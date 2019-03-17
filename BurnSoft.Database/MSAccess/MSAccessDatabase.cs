@@ -7,15 +7,39 @@ using System.Data.Odbc;
 
 namespace BurnSoft.Database.MSAccess
 {
+    /// <summary>
+    /// Class MSAccessDatabase, Helps connect and manage MS Access Databases
+    /// </summary>
     public class MSAccessDatabase
     {
-        #region "Error Handling"
+        #region "Error Handling"        
+        /// <summary>
+        /// The class location
+        /// </summary>
         private static string ClassLocation = "BurnSoft.Database.MSAccess.MSAccessDatabase";
+        /// <summary>
+        /// Errors the message.
+        /// </summary>
+        /// <param name="location">The location.</param>
+        /// <param name="FunctionName">Name of the function.</param>
+        /// <param name="e">The e.</param>
+        /// <returns>System.String.</returns>
         private static string ErrorMessage(string location, string FunctionName, Exception e) => $"{ClassLocation}.{FunctionName} - {e.Message.ToString()}";
 
         #endregion
-        #region "Class Vars"
+        #region "Class Vars"        
+        /// <summary>
+        /// The connection
+        /// </summary>
         OdbcConnection Conn;
+        /// <summary>
+        /// Connection String Format Used to Connect to MS Access Databases using the Microsoft Access Driver
+        /// </summary>
+        /// <param name="DatabasePath"></param>
+        /// <param name="databaseName"></param>
+        /// <param name="password"></param>
+        /// <param name="errOur"></param>
+        /// <returns></returns>
         #endregion
         public static string ConnectionString(string DatabasePath, string databaseName, string password,out string errOur)
         {
@@ -39,6 +63,12 @@ namespace BurnSoft.Database.MSAccess
             return sAns;
         }
 
+        /// <summary>
+        /// Connects the database using the connection string.
+        /// </summary>
+        /// <param name="ConnectionString">The connection string.</param>
+        /// <param name="errOut">The error out.</param>
+        /// <returns><c>true</c> if XXXX, <c>false</c> otherwise.</returns>
         public bool ConnectDB(string ConnectionString, out string errOut)
         {
             bool bAns = false;
