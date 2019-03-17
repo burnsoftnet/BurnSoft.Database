@@ -32,6 +32,7 @@ namespace BurnSoft.Database.MSAccess
         /// The connection
         /// </summary>
         OdbcConnection Conn;
+        #region "Connection Strings"
         /// <summary>
         /// Connection String Format Used to Connect to MS Access Databases using the Microsoft Access Driver
         /// </summary>
@@ -43,7 +44,6 @@ namespace BurnSoft.Database.MSAccess
         #endregion
         public static string ConnectionString(string DatabasePath, string databaseName, string password,out string errOur)
         {
-            //sAns = "Driver={Microsoft Access Driver (*.mdb)};dbq=" & APPLICATION_PATH_DATA & "\" & DATABASE_NAME & ";Pwd=14un0t2n0"
             string sAns = "";
             errOur = @"";
             try
@@ -53,7 +53,7 @@ namespace BurnSoft.Database.MSAccess
                     sAns = $"Driver={{Microsoft Access Driver (*.mdb)}};dbq={DatabasePath}\\{databaseName};Pwd={password}";
                 } else
                 {
-                    sAns = $"Driver={{Microsoft Access Driver (*.mdb)}};dbq={DatabasePath}\\{databaseName};Pwd={password}";
+                    sAns = $"Driver={{Microsoft Access Driver (*.mdb)}};dbq={DatabasePath}\\{databaseName}";
                 }
             }
             catch (Exception e)
@@ -62,6 +62,37 @@ namespace BurnSoft.Database.MSAccess
             }
             return sAns;
         }
+        /// <summary>
+        /// Connections to the MS Access Database using the string OLE.
+        /// </summary>
+        /// <param name="DatabasePath">The database path.</param>
+        /// <param name="databaseName">Name of the database.</param>
+        /// <param name="password">The password.</param>
+        /// <param name="errOur">The error our.</param>
+        /// <returns>System.String.</returns>
+        public static string ConnectionStringOLE(string DatabasePath, string databaseName, string password, out string errOur)
+        {
+            string sAns = "";
+            errOur = @"";
+            try
+            {
+                if (password.Length > 0)
+                {
+                    sAns = $"Provider=Microsoft.Jet.OLEDB.4.0;Persist Security Info=False;Data Source=\"{DatabasePath}\\{databaseName}\";Jet OLEDB:Database Password={password};";
+                }
+                else
+                {
+                    sAns = $"Provider=Microsoft.Jet.OLEDB.4.0;Persist Security Info=False;Data Source=\"{DatabasePath}\\{databaseName}\";";
+                }
+            }
+            catch (Exception e)
+            {
+                errOur = ErrorMessage(ClassLocation, "ConnectionString", e);
+            }
+            return sAns;
+        }
+        #endregion
+
 
         /// <summary>
         /// Connects the database using the connection string.
