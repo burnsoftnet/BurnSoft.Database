@@ -85,6 +85,29 @@ namespace BurnSoft.Database.MSAccess
             }
             return bAns;
         }
+        /// <summary>
+        /// Closes the specified error MSG.
+        /// </summary>
+        /// <param name="errMsg">The error MSG.</param>
+        /// <returns><c>true</c> if XXXX, <c>false</c> otherwise.</returns>
+        public bool Close(out string errMsg)
+        {
+            bool bAns = false;
+            errMsg = @"";
+            try
+            {
+                if(Conn.State != System.Data.ConnectionState.Closed)
+                {
+                    Conn.Close();
+                }
+                Conn = null;
+            }
+            catch (Exception e)
+            {
+                errMsg = ErrorMessage(ClassLocation, "CloseDB", e);
+            }
+            return bAns;
+        }
 
     }
 }
