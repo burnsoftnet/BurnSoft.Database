@@ -14,6 +14,9 @@ namespace BurnSoft.Database.MSAccess
         private static string ErrorMessage(string location, string FunctionName, Exception e) => $"{ClassLocation}.{FunctionName} - {e.Message.ToString()}";
 
         #endregion
+        #region "Class Vars"
+        OdbcConnection Conn;
+        #endregion
         public static string ConnectionString(string DatabasePath, string databaseName, string password,out string errOur)
         {
             //sAns = "Driver={Microsoft Access Driver (*.mdb)};dbq=" & APPLICATION_PATH_DATA & "\" & DATABASE_NAME & ";Pwd=14un0t2n0"
@@ -35,5 +38,23 @@ namespace BurnSoft.Database.MSAccess
             }
             return sAns;
         }
+
+        public bool ConnectDB(string ConnectionString, out string errOut)
+        {
+            bool bAns = false;
+            errOut = @"";
+            try
+            {
+                Conn = new OdbcConnection(ConnectionString);
+                Conn.Open();
+                bAns = true;
+            }
+            catch (Exception e)
+            {
+                errOut = ErrorMessage(ClassLocation, "ConnectDB", e);
+            }
+            return bAns;
+        }
+
     }
 }
