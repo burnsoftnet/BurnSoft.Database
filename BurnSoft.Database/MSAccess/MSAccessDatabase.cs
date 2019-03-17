@@ -140,5 +140,30 @@ namespace BurnSoft.Database.MSAccess
             return bAns;
         }
 
+        public bool ConnExec(string ConnectionString, string SQL, out string errOut)
+        {
+            bool bAns = false;
+            errOut = @"";
+            try
+            {
+                if (ConnectDB(ConnectionString, out errOut))
+                {
+                    OdbcCommand CMD = new OdbcCommand(SQL, Conn);
+                    CMD.ExecuteNonQuery();
+                    CMD.Connection.Close();
+                    CMD = null;
+                    Conn = null;
+                    bAns = true;
+                } else
+                {
+                    throw new Exception(errOut);
+                }
+            }
+            catch (Exception e)
+            {
+                errOut = ErrorMessage(ClassLocation, "ConnExec", e);
+            }
+            return bAns;
+        }
     }
 }
