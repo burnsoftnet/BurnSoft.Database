@@ -139,7 +139,17 @@ namespace BurnSoft.Database.MSAccess
             }
             return bAns;
         }
-
+        /// <summary>
+        /// Connect to the database and execture the SQL statement that you passed.
+        /// In this function, we set the connection objecto null instead of using the Close Function
+        /// because you might be using that object for something else, and this will take out the connection
+        /// from right uder neath you, so we just set that to null instead of a hard close.
+        /// </summary>
+        /// <param name="ConnectionString">The connection string.</param>
+        /// <param name="SQL">The SQL.</param>
+        /// <param name="errOut">The error out.</param>
+        /// <returns><c>true</c> if XXXX, <c>false</c> otherwise.</returns>
+        /// <exception cref="System.Exception"></exception>
         public bool ConnExec(string ConnectionString, string SQL, out string errOut)
         {
             bool bAns = false;
