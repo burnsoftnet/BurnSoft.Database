@@ -5,6 +5,8 @@ VisualStudioVersion = 15.0.28307.136
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BurnSoft.Database", "BurnSoft.Database\BurnSoft.Database.csproj", "{9F0E38E2-1A59-4FD5-9FC5-461424C0C92B}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UnitTestProject_Database", "UnitTestProject_Database\UnitTestProject_Database.csproj", "{133FCBAD-D906-4D83-908E-6AD2081E394A}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,10 @@ Global
 		{9F0E38E2-1A59-4FD5-9FC5-461424C0C92B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9F0E38E2-1A59-4FD5-9FC5-461424C0C92B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{9F0E38E2-1A59-4FD5-9FC5-461424C0C92B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{133FCBAD-D906-4D83-908E-6AD2081E394A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{133FCBAD-D906-4D83-908E-6AD2081E394A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{133FCBAD-D906-4D83-908E-6AD2081E394A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{133FCBAD-D906-4D83-908E-6AD2081E394A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
