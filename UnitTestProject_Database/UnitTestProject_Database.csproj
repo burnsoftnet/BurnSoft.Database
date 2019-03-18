@@ -49,6 +49,7 @@
     <Reference Include="System.Core" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="General.cs" />
     <Compile Include="Settings.cs" />
     <Compile Include="UnitTest_MSAccess.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
