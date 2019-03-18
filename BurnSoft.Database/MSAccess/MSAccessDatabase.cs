@@ -207,7 +207,14 @@ namespace BurnSoft.Database.MSAccess
             }
             return bAns;
         }
-
+        /// <summary>
+        /// Gets the data.
+        /// </summary>
+        /// <param name="ConnectionString">The connection string.</param>
+        /// <param name="SQL">The SQL.</param>
+        /// <param name="errOut">The error out.</param>
+        /// <returns>DataTable.</returns>
+        /// <exception cref="Exception"></exception>
         public DataTable GetData(string ConnectionString, string SQL, out string errOut)
         {
             DataTable Table = new DataTable();
