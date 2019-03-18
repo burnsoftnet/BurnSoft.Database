@@ -23,7 +23,7 @@ namespace UnitTestProject_Database
             /// <summary>
             /// The database path
             /// </summary>
-            public const string DatabasePath = "C:\\Users\\burnsoft\\AppData\\Roaming\\BurnSoft\\MGC";
+            public const string DatabasePath = "C:\\test";
             /// <summary>
             /// The database password
             /// </summary>
