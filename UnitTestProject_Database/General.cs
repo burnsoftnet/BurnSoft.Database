@@ -41,5 +41,27 @@ namespace UnitTestProject_Database
             }
             Assert.AreEqual(bAns, false);
         }
+        /// <summary>
+        /// Determines whether the specified value has value.
+        /// </summary>
+        /// <param name="value">The value.</param>
+        /// <param name="errOut">The error out.</param>
+        public static void HasValue(string value, string errOut="")
+        {
+            bool isLoaded = (value.Length > 0);
+            if (isLoaded)
+            {
+                Debug.Print("Value Returned: {0}", value);
+            } else
+            {
+                Debug.Print("NO VALUE RETURNED!!");
+            }
+            if (errOut.Length > 0)
+            {
+                Debug.Print("ERROR!");
+                Debug.Print(errOut);
+            }
+            Assert.AreEqual(isLoaded, true);
+        }
     }
 }

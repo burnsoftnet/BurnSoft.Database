@@ -19,11 +19,11 @@ namespace UnitTestProject_Database
             /// <summary>
             /// The database name
             /// </summary>
-            public const string DatabaseName = "";
+            public const string DatabaseName = "MGC.mdb";
             /// <summary>
             /// The database path
             /// </summary>
-            public const string DatabasePath = "";
+            public const string DatabasePath = "C:\\Users\\burnsoft\\AppData\\Roaming\\BurnSoft\\MGC";
             /// <summary>
             /// The database password
             /// </summary>
