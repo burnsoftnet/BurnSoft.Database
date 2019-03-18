@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Data.Odbc;
+using System.Data;
 
 namespace BurnSoft.Database.MSAccess
 {
@@ -12,7 +13,7 @@ namespace BurnSoft.Database.MSAccess
     /// </summary>
     public class MSAccessDatabase
     {
-        #region "Error Handling"        
+        #region "Exception Error Handling"        
         /// <summary>
         /// The class location
         /// </summary>
@@ -25,7 +26,38 @@ namespace BurnSoft.Database.MSAccess
         /// <param name="e">The e.</param>
         /// <returns>System.String.</returns>
         private static string ErrorMessage(string location, string FunctionName, Exception e) => $"{ClassLocation}.{FunctionName} - {e.Message.ToString()}";
-
+        /// <summary>
+        /// Errors the message.
+        /// </summary>
+        /// <param name="location">The location.</param>
+        /// <param name="FunctionName">Name of the function.</param>
+        /// <param name="e">The e.</param>
+        /// <returns>System.String.</returns>
+        private static string ErrorMessage(string location, string FunctionName, AccessViolationException e) => $"{ClassLocation}.{FunctionName} - {e.Message.ToString()}";
+        /// <summary>
+        /// Errors the message.
+        /// </summary>
+        /// <param name="location">The location.</param>
+        /// <param name="FunctionName">Name of the function.</param>
+        /// <param name="e">The e.</param>
+        /// <returns>System.String.</returns>
+        private static string ErrorMessage(string location, string FunctionName, InvalidCastException e) => $"{ClassLocation}.{FunctionName} - {e.Message.ToString()}";
+        /// <summary>
+        /// Errors the message.
+        /// </summary>
+        /// <param name="location">The location.</param>
+        /// <param name="FunctionName">Name of the function.</param>
+        /// <param name="e">The e.</param>
+        /// <returns>System.String.</returns>
+        private static string ErrorMessage(string location, string FunctionName, ArgumentException e) => $"{ClassLocation}.{FunctionName} - {e.Message.ToString()}";
+        /// <summary>
+        /// Errors the message.
+        /// </summary>
+        /// <param name="location">The location.</param>
+        /// <param name="FunctionName">Name of the function.</param>
+        /// <param name="e">The e.</param>
+        /// <returns>System.String.</returns>
+        private static string ErrorMessage(string location, string FunctionName, ArgumentNullException e) => $"{ClassLocation}.{FunctionName} - {e.Message.ToString()}";
         #endregion
         #region "Class Vars"        
         /// <summary>
@@ -174,6 +206,31 @@ namespace BurnSoft.Database.MSAccess
                 errOut = ErrorMessage(ClassLocation, "ConnExec", e);
             }
             return bAns;
+        }
+
+        public DataTable GetData(string ConnectionString, string SQL, out string errOut)
+        {
+            DataTable Table = new DataTable();
+            errOut = @"";
+            try
+            {
+                Table.Locale = System.Globalization.CultureInfo.InvariantCulture;
+                if (ConnectDB(ConnectionString, out errOut))
+                {
+                    OdbcCommand CMD = new OdbcCommand(SQL, Conn);
+                    OdbcDataAdapter RS = new OdbcDataAdapter();
+                    RS.SelectCommand = CMD;
+                    RS.Fill(Table);
+                } else
+                {
+                    throw new Exception(errOut);
+                }
+            }
+            catch (Exception e)
+            {
+                errOut = ErrorMessage(ClassLocation, "GetData", e);
+            }
+            return Table;
         }
     }
 }
