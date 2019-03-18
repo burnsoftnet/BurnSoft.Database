@@ -14,7 +14,7 @@ namespace UnitTestProject_Database
         [TestMethod]
         public void TestMethod_ConnectionStringWithPassword()
         {
-            string value = BurnSoft.Database.MSAccess.MSAccessDatabase.ConnectionString(Settings.AccessDatabase.DatabasePath, Settings.AccessDatabase.DatabaseName, Settings.AccessDatabase.DatabasePassword, out errOut);
+            string value = BurnSoft.Database.MSAccess.MSAccessDatabase.ConnectionString(Settings.AccessDatabase.DatabasePath, Settings.AccessDatabase.DatabaseName, out errOut, Settings.AccessDatabase.DatabasePassword);
             General.HasValue(value, errOut);
         }
         /// <summary>
@@ -23,7 +23,7 @@ namespace UnitTestProject_Database
         [TestMethod]
         public void TestMethod_ConnectionStringWithOutPassword()
         {
-            string value = BurnSoft.Database.MSAccess.MSAccessDatabase.ConnectionString(Settings.AccessDatabase.DatabasePath, Settings.AccessDatabase.DatabaseName,"", out errOut);
+            string value = BurnSoft.Database.MSAccess.MSAccessDatabase.ConnectionString(Settings.AccessDatabase.DatabasePath, Settings.AccessDatabase.DatabaseName, out errOut);
             General.HasValue(value, errOut);
         }
         /// <summary>
@@ -32,7 +32,7 @@ namespace UnitTestProject_Database
         [TestMethod]
         public void TestMethod_ConnectionOLEStringWithPassword()
         {
-            string value = BurnSoft.Database.MSAccess.MSAccessDatabase.ConnectionStringOLE(Settings.AccessDatabase.DatabasePath, Settings.AccessDatabase.DatabaseName, Settings.AccessDatabase.DatabasePassword, out errOut);
+            string value = BurnSoft.Database.MSAccess.MSAccessDatabase.ConnectionStringOLE(Settings.AccessDatabase.DatabasePath, Settings.AccessDatabase.DatabaseName, out errOut, Settings.AccessDatabase.DatabasePassword);
             General.HasValue(value, errOut);
         }
         /// <summary>
@@ -41,7 +41,7 @@ namespace UnitTestProject_Database
         [TestMethod]
         public void TestMethod_ConnectionOLEStringWithOutPassword()
         {
-            string value = BurnSoft.Database.MSAccess.MSAccessDatabase.ConnectionStringOLE(Settings.AccessDatabase.DatabasePath, Settings.AccessDatabase.DatabaseName, "", out errOut);
+            string value = BurnSoft.Database.MSAccess.MSAccessDatabase.ConnectionStringOLE(Settings.AccessDatabase.DatabasePath, Settings.AccessDatabase.DatabaseName, out errOut);
             General.HasValue(value, errOut);
         }
     }
