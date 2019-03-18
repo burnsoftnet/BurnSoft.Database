@@ -18,7 +18,7 @@ namespace BurnSoft.Database.SQLite
         /// <summary>
         /// The class location
         /// </summary>
-        private static string ClassLocation = "BurnSoft.Database.MSAccess.MSAccessDatabase";
+        private static string ClassLocation = "BurnSoft.Database.SQLite.BaseDatabase";
         /// <summary>
         /// Errors the message.
         /// </summary>
