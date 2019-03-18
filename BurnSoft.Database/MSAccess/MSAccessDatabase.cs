@@ -74,10 +74,10 @@ namespace BurnSoft.Database.MSAccess
         /// <param name="errOur"></param>
         /// <returns></returns>
         #endregion
-        public static string ConnectionString(string DatabasePath, string databaseName, string password = "",out string errOur)
+        public static string ConnectionString(string DatabasePath, string databaseName,out string errOut, string password = "")
         {
             string sAns = "";
-            errOur = @"";
+            errOut = @"";
             try
             {
                 if (password.Length > 0)
@@ -90,7 +90,7 @@ namespace BurnSoft.Database.MSAccess
             }
             catch (Exception e)
             {
-                errOur = ErrorMessage(ClassLocation, "ConnectionString", e);
+                errOut = ErrorMessage(ClassLocation, "ConnectionString", e);
             }
             return sAns;
         }
@@ -102,10 +102,10 @@ namespace BurnSoft.Database.MSAccess
         /// <param name="password">The password.</param>
         /// <param name="errOur">The error our.</param>
         /// <returns>System.String.</returns>
-        public static string ConnectionStringOLE(string DatabasePath, string databaseName, string password = "", out string errOur)
+        public static string ConnectionStringOLE(string DatabasePath, string databaseName, out string errOut, string password = "")
         {
             string sAns = "";
-            errOur = @"";
+            errOut = @"";
             try
             {
                 if (password.Length > 0)
@@ -119,7 +119,7 @@ namespace BurnSoft.Database.MSAccess
             }
             catch (Exception e)
             {
-                errOur = ErrorMessage(ClassLocation, "ConnectionString", e);
+                errOut = ErrorMessage(ClassLocation, "ConnectionString", e);
             }
             return sAns;
         }
