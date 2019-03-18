@@ -1,6 +1,6 @@
 ﻿using System;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using BurnSoft.Database;
+using BurnSoft.Database.MSAccess;
 
 namespace UnitTestProject_Database
 {
@@ -43,6 +43,20 @@ namespace UnitTestProject_Database
         {
             string value = BurnSoft.Database.MSAccess.MSAccessDatabase.ConnectionStringOLE(Settings.AccessDatabase.DatabasePath, Settings.AccessDatabase.DatabaseName, out errOut);
             General.HasValue(value, errOut);
+        }
+
+        /// <summary>
+        /// Defines the test method TestMethod_ConnectDB.
+        /// </summary>
+        [TestMethod]
+        public void TestMethod_ConnectDB()
+        {
+            string ConnString = BurnSoft.Database.MSAccess.MSAccessDatabase.ConnectionString(Settings.AccessDatabase.DatabasePath, Settings.AccessDatabase.DatabaseName, out errOut, Settings.AccessDatabase.DatabasePassword);
+            BurnSoft.Database.MSAccess.MSAccessDatabase obj = new BurnSoft.Database.MSAccess.MSAccessDatabase();
+            bool value = obj.ConnectDB(ConnString, out errOut);
+            obj.Close(out errOut);
+            General.HasTrueValue(value, errOut);
+
         }
     }
 }
