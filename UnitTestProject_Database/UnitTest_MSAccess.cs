@@ -1,6 +1,7 @@
 ﻿using System;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using BurnSoft.Database.MSAccess;
+using System.Data;
 
 namespace UnitTestProject_Database
 {
@@ -30,7 +31,7 @@ namespace UnitTestProject_Database
         [TestMethod]
         public void TestMethod_ConnectionStringWithOutPassword()
         {
-            string value = BurnSoft.Database.MSAccess.MSAccessDatabase.ConnectionString(Settings.AccessDatabase.DatabasePath, Settings.AccessDatabase.DatabaseName, out errOut);
+            string value = MSAccessDatabase.ConnectionString(Settings.AccessDatabase.DatabasePath, Settings.AccessDatabase.DatabaseName, out errOut);
             General.HasValue(value, errOut);
         }
         /// <summary>
@@ -39,7 +40,7 @@ namespace UnitTestProject_Database
         [TestMethod]
         public void TestMethod_ConnectionOLEStringWithPassword()
         {
-            string value = BurnSoft.Database.MSAccess.MSAccessDatabase.ConnectionStringOLE(Settings.AccessDatabase.DatabasePath, Settings.AccessDatabase.DatabaseName, out errOut, Settings.AccessDatabase.DatabasePassword);
+            string value = MSAccessDatabase.ConnectionStringOLE(Settings.AccessDatabase.DatabasePath, Settings.AccessDatabase.DatabaseName, out errOut, Settings.AccessDatabase.DatabasePassword);
             General.HasValue(value, errOut);
         }
         /// <summary>
@@ -48,7 +49,7 @@ namespace UnitTestProject_Database
         [TestMethod]
         public void TestMethod_ConnectionOLEStringWithOutPassword()
         {
-            string value = BurnSoft.Database.MSAccess.MSAccessDatabase.ConnectionStringOLE(Settings.AccessDatabase.DatabasePath, Settings.AccessDatabase.DatabaseName, out errOut);
+            string value = MSAccessDatabase.ConnectionStringOLE(Settings.AccessDatabase.DatabasePath, Settings.AccessDatabase.DatabaseName, out errOut);
             General.HasValue(value, errOut);
         }
 
@@ -58,7 +59,7 @@ namespace UnitTestProject_Database
         [TestMethod]
         public void TestMethod_ConnectDB()
         {
-            BurnSoft.Database.MSAccess.MSAccessDatabase obj = new BurnSoft.Database.MSAccess.MSAccessDatabase();
+            MSAccessDatabase obj = new MSAccessDatabase();
             bool value = obj.ConnectDB(ConnString, out errOut);
             obj.Close(out errOut);
             General.HasTrueValue(value, errOut);
@@ -71,9 +72,27 @@ namespace UnitTestProject_Database
         public void TestMethod_ConnExec()
         {
             string SQL = "INSERT INTO Gun_Cal(Cal) VALUES('TEST');";
-            BurnSoft.Database.MSAccess.MSAccessDatabase obj = new BurnSoft.Database.MSAccess.MSAccessDatabase();
+            MSAccessDatabase obj = new MSAccessDatabase();
             bool value = obj.ConnExec(ConnString, SQL, out errOut);
             General.HasTrueValue(value, errOut);
+        }
+
+        /// <summary>
+        /// Defines the test method TestMethod_GetData.
+        /// </summary>
+        [TestMethod]
+        public void TestMethod_GetData()
+        {
+            String SQL = "Select * from Gun_Cal";
+            MSAccessDatabase obj = new MSAccessDatabase();
+            DataTable table = obj.GetData(ConnString, SQL, out errOut);
+            string TestValue = @"";
+            foreach(DataRow row in table.Rows)
+            {
+                TestValue += String.Format("{0}{1}",row["Cal"].ToString(),Environment.NewLine);
+            }
+
+            General.HasValue(TestValue, errOut);
         }
     }
 }
