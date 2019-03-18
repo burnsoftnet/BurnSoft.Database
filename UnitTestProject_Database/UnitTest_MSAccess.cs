@@ -8,6 +8,13 @@ namespace UnitTestProject_Database
     public class UnitTest_MSAccess
     {
         private string errOut;
+        private string ConnString;
+
+        [TestInitialize]
+        public void TestInitialize()
+        {
+            ConnString = BurnSoft.Database.MSAccess.MSAccessDatabase.ConnectionString(Settings.AccessDatabase.DatabasePath, Settings.AccessDatabase.DatabaseName, out errOut, Settings.AccessDatabase.DatabasePassword);
+        }
         /// <summary>
         /// Defines the test method TestMethod_ConnectionStringWithPassword.
         /// </summary>
@@ -51,12 +58,22 @@ namespace UnitTestProject_Database
         [TestMethod]
         public void TestMethod_ConnectDB()
         {
-            string ConnString = BurnSoft.Database.MSAccess.MSAccessDatabase.ConnectionString(Settings.AccessDatabase.DatabasePath, Settings.AccessDatabase.DatabaseName, out errOut, Settings.AccessDatabase.DatabasePassword);
             BurnSoft.Database.MSAccess.MSAccessDatabase obj = new BurnSoft.Database.MSAccess.MSAccessDatabase();
             bool value = obj.ConnectDB(ConnString, out errOut);
             obj.Close(out errOut);
             General.HasTrueValue(value, errOut);
 
+        }
+        /// <summary>
+        /// Defines the test method TestMethod_ConnExec.
+        /// </summary>
+        [TestMethod]
+        public void TestMethod_ConnExec()
+        {
+            string SQL = "INSERT INTO Gun_Cal(Cal) VALUES('TEST');";
+            BurnSoft.Database.MSAccess.MSAccessDatabase obj = new BurnSoft.Database.MSAccess.MSAccessDatabase();
+            bool value = obj.ConnExec(ConnString, SQL, out errOut);
+            General.HasTrueValue(value, errOut);
         }
     }
 }
