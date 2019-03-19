@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Data.SQLite;
+using System.Data;
 
 namespace BurnSoft.Database.SQLite
 {
@@ -152,6 +153,37 @@ namespace BurnSoft.Database.SQLite
                 errOut = ErrorMessage(ClassLocation, "HasData", e);
             }
             return bAns;
+        }
+
+        public static DataTable GetDataBySQL(string dbname, string sql, out string errOut)
+        {
+            DataTable dtAns = new DataTable();
+            errOut = @"";
+            try
+            {
+                SQLiteDataManagement obj = new SQLiteDataManagement();
+                if (obj.ConnectDB(dbname, out errOut))
+                {
+                    SQLiteCommand cmd = new SQLiteCommand(sql, obj.ConnObject);
+                    using (SQLiteDataAdapter da  = new SQLiteDataAdapter(cmd))
+                    {
+                        DataSet ds = new DataSet();
+                        da.Fill(ds);
+                        dtAns = ds.Tables[0];
+                    }
+                    cmd.Dispose();
+                    obj.CloseDb();
+                }
+                else
+                {
+                    throw new Exception(errOut);
+                }
+            }
+            catch (Exception e)
+            {
+                errOut = ErrorMessage(ClassLocation, "GetDataBySQL", e);
+            }
+            return dtAns;
         }
     }
 }
