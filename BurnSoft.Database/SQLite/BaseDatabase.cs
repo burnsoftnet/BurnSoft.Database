@@ -89,7 +89,9 @@ namespace BurnSoft.Database.SQLite
             errOut = @"";
             try
             {
-
+                string sql = $"SELECT * from DB_Version where version={myVer}";
+                bAns = SQLiteDataManagement.HasData(dbName, sql, out errOut);
+                if (errOut.Length > 0) throw new Exception(errOut);
             }
             catch (Exception e)
             {
