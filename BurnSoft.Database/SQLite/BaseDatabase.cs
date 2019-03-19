@@ -3,7 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-
+using System.Data.SQLite;
+using System.IO;
 
 namespace BurnSoft.Database.SQLite
 {
@@ -44,6 +45,26 @@ namespace BurnSoft.Database.SQLite
         /// <returns>System.String.</returns>
         private static string ErrorMessage(string location, string FunctionName, ArgumentNullException e) => "{ClassLocation}.{FunctionName} - {e.Message.ToString()}";
         #endregion
+        
+        private static string ConnectionString(string dbname)
+        {
+            return $"Data Source={dbname};Version=3";
+        }
 
+        public static bool CreateDB(string dbName, out string errOut)
+        {
+            bool bAns = false;
+            errOut = @"";
+            try
+            {
+                SQLiteConnection.CreateFile(dbName);
+                bAns = true;
+            }
+            catch (Exception)
+            {
+                errOut = ErrorMessage(ClassLocation, "CreateDB", e);
+            }
+            return bAns;
+        }
     }
 }
