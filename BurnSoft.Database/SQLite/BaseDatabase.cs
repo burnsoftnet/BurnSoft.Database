@@ -164,5 +164,20 @@ namespace BurnSoft.Database.SQLite
             }
             return bAns;
         }
+
+        private static double GetDatabaseVersion(string dbname, out string errOut)
+        {
+            double dAns = 0;
+            errOut = @"";
+            try
+            {
+
+            }
+            catch (Exception e)
+            {
+                errOut = ErrorMessage(ClassLocation, "GetDatabaseVersion", e);
+            }
+            return dAns;
+        }
     }
 }
