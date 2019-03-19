@@ -51,13 +51,24 @@ namespace BurnSoft.Database.SQLite
             errOut = @"";
             try
             {
-                ConnObject = new SQLiteConnection(BaseDatabase.Co)
+                ConnObject = new SQLiteConnection(BaseDatabase.ConnectionString(dbName));
+                ConnObject.Open();
+                bAns = true;
             }
             catch (Exception e)
             {
                 errOut = ErrorMessage(ClassLocation, "ConnectDB", e);
             }
             return bAns;
+        }
+
+        public void CloseDb()
+        {
+            if (ConnObject.State != System.Data.ConnectionState.Closed)
+            {
+                ConnObject.Close();
+            }
+            ConnObject = null;
         }
     }
 }
