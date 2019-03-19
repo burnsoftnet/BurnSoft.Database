@@ -46,7 +46,7 @@ namespace BurnSoft.Database.SQLite
         private static string ErrorMessage(string location, string FunctionName, ArgumentNullException e) => "{ClassLocation}.{FunctionName} - {e.Message.ToString()}";
         #endregion
         
-        private static string ConnectionString(string dbname)
+        public static string ConnectionString(string dbname)
         {
             return $"Data Source={dbname};Version=3";
         }

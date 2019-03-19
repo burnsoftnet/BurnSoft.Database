@@ -43,6 +43,21 @@ namespace BurnSoft.Database.SQLite
         /// <returns>System.String.</returns>
         private static string ErrorMessage(string location, string FunctionName, ArgumentNullException e) => "{ClassLocation}.{FunctionName} - {e.Message.ToString()}";
         #endregion
+        public SQLiteConnection ConnObject;
 
+        public bool ConnectDB(string dbName, out string errOut)
+        {
+            bool bAns = false;
+            errOut = @"";
+            try
+            {
+                ConnObject = new SQLiteConnection(BaseDatabase.Co)
+            }
+            catch (Exception e)
+            {
+                errOut = ErrorMessage(ClassLocation, "ConnectDB", e);
+            }
+            return bAns;
+        }
     }
 }
