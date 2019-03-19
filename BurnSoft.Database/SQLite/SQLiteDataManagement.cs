@@ -70,5 +70,35 @@ namespace BurnSoft.Database.SQLite
             }
             ConnObject = null;
         }
+
+        public static bool RunQuery(string dbName, string SQL, out string errOut)
+        {
+            bool bAns = false;
+            errOut = @"";
+            try
+            {
+                SQLiteDataManagement obj = new SQLiteDataManagement();
+                if (obj.ConnectDB(dbName, out errOut))
+                {
+                    SQLiteCommand cmd = new SQLiteCommand
+                    {
+                        CommandText = SQL,
+                        Connection = obj.ConnObject
+                    };
+                    cmd.ExecuteNonQuery();
+                    cmd.Connection.Close();
+                    obj.CloseDb();
+                    bAns = true;
+                } else
+                {
+                    throw new Exception(errOut);
+                }
+            }
+            catch (Exception e)
+            {
+                errOut = ErrorMessage(ClassLocation, "RunQuery", e);
+            }
+            return bAns;
+        }
     }
 }
