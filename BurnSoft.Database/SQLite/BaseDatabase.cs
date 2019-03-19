@@ -45,12 +45,22 @@ namespace BurnSoft.Database.SQLite
         /// <returns>System.String.</returns>
         private static string ErrorMessage(string location, string FunctionName, ArgumentNullException e) => "{ClassLocation}.{FunctionName} - {e.Message.ToString()}";
         #endregion
-        
+
+        /// <summary>
+        /// Connections the string.
+        /// </summary>
+        /// <param name="dbname">The dbname.</param>
+        /// <returns>System.String.</returns>
         public static string ConnectionString(string dbname)
         {
             return $"Data Source={dbname};Version=3";
         }
-
+        /// <summary>
+        /// Creates the database.
+        /// </summary>
+        /// <param name="dbName">Name of the database.</param>
+        /// <param name="errOut">The error out.</param>
+        /// <returns><c>true</c> if XXXX, <c>false</c> otherwise.</returns>
         public static bool CreateDB(string dbName, out string errOut)
         {
             bool bAns = false;
@@ -66,7 +76,13 @@ namespace BurnSoft.Database.SQLite
             }
             return bAns;
         }
-
+        /// <summary>
+        /// Databases the version exists.
+        /// </summary>
+        /// <param name="dbName">Name of the database.</param>
+        /// <param name="myVer">My ver.</param>
+        /// <param name="errOut">The error out.</param>
+        /// <returns><c>true</c> if XXXX, <c>false</c> otherwise.</returns>
         public static bool DBVersionExists(string dbName, double myVer, out string errOut)
         {
             bool bAns = false;
