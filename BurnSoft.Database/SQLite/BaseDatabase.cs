@@ -99,7 +99,70 @@ namespace BurnSoft.Database.SQLite
             }
             return bAns;
         }
-
-
+        /// <summary>
+        /// Updates the database version.
+        /// </summary>
+        /// <param name="dbname">The dbname.</param>
+        /// <param name="dbversion">The dbversion.</param>
+        /// <param name="errOut">The error out.</param>
+        /// <returns><c>true</c> if XXXX, <c>false</c> otherwise.</returns>
+        /// <exception cref="Exception"></exception>
+        public static bool UpdateDbVersion(string dbname, double dbversion, out string errOut)
+        {
+            bool bAns = false;
+            errOut = @"";
+            try
+            {
+                string sql = $"INSERT INTO DB_Version (version) VALUES ({dbversion});";
+                bAns = SQLiteDataManagement.RunQuery(dbname, sql, out errOut);
+                if (!bAns) throw new Exception(errOut);
+            }
+            catch (Exception e)
+            {
+                errOut = ErrorMessage(ClassLocation, "UpdateDbVersion", e);
+            }
+            return bAns;
+        }
+        /// <summary>
+        /// Creates the database version.
+        /// </summary>
+        /// <param name="dbname">The dbname.</param>
+        /// <param name="errOut">The error out.</param>
+        /// <param name="version">The version.</param>
+        /// <returns><c>true</c> if XXXX, <c>false</c> otherwise.</returns>
+        /// <exception cref="Exception"></exception>
+        private static bool CreateDatabaseVersion(string dbname, out string errOut, double version =1.0)
+        {
+            bool bAns = false;
+            errOut = @"";
+            try
+            {
+                string sql = "create table IF NOT EXISTS DB_Version (id integer primary key autoincrement, version DOUBLE DEFAULT 0, dt DATETIME DEFAULT CURRENT_TIMESTAMP);";
+                if (SQLiteDataManagement.RunQuery(dbname, sql, out errOut))
+                {
+                    if (!DBVersionExists(dbname, version, out errOut))
+                    {
+                        if (UpdateDbVersion(dbname, version, out errOut))
+                        {
+                            bAns = true;
+                        } else
+                        {
+                            throw new Exception(errOut);
+                        }
+                    } else
+                    {
+                        bAns = true;
+                    }
+                } else
+                {
+                    throw new Exception(errOut);
+                }
+            }
+            catch (Exception e)
+            {
+                errOut = ErrorMessage(ClassLocation, "CreateDatabaseVersion", e);
+            }
+            return bAns;
+        }
     }
 }
