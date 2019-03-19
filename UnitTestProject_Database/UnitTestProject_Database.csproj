@@ -52,6 +52,7 @@
   <ItemGroup>
     <Compile Include="General.cs" />
     <Compile Include="Settings.cs" />
+    <Compile Include="UnitTest_SQLite_BaseDatabase.cs" />
     <Compile Include="UnitTest_MSAccess.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

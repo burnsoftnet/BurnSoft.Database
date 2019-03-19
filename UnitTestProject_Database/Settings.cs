@@ -30,5 +30,16 @@ namespace UnitTestProject_Database
             public const string DatabasePassword = "";
 
         }
+        /// <summary>
+        /// Class SQLiteDatabase.
+        /// </summary>
+        public class SQLiteDatabase
+        {
+            /// <summary>
+            /// The database name and path
+            /// </summary>
+            public const string DatabaseNameAndPath = "C:\\test\\unittest.db";
+
+        }
     }
 }
