@@ -42,9 +42,17 @@ namespace BurnSoft.Database.SQLite
         /// <param name="e">The e.</param>
         /// <returns>System.String.</returns>
         private static string ErrorMessage(string location, string FunctionName, ArgumentNullException e) => "{ClassLocation}.{FunctionName} - {e.Message.ToString()}";
-        #endregion
+        #endregion        
+        /// <summary>
+        /// The connection object
+        /// </summary>
         public SQLiteConnection ConnObject;
-
+        /// <summary>
+        /// Connects the database.
+        /// </summary>
+        /// <param name="dbName">Name of the database.</param>
+        /// <param name="errOut">The error out.</param>
+        /// <returns><c>true</c> if XXXX, <c>false</c> otherwise.</returns>
         public bool ConnectDB(string dbName, out string errOut)
         {
             bool bAns = false;
@@ -61,7 +69,9 @@ namespace BurnSoft.Database.SQLite
             }
             return bAns;
         }
-
+        /// <summary>
+        /// Closes the database.
+        /// </summary>
         public void CloseDb()
         {
             if (ConnObject.State != System.Data.ConnectionState.Closed)
@@ -70,7 +80,14 @@ namespace BurnSoft.Database.SQLite
             }
             ConnObject = null;
         }
-
+        /// <summary>
+        /// Runs the query.
+        /// </summary>
+        /// <param name="dbName">Name of the database.</param>
+        /// <param name="SQL">The SQL.</param>
+        /// <param name="errOut">The error out.</param>
+        /// <returns><c>true</c> if XXXX, <c>false</c> otherwise.</returns>
+        /// <exception cref="Exception"></exception>
         public static bool RunQuery(string dbName, string SQL, out string errOut)
         {
             bool bAns = false;
