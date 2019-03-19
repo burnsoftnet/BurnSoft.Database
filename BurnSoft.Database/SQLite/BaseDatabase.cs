@@ -60,9 +60,24 @@ namespace BurnSoft.Database.SQLite
                 SQLiteConnection.CreateFile(dbName);
                 bAns = true;
             }
-            catch (Exception)
+            catch (Exception e)
             {
                 errOut = ErrorMessage(ClassLocation, "CreateDB", e);
+            }
+            return bAns;
+        }
+
+        public static bool DBVersionExists(string dbName, double myVer, out string errOut)
+        {
+            bool bAns = false;
+            errOut = @"";
+            try
+            {
+
+            }
+            catch (Exception e)
+            {
+                errOut = ErrorMessage(ClassLocation, "DBVersionExists", e);
             }
             return bAns;
         }
