@@ -117,6 +117,14 @@ namespace BurnSoft.Database.SQLite
             }
             return bAns;
         }
+        /// <summary>
+        /// Determines whether the specified database name has data.
+        /// </summary>
+        /// <param name="dbName">Name of the database.</param>
+        /// <param name="SQl">The s ql.</param>
+        /// <param name="errOut">The error out.</param>
+        /// <returns><c>true</c> if the specified database name has data; otherwise, <c>false</c>.</returns>
+        /// <exception cref="Exception"></exception>
         public static bool HasData(string dbName, string SQl , out string errOut)
         {
             bool bAns = false;
