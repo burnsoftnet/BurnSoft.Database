@@ -117,5 +117,33 @@ namespace BurnSoft.Database.SQLite
             }
             return bAns;
         }
+        public static bool HasData(string dbName, string SQl , out string errOut)
+        {
+            bool bAns = false;
+            errOut = @"";
+            try
+            {
+                SQLiteDataManagement obj = new SQLiteDataManagement();
+                if (obj.ConnectDB(dbName, out errOut))
+                {
+                    SQLiteCommand cmd = new SQLiteCommand(SQl, obj.ConnObject);
+                    using (SQLiteDataReader rs = cmd.ExecuteReader())
+                    {
+                        bAns = rs.HasRows;
+                        rs.Close();
+                    }
+                    cmd.Dispose();
+                    obj.CloseDb();
+                } else
+                {
+                    throw new Exception(errOut);
+                }
+            }
+            catch (Exception e)
+            {
+                errOut = ErrorMessage(ClassLocation, "HasData", e);
+            }
+            return bAns;
+        }
     }
 }
