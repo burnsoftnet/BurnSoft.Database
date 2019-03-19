@@ -154,7 +154,14 @@ namespace BurnSoft.Database.SQLite
             }
             return bAns;
         }
-
+        /// <summary>
+        /// Gets the data by SQL.
+        /// </summary>
+        /// <param name="dbname">The dbname.</param>
+        /// <param name="sql">The SQL.</param>
+        /// <param name="errOut">The error out.</param>
+        /// <returns>DataTable.</returns>
+        /// <exception cref="Exception"></exception>
         public static DataTable GetDataBySQL(string dbname, string sql, out string errOut)
         {
             DataTable dtAns = new DataTable();
