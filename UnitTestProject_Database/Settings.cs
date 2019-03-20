@@ -47,6 +47,10 @@ namespace UnitTestProject_Database
             /// The database version
             /// </summary>
             public const double DBVersion = 1.1;
+            /// <summary>
+            /// The database version update
+            /// </summary>
+            public const double DBVersionUpdate = 2.0;
         }
     }
 }
