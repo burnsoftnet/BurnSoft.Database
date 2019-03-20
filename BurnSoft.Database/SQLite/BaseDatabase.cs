@@ -196,6 +196,19 @@ namespace BurnSoft.Database.SQLite
             }
             return dAns;
         }
+        public static bool CreateStarterDatabase(string dbname, out string errOut, double dbversion = 1.0)
+        {
+            bool bAns = false;
+            errOut = @"";
+            try
+            {
 
+            }
+            catch (Exception e)
+            {
+                errOut = ErrorMessage(ClassLocation, "CreateStarterDatabase", e);
+            }
+            return bAns;
+        }
     }
 }
