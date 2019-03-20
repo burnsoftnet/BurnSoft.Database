@@ -192,5 +192,27 @@ namespace BurnSoft.Database.SQLite
             }
             return dtAns;
         }
+        /// <summary>
+        /// Cleans the database.
+        /// </summary>
+        /// <param name="dbname">The dbname.</param>
+        /// <param name="errOut">The error out.</param>
+        /// <returns><c>true</c> if XXXX, <c>false</c> otherwise.</returns>
+        /// <exception cref="Exception"></exception>
+        public static bool CleanDB(string dbname, out string errOut)
+        {
+            bool bAns = false;
+            errOut = @"";
+            try
+            {
+                bAns = RunQuery(dbname, "vacuum", out errOut);
+                if (!bAns) throw new Exception(errOut);
+            }
+            catch (Exception e)
+            {
+                errOut = ErrorMessage(ClassLocation, "CleanDb", e);
+            }
+            return bAns;
+        }
     }
 }
