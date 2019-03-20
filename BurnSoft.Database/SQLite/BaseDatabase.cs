@@ -164,14 +164,31 @@ namespace BurnSoft.Database.SQLite
             }
             return bAns;
         }
-
+        /// <summary>
+        /// Gets the database version.
+        /// </summary>
+        /// <param name="dbname">The dbname.</param>
+        /// <param name="errOut">The error out.</param>
+        /// <returns>System.Double.</returns>
         private static double GetDatabaseVersion(string dbname, out string errOut)
         {
             double dAns = 0;
             errOut = @"";
             try
             {
-
+                string sql = "select version from DB_Version order by id desc limit 1;";
+                SQLiteDataManagement obj = new SQLiteDataManagement();
+                SQLiteCommand cmd = new SQLiteCommand(sql, obj.ConnObject);
+                using (SQLiteDataReader rs = cmd.ExecuteReader())
+                {
+                    while (rs.Read())
+                    {
+                        dAns = rs.GetDouble(0);
+                    }
+                    rs.Close();
+                }
+                cmd.Dispose();
+                obj.CloseDb();
             }
             catch (Exception e)
             {
