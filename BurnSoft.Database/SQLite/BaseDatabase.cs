@@ -131,7 +131,7 @@ namespace BurnSoft.Database.SQLite
         /// <param name="version">The version.</param>
         /// <returns><c>true</c> if XXXX, <c>false</c> otherwise.</returns>
         /// <exception cref="Exception"></exception>
-        private static bool CreateDatabaseVersion(string dbname, out string errOut, double version =1.0)
+        public static bool CreateDatabaseVersion(string dbname, out string errOut, double version =1.0)
         {
             bool bAns = false;
             errOut = @"";
