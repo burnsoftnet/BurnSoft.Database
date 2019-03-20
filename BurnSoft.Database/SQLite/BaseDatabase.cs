@@ -196,13 +196,45 @@ namespace BurnSoft.Database.SQLite
             }
             return dAns;
         }
+
+        /// <summary>
+        /// Creates the starter database.
+        /// </summary>
+        /// <param name="dbname">The dbname.</param>
+        /// <param name="errOut">The error out.</param>
+        /// <param name="dbversion">The dbversion.</param>
+        /// <returns><c>true</c> if XXXX, <c>false</c> otherwise.</returns>
+        /// <exception cref="Exception">
+        /// </exception>
         public static bool CreateStarterDatabase(string dbname, out string errOut, double dbversion = 1.0)
         {
             bool bAns = false;
             errOut = @"";
             try
             {
-
+                bool dbExists = File.Exists(dbname);
+                if (!dbExists)
+                {
+                    if (CreateDB(dbname, out errOut))
+                    {
+                        if (CreateDatabaseVersion(dbname, out errOut, dbversion))
+                        {
+                            bAns = true;
+                        } else
+                        {
+                            throw new Exception(errOut);
+                        }
+                    } else
+                    {
+                        if (CreateDatabaseVersion(dbname, out errOut))
+                        {
+                            bAns = true;
+                        } else
+                        {
+                            throw new Exception(errOut);
+                        }
+                    }
+                }
             }
             catch (Exception e)
             {
