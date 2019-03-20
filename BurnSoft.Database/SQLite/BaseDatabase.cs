@@ -170,7 +170,7 @@ namespace BurnSoft.Database.SQLite
         /// <param name="dbname">The dbname.</param>
         /// <param name="errOut">The error out.</param>
         /// <returns>System.Double.</returns>
-        private static double GetDatabaseVersion(string dbname, out string errOut)
+        public static double GetDatabaseVersion(string dbname, out string errOut)
         {
             double dAns = 0;
             errOut = @"";
@@ -196,5 +196,6 @@ namespace BurnSoft.Database.SQLite
             }
             return dAns;
         }
+
     }
 }
