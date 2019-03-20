@@ -82,6 +82,14 @@ namespace BurnSoft.Database.SQLite
             ConnObject = null;
         }
         /// <summary>
+        /// Disposes this instance.
+        /// </summary>
+        public void Dispose()
+        {
+            ConnObject?.Dispose();
+        }
+
+        /// <summary>
         /// Runs the query.
         /// </summary>
         /// <param name="dbName">Name of the database.</param>
