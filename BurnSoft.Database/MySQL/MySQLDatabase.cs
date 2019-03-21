@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using MySql.Data.MySqlClient;
+using System.Data;
 
 namespace BurnSoft.Database.MySQL
 {
@@ -41,6 +43,7 @@ namespace BurnSoft.Database.MySQL
         /// <returns>System.String.</returns>
         private static string ErrorMessage(string location, string FunctionName, ArgumentNullException e) => $"{ClassLocation}.{FunctionName} - {e.Message.ToString()}";
         #endregion        
+        public MySqlConnection Conn;
         /// <summary>
         /// Connections the string to connect to a MySQL Server
         /// </summary>
@@ -63,6 +66,39 @@ namespace BurnSoft.Database.MySQL
                 errOut = ErrorMessage(ClassLocation, "Connectionstring", e);
             }
             return sAns;
+        }
+        /// <summary>
+        /// Connects the database.
+        /// </summary>
+        /// <param name="connectionString">The connection string.</param>
+        /// <param name="errOut">The error out.</param>
+        /// <returns><c>true</c> if XXXX, <c>false</c> otherwise.</returns>
+        public bool ConnectDB(string connectionString, out string errOut)
+        {
+            bool bAns = false;
+            errOut = @"";
+            try
+            {
+                Conn = new MySqlConnection(connectionString);
+                Conn.Open();
+                bAns = true;
+            }
+            catch (Exception e)
+            {
+                errOut = ErrorMessage(ClassLocation, "ConnectDB", e);
+            }
+            return bAns;
+        }
+        /// <summary>
+        /// Closes this instance.
+        /// </summary>
+        public void Close()
+        {
+            if (Conn.State != ConnectionState.Closed)
+            {
+                Conn.Close();
+            }
+            Conn = null;
         }
     }
 }
