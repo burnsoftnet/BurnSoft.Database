@@ -68,7 +68,9 @@ namespace UnitTestProject_Database
             Debug.Print("This Database Version is: {0}", value);
             General.HasTrueValue(value, errOut);
         }
- 
+        /// <summary>
+        /// Defines the test method TestMethod_CreateStarterDatabase.
+        /// </summary>
         [TestMethod]
         public void TestMethod_CreateStarterDatabase()
         {

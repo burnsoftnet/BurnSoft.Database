@@ -42,7 +42,7 @@ namespace UnitTestProject_Database
             /// <summary>
             /// The starter database name and path
             /// </summary>
-            public const string StarterDatabaseNameAndPath = "C:\\test\\unittest.db";
+            public const string StarterDatabaseNameAndPath = "C:\\test\\unittest_full.db";
             /// <summary>
             /// The database version
             /// </summary>
