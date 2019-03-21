@@ -235,6 +235,9 @@ namespace BurnSoft.Database.SQLite
                             throw new Exception(errOut);
                         }
                     }
+                } else
+                {
+                    bAns = dbExists;
                 }
             }
             catch (Exception e)
