@@ -100,5 +100,19 @@ namespace BurnSoft.Database.MySQL
             }
             Conn = null;
         }
+        public static bool RunQuery(string connectionString, string sql, out string errOut)
+        {
+            bool bAns = false;
+            errOut = @"";
+            try
+            {
+
+            }
+            catch (Exception e)
+            {
+                errOut = ErrorMessage(ClassLocation, "RunQuery", e);
+            }
+            return bAns;
+        }
     }
 }
