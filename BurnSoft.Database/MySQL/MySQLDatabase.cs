@@ -100,13 +100,36 @@ namespace BurnSoft.Database.MySQL
             }
             Conn = null;
         }
+        /// <summary>
+        /// Runs the query.
+        /// </summary>
+        /// <param name="connectionString">The connection string.</param>
+        /// <param name="sql">The SQL.</param>
+        /// <param name="errOut">The error out.</param>
+        /// <returns><c>true</c> if XXXX, <c>false</c> otherwise.</returns>
+        /// <exception cref="System.Exception"></exception>
         public static bool RunQuery(string connectionString, string sql, out string errOut)
         {
             bool bAns = false;
             errOut = @"";
             try
             {
-
+                MySQLDatabase obj = new MySQLDatabase();
+                if (obj.ConnectDB(connectionString, out errOut))
+                {
+                    MySqlCommand cmd = new MySqlCommand()
+                    {
+                        CommandText = sql,
+                        Connection = obj.Conn
+                    };
+                    cmd.ExecuteNonQuery();
+                    cmd.Connection.Close();
+                    obj.Close();
+                    bAns = true;
+                } else
+                {
+                    throw new Exception(errOut);
+                }
             }
             catch (Exception e)
             {
