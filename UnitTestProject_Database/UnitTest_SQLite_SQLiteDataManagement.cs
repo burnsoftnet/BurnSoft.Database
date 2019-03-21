@@ -40,7 +40,7 @@ namespace UnitTestProject_Database
         [TestMethod]
         public void TestMethod_RunQuery()
         {
-            string sql = "INSERT INTO DB_Version (version) VALUES (0);";
+            string sql = "INSERT INTO DB_Version (version) VALUES (2.0);";
             bool value = SQLiteDataManagement.RunQuery(Settings.SQLiteDatabase.StarterDatabaseNameAndPath, sql, out errOut);
             General.HasTrueValue(value, errOut);
         }
