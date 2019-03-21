@@ -222,5 +222,126 @@ namespace BurnSoft.Database.SQLite
             }
             return bAns;
         }
+        /// <summary>
+        /// Gets the single value from a T-SQL querey, granted it is working in just strings, but the public functions
+        /// will contain the conversions for integer and double values as needed.  This was just a generic interface for a quick
+        /// and easy pull from the database.
+        /// </summary>
+        /// <param name="dbname">The dbname.</param>
+        /// <param name="sql">The SQL.</param>
+        /// <param name="sColName">Name of the s col.</param>
+        /// <param name="defaultValue">The default value.</param>
+        /// <param name="errOut">The error out.</param>
+        /// <returns>System.String.</returns>
+        /// <exception cref="Exception"></exception>
+        private static string GetSingleValue(string dbname, string sql, string sColName, string defaultValue, out string errOut)
+        {
+            string sAns = defaultValue;
+            errOut = @"";
+            try
+            {
+                SQLiteDataManagement obj = new SQLiteDataManagement();
+                if (obj.ConnectDB(dbname, out errOut))
+                {
+                    SQLiteCommand cmd = new SQLiteCommand(sql, obj.ConnObject);
+                    using (SQLiteDataReader rs = cmd.ExecuteReader())
+                    {
+                        while (rs.Read())
+                        {
+                            if (rs.GetValue(rs.GetOrdinal(sColName)) != DBNull.Value)
+                            {
+                                sAns = Convert.ToString(rs.GetValue(rs.GetOrdinal(sColName)));
+                            }
+                        }
+                        rs.Close();
+                    }
+                    cmd.Dispose();
+                    obj.CloseDb();
+                } else
+                {
+                    throw new Exception(errOut);
+                }
+            }
+            catch (Exception e)
+            {
+                errOut = ErrorMessage(ClassLocation, "GetSingleValue", e);
+            }
+            return sAns;
+        }
+        /// <summary>
+        /// Gets the single value from database.
+        /// </summary>
+        /// <param name="dbname">The dbname.</param>
+        /// <param name="sql">The SQL.</param>
+        /// <param name="sColName">Name of the s col.</param>
+        /// <param name="defaultValue">The default value.</param>
+        /// <param name="errOut">The error out.</param>
+        /// <returns>System.String.</returns>
+        /// <exception cref="Exception"></exception>
+        public static string GetSingleValueFromDatabase(string dbname, string sql, string sColName, string defaultValue, out string errOut)
+        {
+            string sAns = @"";
+            errOut = @"";
+            try
+            {
+                sAns = GetSingleValue(dbname, sql, sColName, defaultValue, out errOut);
+                if (errOut.Length > 0) throw new Exception(errOut);
+            }
+            catch (Exception e)
+            {
+                errOut = ErrorMessage(ClassLocation, "GetSingleValueFromDatabase", e);
+            }
+            return sAns;
+        }
+        /// <summary>
+        /// Gets the single value from database.
+        /// </summary>
+        /// <param name="dbname">The dbname.</param>
+        /// <param name="sql">The SQL.</param>
+        /// <param name="sColName">Name of the s col.</param>
+        /// <param name="defaultValue">The default value.</param>
+        /// <param name="errOut">The error out.</param>
+        /// <returns>System.Int32.</returns>
+        /// <exception cref="Exception"></exception>
+        public static int GetSingleValueFromDatabase(string dbname, string sql, string sColName, int defaultValue, out string errOut)
+        {
+            int iAns = 0;
+            errOut = @"";
+            try
+            {
+                iAns = Convert.ToInt32(GetSingleValue(dbname, sql, sColName, Convert.ToString(defaultValue), out errOut));
+                if (errOut.Length > 0) throw new Exception(errOut);
+            }
+            catch (Exception e)
+            {
+                errOut = ErrorMessage(ClassLocation, "GetSingleValueFromDatabase", e);
+            }
+            return iAns;
+        }
+        /// <summary>
+        /// Gets the single value from database.
+        /// </summary>
+        /// <param name="dbname">The dbname.</param>
+        /// <param name="sql">The SQL.</param>
+        /// <param name="sColName">Name of the s col.</param>
+        /// <param name="defaultValue">The default value.</param>
+        /// <param name="errOut">The error out.</param>
+        /// <returns>System.Double.</returns>
+        /// <exception cref="Exception"></exception>
+        public static double GetSingleValueFromDatabase(string dbname, string sql, string sColName, double defaultValue, out string errOut)
+        {
+            double dAns = 0;
+            errOut = @"";
+            try
+            {
+                dAns = Convert.ToDouble(GetSingleValue(dbname, sql, sColName, Convert.ToString(defaultValue), out errOut));
+                if (errOut.Length > 0) throw new Exception(errOut);
+            }
+            catch (Exception e)
+            {
+                errOut = ErrorMessage(ClassLocation, "GetSingleValueFromDatabase", e);
+            }
+            return dAns;
+        }
     }
 }
