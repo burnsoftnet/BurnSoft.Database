@@ -2,7 +2,9 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using BurnSoft.Database.SQLite;
 using System.Diagnostics;
-
+/// <summary>
+/// The UnitTestProject_Database namespace.
+/// </summary>
 namespace UnitTestProject_Database
 {
     [TestClass]
