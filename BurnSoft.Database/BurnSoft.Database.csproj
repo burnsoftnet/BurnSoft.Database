@@ -79,13 +79,12 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="MSAccess\MSAccessDatabase.cs" />
+    <Compile Include="MySQL\MySQLDatabase.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SQLite\BaseDatabase.cs" />
     <Compile Include="SQLite\SQLiteDataManagement.cs" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="MySQL\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <None Include="App.config" />
     <None Include="BurnSoft.Database.nuspec" />
