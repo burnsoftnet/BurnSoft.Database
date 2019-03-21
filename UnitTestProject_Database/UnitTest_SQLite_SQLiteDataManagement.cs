@@ -39,7 +39,7 @@ namespace UnitTestProject_Database
         [TestMethod]
         public void TestMethod_HasData()
         {
-            string sql = "select * DB_Version;";
+            string sql = "select * from DB_Version;";
             bool value = SQLiteDataManagement.HasData(Settings.SQLiteDatabase.StarterDatabaseNameAndPath, sql, out errOut);
             General.HasTrueValue(value, errOut);
         }
@@ -47,7 +47,7 @@ namespace UnitTestProject_Database
         [TestMethod]
         public void TestMethod_GetDataBySQL()
         {
-            string sql = "select * DB_Version;";
+            string sql = "select * from DB_Version;";
             DataTable dt = SQLiteDataManagement.GetDataBySQL(Settings.SQLiteDatabase.StarterDatabaseNameAndPath, sql, out errOut);
             bool HasData = false;
             if (errOut.Length == 0)
@@ -58,13 +58,14 @@ namespace UnitTestProject_Database
                     Debug.Print("{0}", dr["id"].ToString());
                     Debug.Print("{0}", dr["version"].ToString());
                     Debug.Print("{0}", dr["dt"].ToString());
+                    Debug.Print("");
                 }
             }
             General.HasTrueValue(HasData, errOut);
         }
 
         [TestMethod]
-        public void TestMethod_()
+        public void TestMethod_CleanDB()
         {
         }
         /*
