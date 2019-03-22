@@ -61,19 +61,19 @@ namespace UnitTestProject_Database
             /// <summary>
             /// The hostname
             /// </summary>
-            public const string HOSTNAME = "";
+            public const string HOSTNAME = "192.168.1.5";
             /// <summary>
             /// The uid
             /// </summary>
-            public const string UID = "";
+            public const string UID = "testuser";
             /// <summary>
             /// The password
             /// </summary>
-            public const string PWD = "";
+            public const string PWD = "test.user";
             /// <summary>
             /// The database
             /// </summary>
-            public const string Database = "";
+            public const string Database = "testdb";
 
 
         }
