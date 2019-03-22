@@ -16,7 +16,9 @@ namespace UnitTestProject_Database
             string value = MySQLDatabase.ConnectionString(Settings.MySQLDatabase.HOSTNAME, Settings.MySQLDatabase.UID, Settings.MySQLDatabase.PWD, Settings.MySQLDatabase.Database, out errOut);
             General.HasValue(value, errOut);
         }
-
+        /// <summary>
+        /// Defines the test method TestMethod_ConnectDB.
+        /// </summary>
         [TestMethod]
         public void TestMethod_ConnectDB()
         {
@@ -26,7 +28,9 @@ namespace UnitTestProject_Database
             obj.Close();
             General.HasTrueValue(value, errOut);
         }
-
+        /// <summary>
+        /// Defines the test method TestMethod_RunQuery.
+        /// </summary>
         [TestMethod]
         public void TestMethod_RunQuery()
         {
