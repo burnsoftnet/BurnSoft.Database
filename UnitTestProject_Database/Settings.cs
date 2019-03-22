@@ -52,5 +52,30 @@ namespace UnitTestProject_Database
             /// </summary>
             public const double DBVersionUpdate = 2.0;
         }
+
+        /// <summary>
+        /// Class MySQLDatabase Settings for the MySQl Unit tests
+        /// </summary>
+        public class MySQLDatabase
+        {
+            /// <summary>
+            /// The hostname
+            /// </summary>
+            public const string HOSTNAME = "";
+            /// <summary>
+            /// The uid
+            /// </summary>
+            public const string UID = "";
+            /// <summary>
+            /// The password
+            /// </summary>
+            public const string PWD = "";
+            /// <summary>
+            /// The database
+            /// </summary>
+            public const string Database = "";
+
+
+        }
     }
 }
