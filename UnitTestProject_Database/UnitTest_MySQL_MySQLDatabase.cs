@@ -10,7 +10,7 @@ namespace UnitTestProject_Database
         [TestMethod]
         public void TestMethod_ConnectionString()
         {
-           
+           string value = MySQLDatabase.ConnectionString(Settings.MySQLDatabase.HOSTNAME, Settings.MySQLDatabase.UID, Settings.MySQLDatabase.PWD)
         }
 
         /*
