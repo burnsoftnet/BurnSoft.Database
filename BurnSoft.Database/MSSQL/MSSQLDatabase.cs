@@ -73,6 +73,15 @@ namespace BurnSoft.Database.MSSQL
         /// <param name="uid">The uid.</param>
         /// <param name="pwd">The password.</param>
         /// <returns>System.String.</returns>
+        /// <example>
+        /// SEE UNIT TEST @ UnitTest_MSSQL_MSSQLDatabase <br/>
+        /// <br/>
+        /// string connString = MSSQLDatabase.ConnectionString("192.168.1.6", "", "test", "test", "test");<br/>
+        /// <br/>
+        /// <b>Result</b><br/>
+        /// Data Source=192.168.1.6;Initial Catalog=test; Integrated Security=false; Pooling=false;UID=test;PWD=test<br/>
+        /// 
+        /// </example>
         public static string ConnectionString(string hostname, string instance, string database, string uid, string pwd)
         {
             string sAns = @"";
@@ -115,6 +124,10 @@ namespace BurnSoft.Database.MSSQL
         /// <param name="connString">The connection string.</param>
         /// <param name="errOut">The error out.</param>
         /// <returns><c>true</c> if XXXX, <c>false</c> otherwise.</returns>
+        /// <example>
+        /// SEE UNIT TEST @ UnitTest_MSSQL_MSSQLDatabase <br/>
+        /// <br/>
+        /// </example>
         public bool ConnectToDb(string connString, out string errOut)
         {
             bool bAns = false;
@@ -155,6 +168,10 @@ namespace BurnSoft.Database.MSSQL
         /// <param name="errOut">The error out.</param>
         /// <returns><c>true</c> if XXXX, <c>false</c> otherwise.</returns>
         /// <exception cref="Exception"></exception>
+        /// <example>
+        /// SEE UNIT TEST @ UnitTest_MSSQL_MSSQLDatabase <br/>
+        /// <br/>
+        /// </example>
         public static bool RunExec(string connString, string sql, out string errOut)
         {
             bool bAns = false;

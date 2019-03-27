@@ -21,7 +21,7 @@ namespace UnitTestProject_Database
         [TestMethod]
         public void TestMethod_ConnectionStringInstance()
         {
-            string connString = MSSQLDatabase.ConnectionString(Settings.MSSQLDatabase.server, "test", Settings.MSSQLDatabase.database, Settings.MSSQLDatabase.UID, Settings.MSSQLDatabase.pwd);
+            string connString = MSSQLDatabase.ConnectionString(Settings.MSSQLDatabase.server, "testinstance", Settings.MSSQLDatabase.database, Settings.MSSQLDatabase.UID, Settings.MSSQLDatabase.pwd);
             General.HasValue(connString);
         }
     }
