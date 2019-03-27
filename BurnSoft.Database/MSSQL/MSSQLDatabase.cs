@@ -140,6 +140,10 @@ namespace BurnSoft.Database.MSSQL
         /// <example>
         /// SEE UNIT TEST @ UnitTest_MSSQL_MSSQLDatabase <br/>
         /// <br/>
+        /// MSSQLDatabase obj = new MSSQLDatabase();<br/>
+        /// string connString = MSSQLDatabase.ConnectionString("192.168.1.6", "", "test", "test", "test");<br/>
+        /// bool value = obj.ConnectToDb(connString, out errOut);<br/>
+        /// obj.Close();<br/>
         /// </example>
         public bool ConnectToDb(string connString, out string errOut)
         {
@@ -160,6 +164,14 @@ namespace BurnSoft.Database.MSSQL
         /// <summary>
         /// Closes this instance.
         /// </summary>
+        /// <example>
+        /// SEE UNIT TEST @ UnitTest_MSSQL_MSSQLDatabase <br/>
+        /// <br/>
+        /// MSSQLDatabase obj = new MSSQLDatabase();<br/>
+        /// string connString = MSSQLDatabase.ConnectionString("192.168.1.6", "", "test", "test", "test");<br/>
+        /// bool value = obj.ConnectToDb(connString, out errOut);<br/>
+        /// obj.Close();<br/>
+        /// </example>
         public void Close()
         {
             if (Conn.State != System.Data.ConnectionState.Closed)
@@ -184,6 +196,9 @@ namespace BurnSoft.Database.MSSQL
         /// <example>
         /// SEE UNIT TEST @ UnitTest_MSSQL_MSSQLDatabase <br/>
         /// <br/>
+        /// string connString = MSSQLDatabase.ConnectionString("192.168.1.6", "", "test", "test", "test");<br/>
+        /// string SQL = "UPDATE test set value=1;";<br/>
+        /// bool value = MSSQLDatabase.RunExec(connString, SQL, out errOut);<br/>
         /// </example>
         public static bool RunExec(string connString, string sql, out string errOut)
         {

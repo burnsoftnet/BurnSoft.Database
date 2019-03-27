@@ -7,6 +7,10 @@ namespace UnitTestProject_Database
     public class UnitTest_MSSQL_MSSQLDatabase
     {
         /// <summary>
+        /// The error out
+        /// </summary>
+        private string errOut;
+        /// <summary>
         /// Defines the test method TestMethod_ConnectionString.
         /// </summary>
         [TestMethod]
@@ -23,6 +27,29 @@ namespace UnitTestProject_Database
         {
             string connString = MSSQLDatabase.ConnectionString(Settings.MSSQLDatabase.server, "testinstance", Settings.MSSQLDatabase.database, Settings.MSSQLDatabase.UID, Settings.MSSQLDatabase.pwd);
             General.HasValue(connString);
+        }
+        /// <summary>
+        /// Defines the test method TestMethod_ConnectToDb.
+        /// </summary>
+        [TestMethod]
+        public void TestMethod_ConnectToDb()
+        {
+            MSSQLDatabase obj = new MSSQLDatabase();
+            string connString = MSSQLDatabase.ConnectionString(Settings.MSSQLDatabase.server, "", Settings.MSSQLDatabase.database, Settings.MSSQLDatabase.UID, Settings.MSSQLDatabase.pwd);
+            bool value = obj.ConnectToDb(connString, out errOut);
+            obj.Close();
+            General.HasTrueValue(value, errOut);
+        }
+        /// <summary>
+        /// Defines the test method TestMethod_RunExec.
+        /// </summary>
+        [TestMethod]
+        public void TestMethod_RunExec()
+        {
+            string connString = MSSQLDatabase.ConnectionString(Settings.MSSQLDatabase.server, "", Settings.MSSQLDatabase.database, Settings.MSSQLDatabase.UID, Settings.MSSQLDatabase.pwd);
+            string SQL = "UPDATE test set value=1;";
+            bool value = MSSQLDatabase.RunExec(connString, SQL,out errOut);
+            General.HasTrueValue(value, errOut);
         }
     }
 }
