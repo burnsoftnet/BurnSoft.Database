@@ -151,6 +151,9 @@ namespace BurnSoft.Database.MSAccess
         /// <example>
         /// SEE UNIT TEST @ UnitTest_MSAccess <br/>
         /// <br/>
+        /// MSAccessDatabase obj = new MSAccessDatabase(); <br/>
+        /// bool value = obj.ConnectDB(ConnString, out errOut); <br/>
+        /// obj.Close(out errOut); <br/>
         /// </example>
         public bool ConnectDB(string ConnectionString, out string errOut)
         {
@@ -176,6 +179,8 @@ namespace BurnSoft.Database.MSAccess
         /// <example>
         /// SEE UNIT TEST @ UnitTest_MSAccess <br/>
         /// <br/>
+        /// MSAccessDatabase obj = new MSAccessDatabase(); <br/>
+        /// obj.Close(out errOut); <br/>
         /// </example>
         public bool Close(out string errMsg)
         {
@@ -209,6 +214,9 @@ namespace BurnSoft.Database.MSAccess
         /// <example>
         /// SEE UNIT TEST @ UnitTest_MSAccess <br/>
         /// <br/>
+        /// string SQL = "INSERT INTO Gun_Cal(Cal) VALUES('TEST');"; <br/>
+        /// MSAccessDatabase obj = new MSAccessDatabase(); <br/>
+        /// bool value = obj.ConnExec(ConnString, SQL, out errOut); <br/>
         /// </example>
         public bool ConnExec(string ConnectionString, string SQL, out string errOut)
         {
@@ -246,6 +254,14 @@ namespace BurnSoft.Database.MSAccess
         /// <example>
         /// SEE UNIT TEST @ UnitTest_MSAccess <br/>
         /// <br/>
+        ///  String SQL = "Select * from Gun_Cal"; <br/>
+        /// MSAccessDatabase obj = new MSAccessDatabase(); <br/>
+        /// DataTable table = obj.GetData(ConnString, SQL, out errOut); <br/>
+        /// string TestValue = @""; <br/>
+        ///    foreach(DataRow row in table.Rows) <br/>
+        ///    { <br/>
+        ///        TestValue += String.Format("{0}{1}",row["Cal"].ToString(),Environment.NewLine); <br/>
+        ///    } <br/>
         /// </example>
         public DataTable GetData(string ConnectionString, string SQL, out string errOut)
         {
