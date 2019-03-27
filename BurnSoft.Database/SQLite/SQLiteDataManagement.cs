@@ -67,6 +67,10 @@ namespace BurnSoft.Database.SQLite
         /// <param name="dbName">Name of the database.</param>
         /// <param name="errOut">The error out.</param>
         /// <returns><c>true</c> if XXXX, <c>false</c> otherwise.</returns>
+        /// <example>
+        /// <b>SEE UNIT TESTS @ UnitTest_SQLite_SQLiteDataManagement</b><br/>
+        /// <br/>
+        /// </example>
         public bool ConnectDB(string dbName, out string errOut)
         {
             bool bAns = false;
@@ -86,6 +90,10 @@ namespace BurnSoft.Database.SQLite
         /// <summary>
         /// Closes the database.
         /// </summary>
+        /// <example>
+        /// <b>SEE UNIT TESTS @ UnitTest_SQLite_SQLiteDataManagement</b><br/>
+        /// <br/>
+        /// </example>
         public void CloseDb()
         {
             if (ConnObject.State != System.Data.ConnectionState.Closed)
@@ -97,6 +105,10 @@ namespace BurnSoft.Database.SQLite
         /// <summary>
         /// Disposes this instance.
         /// </summary>
+        /// <example>
+        /// <b>SEE UNIT TESTS @ UnitTest_SQLite_SQLiteDataManagement</b><br/>
+        /// <br/>
+        /// </example>
         public void Dispose()
         {
             ConnObject?.Dispose();
@@ -110,6 +122,10 @@ namespace BurnSoft.Database.SQLite
         /// <param name="errOut">The error out.</param>
         /// <returns><c>true</c> if XXXX, <c>false</c> otherwise.</returns>
         /// <exception cref="Exception"></exception>
+        /// <example>
+        /// <b>SEE UNIT TESTS @ UnitTest_SQLite_SQLiteDataManagement</b><br/>
+        /// <br/>
+        /// </example>
         public static bool RunQuery(string dbName, string SQL, out string errOut)
         {
             bool bAns = false;
@@ -147,6 +163,10 @@ namespace BurnSoft.Database.SQLite
         /// <param name="errOut">The error out.</param>
         /// <returns><c>true</c> if the specified database name has data; otherwise, <c>false</c>.</returns>
         /// <exception cref="Exception"></exception>
+        /// <example>
+        /// <b>SEE UNIT TESTS @ UnitTest_SQLite_SQLiteDataManagement</b><br/>
+        /// <br/>
+        /// </example>
         public static bool HasData(string dbName, string SQl , out string errOut)
         {
             bool bAns = false;
@@ -183,6 +203,10 @@ namespace BurnSoft.Database.SQLite
         /// <param name="errOut">The error out.</param>
         /// <returns>DataTable.</returns>
         /// <exception cref="Exception"></exception>
+        /// <example>
+        /// <b>SEE UNIT TESTS @ UnitTest_SQLite_SQLiteDataManagement</b><br/>
+        /// <br/>
+        /// </example>
         public static DataTable GetDataBySQL(string dbname, string sql, out string errOut)
         {
             DataTable dtAns = new DataTable();
@@ -220,6 +244,10 @@ namespace BurnSoft.Database.SQLite
         /// <param name="errOut">The error out.</param>
         /// <returns><c>true</c> if XXXX, <c>false</c> otherwise.</returns>
         /// <exception cref="Exception"></exception>
+        /// <example>
+        /// <b>SEE UNIT TESTS @ UnitTest_SQLite_SQLiteDataManagement</b><br/>
+        /// <br/>
+        /// </example>
         public static bool CleanDB(string dbname, out string errOut)
         {
             bool bAns = false;
@@ -247,6 +275,10 @@ namespace BurnSoft.Database.SQLite
         /// <param name="errOut">The error out.</param>
         /// <returns>System.String.</returns>
         /// <exception cref="Exception"></exception>
+        /// <example>
+        /// <b>SEE UNIT TESTS @ UnitTest_SQLite_SQLiteDataManagement</b><br/>
+        /// <br/>
+        /// </example>
         private static string GetSingleValue(string dbname, string sql, string sColName, string defaultValue, out string errOut)
         {
             string sAns = defaultValue;
@@ -291,6 +323,10 @@ namespace BurnSoft.Database.SQLite
         /// <param name="errOut">The error out.</param>
         /// <returns>System.String.</returns>
         /// <exception cref="Exception"></exception>
+        /// <example>
+        /// <b>SEE UNIT TESTS @ UnitTest_SQLite_SQLiteDataManagement</b><br/>
+        /// <br/>
+        /// </example>
         public static string GetSingleValueFromDatabase(string dbname, string sql, string sColName, string defaultValue, out string errOut)
         {
             string sAns = @"";
@@ -316,6 +352,10 @@ namespace BurnSoft.Database.SQLite
         /// <param name="errOut">The error out.</param>
         /// <returns>System.Int32.</returns>
         /// <exception cref="Exception"></exception>
+        /// <example>
+        /// <b>SEE UNIT TESTS @ UnitTest_SQLite_SQLiteDataManagement</b><br/>
+        /// <br/>
+        /// </example>
         public static int GetSingleValueFromDatabase(string dbname, string sql, string sColName, int defaultValue, out string errOut)
         {
             int iAns = 0;
@@ -341,6 +381,10 @@ namespace BurnSoft.Database.SQLite
         /// <param name="errOut">The error out.</param>
         /// <returns>System.Double.</returns>
         /// <exception cref="Exception"></exception>
+        /// <example>
+        /// <b>SEE UNIT TESTS @ UnitTest_SQLite_SQLiteDataManagement</b><br/>
+        /// <br/>
+        /// </example>
         public static double GetSingleValueFromDatabase(string dbname, string sql, string sColName, double defaultValue, out string errOut)
         {
             double dAns = 0;
