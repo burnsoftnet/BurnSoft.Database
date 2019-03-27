@@ -77,6 +77,10 @@ namespace BurnSoft.Database.MSAccess
         /// <example>
         /// SEE UNIT TEST @ UnitTest_MSAccess <br/>
         /// <br/>
+        /// string value = MSAccessDatabase.ConnectionString("C:\\test", "test.mdb", out errOut);
+        /// <br/>
+        /// <b>Results</b><br/>
+        /// Driver={Microsoft Access Driver (*.mdb)};dbq=C:\test\test.mdb
         /// </example>
         public static string ConnectionString(string DatabasePath, string databaseName,out string errOut, string password = "")
         {
@@ -109,6 +113,10 @@ namespace BurnSoft.Database.MSAccess
         /// <example>
         /// SEE UNIT TEST @ UnitTest_MSAccess <br/>
         /// <br/>
+        /// string value = MSAccessDatabase.ConnectionStringOLE("C:\\test", "test.mdb", out errOut);<br/>
+        /// <br/>
+        /// <b>Results</b><br/>
+        /// Provider=Microsoft.Jet.OLEDB.4.0;Persist Security Info=False;Data Source="C:\test\test.mdb";
         /// </example>
         public static string ConnectionStringOLE(string DatabasePath, string databaseName, out string errOut, string password = "")
         {
