@@ -15,4 +15,23 @@
     <copyright>Copyright 2019</copyright>
     <tags>BurnSoft Database, SQLite, MSAccess Access, MSSQL, SQL, MySQL</tags>
   </metadata>
+  <files>
+    <file src="BurnSoft.Database.chm" target="content/BurnSoft.Database.chm" />
+    <file src="x64/SQLite.Interop.dll" target="lib/net45/x64/SQLite.Interop.dll" />
+    <file src="x86/SQLite.Interop.dll" target="lib/net45/x86/SQLite.Interop.dll" />
+    <file src="EntityFramework.dll" target="lib/net45/EntityFramework.dll" />
+    <file src="EntityFramework.SqlServer.dll" target="lib/net45/EntityFramework.SqlServer.dll" />
+    <file src="EntityFramework.SqlServer.xml" target="lib/net45/EntityFramework.SqlServer.xml" />
+    <file src="EntityFramework.xml" target="lib/net45/EntityFramework.xml" />
+    <file src="Google.Protobuf.dll" target="lib/net45/Google.Protobuf.dll" />
+    <file src="Google.Protobuf.xml" target="lib/net45/Google.Protobuf.xml" />
+    <file src="MySql.Data.dll" target="lib/net45/MySql.Data.dll" />
+    <file src="MySql.Data.Entity.EF6.dll" target="lib/net45/MySql.Data.Entity.EF6.dll" />
+    <file src="MySql.Data.Entity.EF6.xml" target="lib/net45/MySql.Data.Entity.EF6.xml" />
+    <file src="MySql.Data.xml" target="lib/net45/MySql.Data.xml" />
+    <file src="System.Data.SQLite.dll" target="lib/net45/System.Data.SQLite.dll" />
+    <file src="System.Data.SQLite.EF6.dll" target="lib/net45/System.Data.SQLite.EF6.dll" />
+    <file src="System.Data.SQLite.Linq.dll" target="lib/net45/System.Data.SQLite.Linq.dll" />
+    <file src="System.Data.SQLite.xml" target="lib/net45/System.Data.SQLite.xml" />
+  </files>
 </package>
