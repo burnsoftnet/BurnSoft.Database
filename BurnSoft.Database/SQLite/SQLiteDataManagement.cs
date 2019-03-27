@@ -70,6 +70,9 @@ namespace BurnSoft.Database.SQLite
         /// <example>
         /// <b>SEE UNIT TESTS @ UnitTest_SQLite_SQLiteDataManagement</b><br/>
         /// <br/>
+        /// SQLiteDataManagement obj = new SQLiteDataManagement();
+        /// value = obj.ConnectDB("C:\\test\\unittest.db", out errOut);
+        /// obj.Close();
         /// </example>
         public bool ConnectDB(string dbName, out string errOut)
         {
@@ -93,6 +96,9 @@ namespace BurnSoft.Database.SQLite
         /// <example>
         /// <b>SEE UNIT TESTS @ UnitTest_SQLite_SQLiteDataManagement</b><br/>
         /// <br/>
+        /// SQLiteDataManagement obj = new SQLiteDataManagement();
+        /// value = obj.ConnectDB("C:\\test\\unittest.db", out errOut);
+        /// obj.Close();
         /// </example>
         public void CloseDb()
         {
@@ -108,6 +114,9 @@ namespace BurnSoft.Database.SQLite
         /// <example>
         /// <b>SEE UNIT TESTS @ UnitTest_SQLite_SQLiteDataManagement</b><br/>
         /// <br/>
+        /// SQLiteDataManagement obj = new SQLiteDataManagement();
+        /// value = obj.ConnectDB("C:\\test\\unittest.db", out errOut);
+        /// obj.Dispose();
         /// </example>
         public void Dispose()
         {
@@ -125,6 +134,8 @@ namespace BurnSoft.Database.SQLite
         /// <example>
         /// <b>SEE UNIT TESTS @ UnitTest_SQLite_SQLiteDataManagement</b><br/>
         /// <br/>
+        /// string sql = "INSERT INTO DB_Version (version) VALUES (2.0);";
+        /// bool value = SQLiteDataManagement.RunQuery("C:\\test\\unittest.db", sql, out errOut);
         /// </example>
         public static bool RunQuery(string dbName, string SQL, out string errOut)
         {
@@ -166,6 +177,8 @@ namespace BurnSoft.Database.SQLite
         /// <example>
         /// <b>SEE UNIT TESTS @ UnitTest_SQLite_SQLiteDataManagement</b><br/>
         /// <br/>
+        /// string sql = "select * from DB_Version;";
+        /// bool value = SQLiteDataManagement.HasData("C:\\test\\unittest.db", sql, out errOut);
         /// </example>
         public static bool HasData(string dbName, string SQl , out string errOut)
         {
@@ -206,6 +219,20 @@ namespace BurnSoft.Database.SQLite
         /// <example>
         /// <b>SEE UNIT TESTS @ UnitTest_SQLite_SQLiteDataManagement</b><br/>
         /// <br/>
+        /// string sql = "select * from DB_Version;";<br/>
+        /// DataTable dt = SQLiteDataManagement.GetDataBySQL("C:\\test\\unittest.db", sql, out errOut);<br/>
+        /// bool HasData = false;<br/>
+        ///    if (errOut.Length == 0)<br/>
+        ///    {<br/>
+        ///        HasData = (dt.Rows.Count > 0);<br/>
+        ///        foreach (DataRow dr in dt.Rows)<br/>
+        ///        {<br/>
+        ///            Debug.Print("{0}", dr["id"].ToString());<br/>
+        ///            Debug.Print("{0}", dr["version"].ToString());<br/>
+        ///            Debug.Print("{0}", dr["dt"].ToString());<br/>
+        ///            Debug.Print("");<br/>
+        ///        }<br/>
+        ///}<br/>
         /// </example>
         public static DataTable GetDataBySQL(string dbname, string sql, out string errOut)
         {
@@ -247,6 +274,7 @@ namespace BurnSoft.Database.SQLite
         /// <example>
         /// <b>SEE UNIT TESTS @ UnitTest_SQLite_SQLiteDataManagement</b><br/>
         /// <br/>
+        /// bool value = SQLiteDataManagement.CleanDB("C:\\test\\unittest.db", out errOut);
         /// </example>
         public static bool CleanDB(string dbname, out string errOut)
         {
@@ -278,6 +306,8 @@ namespace BurnSoft.Database.SQLite
         /// <example>
         /// <b>SEE UNIT TESTS @ UnitTest_SQLite_SQLiteDataManagement</b><br/>
         /// <br/>
+        /// string sql = "select * from DB_Version order by dt desc limit 1;";<br/>
+        /// string value = GetSingleValue("C:\\test\\unittest.db", sql, "dt", "", out errOut);
         /// </example>
         private static string GetSingleValue(string dbname, string sql, string sColName, string defaultValue, out string errOut)
         {
@@ -326,6 +356,8 @@ namespace BurnSoft.Database.SQLite
         /// <example>
         /// <b>SEE UNIT TESTS @ UnitTest_SQLite_SQLiteDataManagement</b><br/>
         /// <br/>
+        /// string sql = "select * from DB_Version order by dt desc limit 1;";<br/>
+        /// string value = SQLiteDataManagement.GetSingleValueFromDatabase("C:\\test\\unittest.db", sql, "dt", "", out errOut);<br/>
         /// </example>
         public static string GetSingleValueFromDatabase(string dbname, string sql, string sColName, string defaultValue, out string errOut)
         {
@@ -355,6 +387,8 @@ namespace BurnSoft.Database.SQLite
         /// <example>
         /// <b>SEE UNIT TESTS @ UnitTest_SQLite_SQLiteDataManagement</b><br/>
         /// <br/>
+        /// string sql = "select * from DB_Version order by dt desc limit 1;";<br/>
+        /// int value = SQLiteDataManagement.GetSingleValueFromDatabase("C:\\test\\unittest.db", sql, "id", 0, out errOut);<br/>
         /// </example>
         public static int GetSingleValueFromDatabase(string dbname, string sql, string sColName, int defaultValue, out string errOut)
         {
@@ -384,6 +418,8 @@ namespace BurnSoft.Database.SQLite
         /// <example>
         /// <b>SEE UNIT TESTS @ UnitTest_SQLite_SQLiteDataManagement</b><br/>
         /// <br/>
+        ///  string sql = "select * from DB_Version order by dt desc limit 1;"; <br/>
+        /// double value = SQLiteDataManagement.GetSingleValueFromDatabase("C:\\test\\unittest.db", sql, "version", 0.0, out errOut); <br/>
         /// </example>
         public static double GetSingleValueFromDatabase(string dbname, string sql, string sColName, double defaultValue, out string errOut)
         {
