@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Data.SqlClient;
 
 namespace BurnSoft.Database.MSSQL
 {
@@ -56,7 +57,13 @@ namespace BurnSoft.Database.MSSQL
         /// <param name="e">The e.</param>
         /// <returns>System.String.</returns>
         private static string ErrorMessage(string location, string FunctionName, ArgumentNullException e) => $"{ClassLocation}.{FunctionName} - {e.Message.ToString()}";
-        #endregion        
+        #endregion
+
+        /// <summary>
+        /// The SQL connection Object.
+        /// </summary>
+        public SqlConnection Conn;
+
         /// <summary>
         /// Connections the string.
         /// </summary>
@@ -78,6 +85,66 @@ namespace BurnSoft.Database.MSSQL
                 sAns = $"Data Source={hostname};{ending}";
             }
             return sAns;
+        }
+
+        /// <summary>
+        /// Converts to database.
+        /// </summary>
+        /// <param name="connString">The connection string.</param>
+        /// <param name="errOut">The error out.</param>
+        /// <returns><c>true</c> if XXXX, <c>false</c> otherwise.</returns>
+        public static bool ConnectToDatabase(string connString, out string errOut)
+        {
+            bool bAns = false;
+            errOut = @"";
+            try
+            {
+                MSSQLDatabase obj = new MSSQLDatabase();
+                bAns = obj.ConnectToDb(connString, out errOut);
+            }
+            catch (Exception e)
+            {
+                errOut = ErrorMessage(ClassLocation, "ConnectToDatabase", e);
+            }
+            return bAns;
+        }
+
+        /// <summary>
+        /// Converts to db.
+        /// </summary>
+        /// <param name="connString">The connection string.</param>
+        /// <param name="errOut">The error out.</param>
+        /// <returns><c>true</c> if XXXX, <c>false</c> otherwise.</returns>
+        public bool ConnectToDb(string connString, out string errOut)
+        {
+            bool bAns = false;
+            errOut = @"";
+            try
+            {
+                Conn = new SqlConnection(connString);
+                Conn.Open();
+                bAns = true;
+            }
+            catch (Exception e)
+            {
+                errOut = ErrorMessage(ClassLocation, "ConnectToDb", e);
+            }
+            return bAns;
+        }
+        /// <summary>
+        /// Closes this instance.
+        /// </summary>
+        public void Close()
+        {
+            if (Conn.State != System.Data.ConnectionState.Closed)
+            {
+                while (Conn.State != System.Data.ConnectionState.Closed)
+                {
+                    Conn.Close();
+                    Conn.Dispose();
+                }
+            }
+            Conn = null;
         }
     }
 }
