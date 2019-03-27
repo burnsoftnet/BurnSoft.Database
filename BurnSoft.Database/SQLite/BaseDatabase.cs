@@ -54,7 +54,10 @@ namespace BurnSoft.Database.SQLite
         /// <example>
         /// <b>SEE UNIT TESTS @ UnitTest_SQLite_BaseDatabase</b><br/>
         /// <br/>
-        /// 
+        /// string value = BaseDatabase.ConnectionString("C:\\test\\unittest.db");<br/>
+        /// <br/>
+        /// <b>Results</b><br/>
+        /// Data Source=C:\test\unittest.db;Version=3
         /// </example>
         public static string ConnectionString(string dbname)
         {

@@ -77,7 +77,9 @@ namespace UnitTestProject_Database
 
 
         }
-
+        /// <summary>
+        /// Class MSSQLDatabase.
+        /// </summary>
         public class MSSQLDatabase
         {
             public static string server = "192.168.1.6";
