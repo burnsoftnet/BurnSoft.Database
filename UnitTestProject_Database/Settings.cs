@@ -77,5 +77,13 @@ namespace UnitTestProject_Database
 
 
         }
+
+        public class MSSQLDatabase
+        {
+            public static string server = "192.168.1.6";
+            public static string UID = "test";
+            public static string pwd = "test";
+            public static string database = "test";
+        }
     }
 }
