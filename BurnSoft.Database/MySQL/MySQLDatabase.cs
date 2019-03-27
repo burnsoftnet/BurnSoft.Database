@@ -53,6 +53,10 @@ namespace BurnSoft.Database.MySQL
         /// <param name="databaseName">Name of the database.</param>
         /// <param name="errOut">The error out.</param>
         /// <returns>System.String.</returns>
+        /// <example>
+        /// <b>SEE UNIT TESTS @ UnitTest_MySQL_MySQLDatabase</b><br/>
+        /// <br/>
+        /// </example>
         public static string ConnectionString(string hostname, string uid, string pwd, string databaseName, out string errOut)
         {
             string sAns = @"";
@@ -73,6 +77,10 @@ namespace BurnSoft.Database.MySQL
         /// <param name="connectionString">The connection string.</param>
         /// <param name="errOut">The error out.</param>
         /// <returns><c>true</c> if XXXX, <c>false</c> otherwise.</returns>
+        /// <example>
+        /// <b>SEE UNIT TESTS @ UnitTest_MySQL_MySQLDatabase</b><br/>
+        /// <br/>
+        /// </example>
         public bool ConnectDB(string connectionString, out string errOut)
         {
             bool bAns = false;
@@ -92,6 +100,10 @@ namespace BurnSoft.Database.MySQL
         /// <summary>
         /// Closes this instance.
         /// </summary>
+        /// <example>
+        /// <b>SEE UNIT TESTS @ UnitTest_MySQL_MySQLDatabase</b><br/>
+        /// <br/>
+        /// </example>
         public void Close()
         {
             if (Conn.State != ConnectionState.Closed)
@@ -108,6 +120,10 @@ namespace BurnSoft.Database.MySQL
         /// <param name="errOut">The error out.</param>
         /// <returns><c>true</c> if XXXX, <c>false</c> otherwise.</returns>
         /// <exception cref="System.Exception"></exception>
+        /// <example>
+        /// <b>SEE UNIT TESTS @ UnitTest_MySQL_MySQLDatabase</b><br/>
+        /// <br/>
+        /// </example>
         public static bool RunQuery(string connectionString, string sql, out string errOut)
         {
             bool bAns = false;
