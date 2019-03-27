@@ -51,6 +51,11 @@ namespace BurnSoft.Database.SQLite
         /// </summary>
         /// <param name="dbname">The dbname.</param>
         /// <returns>System.String.</returns>
+        /// <example>
+        /// <b>SEE UNIT TESTS @ UnitTest_SQLite_BaseDatabase</b><br/>
+        /// <br/>
+        /// 
+        /// </example>
         public static string ConnectionString(string dbname)
         {
             return $"Data Source={dbname};Version=3";
@@ -61,6 +66,11 @@ namespace BurnSoft.Database.SQLite
         /// <param name="dbName">Name of the database.</param>
         /// <param name="errOut">The error out.</param>
         /// <returns><c>true</c> if XXXX, <c>false</c> otherwise.</returns>
+        /// <example>
+        /// <b>SEE UNIT TESTS @ UnitTest_SQLite_BaseDatabase</b><br/>
+        /// <br/>
+        /// 
+        /// </example>
         public static bool CreateDB(string dbName, out string errOut)
         {
             bool bAns = false;
@@ -83,6 +93,11 @@ namespace BurnSoft.Database.SQLite
         /// <param name="myVer">My ver.</param>
         /// <param name="errOut">The error out.</param>
         /// <returns><c>true</c> if XXXX, <c>false</c> otherwise.</returns>
+        /// <example>
+        /// <b>SEE UNIT TESTS @ UnitTest_SQLite_BaseDatabase</b><br/>
+        /// <br/>
+        /// 
+        /// </example>
         public static bool DBVersionExists(string dbName, double myVer, out string errOut)
         {
             bool bAns = false;
@@ -107,6 +122,11 @@ namespace BurnSoft.Database.SQLite
         /// <param name="errOut">The error out.</param>
         /// <returns><c>true</c> if XXXX, <c>false</c> otherwise.</returns>
         /// <exception cref="Exception"></exception>
+        /// <example>
+        /// <b>SEE UNIT TESTS @ UnitTest_SQLite_BaseDatabase</b><br/>
+        /// <br/>
+        /// 
+        /// </example>
         public static bool UpdateDbVersion(string dbname, double dbversion, out string errOut)
         {
             bool bAns = false;
@@ -131,6 +151,11 @@ namespace BurnSoft.Database.SQLite
         /// <param name="version">The version.</param>
         /// <returns><c>true</c> if XXXX, <c>false</c> otherwise.</returns>
         /// <exception cref="Exception"></exception>
+        /// <example>
+        /// <b>SEE UNIT TESTS @ UnitTest_SQLite_BaseDatabase</b><br/>
+        /// <br/>
+        /// 
+        /// </example>
         public static bool CreateDatabaseVersion(string dbname, out string errOut, double version =1.0)
         {
             bool bAns = false;
@@ -170,6 +195,11 @@ namespace BurnSoft.Database.SQLite
         /// <param name="dbname">The dbname.</param>
         /// <param name="errOut">The error out.</param>
         /// <returns>System.Double.</returns>
+        /// <example>
+        /// <b>SEE UNIT TESTS @ UnitTest_SQLite_BaseDatabase</b><br/>
+        /// <br/>
+        /// 
+        /// </example>
         public static double GetDatabaseVersion(string dbname, out string errOut)
         {
             double dAns = 0;
@@ -207,6 +237,11 @@ namespace BurnSoft.Database.SQLite
         /// <returns><c>true</c> if XXXX, <c>false</c> otherwise.</returns>
         /// <exception cref="Exception">
         /// </exception>
+        /// <example>
+        /// <b>SEE UNIT TESTS @ UnitTest_SQLite_BaseDatabase</b><br/>
+        /// <br/>
+        /// 
+        /// </example>
         public static bool CreateStarterDatabase(string dbname, out string errOut, double dbversion = 1.0)
         {
             bool bAns = false;
