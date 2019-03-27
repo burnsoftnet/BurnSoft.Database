@@ -146,5 +146,43 @@ namespace BurnSoft.Database.MSSQL
             }
             Conn = null;
         }
+
+        /// <summary>
+        /// Runs and executes the SQL statement.
+        /// </summary>
+        /// <param name="connString">The connection string.</param>
+        /// <param name="sql">The SQL.</param>
+        /// <param name="errOut">The error out.</param>
+        /// <returns><c>true</c> if XXXX, <c>false</c> otherwise.</returns>
+        /// <exception cref="Exception"></exception>
+        public static bool RunExec(string connString, string sql, out string errOut)
+        {
+            bool bAns = false;
+            errOut = @"";
+            try
+            {
+                MSSQLDatabase obj = new MSSQLDatabase();
+                
+                if (obj.ConnectToDb(connString, out errOut))
+                {
+                    SqlCommand cmd = new SqlCommand()
+                    {
+                        CommandText = sql,
+                        Connection = obj.Conn
+                    };
+                    cmd.ExecuteNonQuery();
+                    cmd.Dispose();
+                    cmd = null;
+                } else
+                {
+                    throw new Exception(errOut);
+                }
+            }
+            catch (Exception e)
+            {
+                errOut = ErrorMessage(ClassLocation, "RunExec", e);
+            }
+            return bAns;
+        }
     }
 }
