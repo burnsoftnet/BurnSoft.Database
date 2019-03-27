@@ -1,8 +1,21 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿
+/* ------------------------------------------------------------------------------------------------
+* 
+* BurnSoft
+* www.burnsoft.net
+* Owenton, Kentucky
+* Copyright (C) 2019. All Rights Reserved.
+* 
+* ------------------------------------------------------------------------------------------------
+* Original Designer(s):
+*                      Joe M.
+* Original Author(s):
+*      03/27/2019      Joe M.
+*      
+* Revision:
+* 
+* ----------------------------------------------------------------------------------------------- */
+using System;
 using System.Data.SQLite;
 using System.IO;
 
@@ -72,7 +85,7 @@ namespace BurnSoft.Database.SQLite
         /// <example>
         /// <b>SEE UNIT TESTS @ UnitTest_SQLite_BaseDatabase</b><br/>
         /// <br/>
-        /// 
+        /// bool value = BaseDatabase.CreateDB("C:\\test\\unittest.db", out errOut);
         /// </example>
         public static bool CreateDB(string dbName, out string errOut)
         {
@@ -99,7 +112,7 @@ namespace BurnSoft.Database.SQLite
         /// <example>
         /// <b>SEE UNIT TESTS @ UnitTest_SQLite_BaseDatabase</b><br/>
         /// <br/>
-        /// 
+        /// bool value = BaseDatabase.DBVersionExists("C:\\test\\unittest.db", 1.1, out errOut);
         /// </example>
         public static bool DBVersionExists(string dbName, double myVer, out string errOut)
         {
@@ -128,7 +141,7 @@ namespace BurnSoft.Database.SQLite
         /// <example>
         /// <b>SEE UNIT TESTS @ UnitTest_SQLite_BaseDatabase</b><br/>
         /// <br/>
-        /// 
+        /// bool value = BaseDatabase.UpdateDbVersion("C:\\test\\unittest.db", 1.1, out errOut);
         /// </example>
         public static bool UpdateDbVersion(string dbname, double dbversion, out string errOut)
         {
@@ -157,7 +170,7 @@ namespace BurnSoft.Database.SQLite
         /// <example>
         /// <b>SEE UNIT TESTS @ UnitTest_SQLite_BaseDatabase</b><br/>
         /// <br/>
-        /// 
+        /// bool value = BaseDatabase.CreateDatabaseVersion("C:\\test\\unittest.db", out errOut, 1.2);
         /// </example>
         public static bool CreateDatabaseVersion(string dbname, out string errOut, double version =1.0)
         {
@@ -201,7 +214,7 @@ namespace BurnSoft.Database.SQLite
         /// <example>
         /// <b>SEE UNIT TESTS @ UnitTest_SQLite_BaseDatabase</b><br/>
         /// <br/>
-        /// 
+        /// double value = BaseDatabase.GetDatabaseVersion("C:\\test\\unittest.db", out errOut);
         /// </example>
         public static double GetDatabaseVersion(string dbname, out string errOut)
         {
@@ -232,7 +245,7 @@ namespace BurnSoft.Database.SQLite
         }
 
         /// <summary>
-        /// Creates the starter database.
+        /// Creates the starter database with the table DB_Version set to version 1.0 and the date and time it was created.
         /// </summary>
         /// <param name="dbname">The dbname.</param>
         /// <param name="errOut">The error out.</param>
@@ -243,7 +256,7 @@ namespace BurnSoft.Database.SQLite
         /// <example>
         /// <b>SEE UNIT TESTS @ UnitTest_SQLite_BaseDatabase</b><br/>
         /// <br/>
-        /// 
+        /// bool value = BaseDatabase.CreateStarterDatabase("C:\\test\\unittest.db", out errOut);
         /// </example>
         public static bool CreateStarterDatabase(string dbname, out string errOut, double dbversion = 1.0)
         {

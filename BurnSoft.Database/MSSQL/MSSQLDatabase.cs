@@ -1,8 +1,21 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿
+/* ------------------------------------------------------------------------------------------------
+* 
+* BurnSoft
+* www.burnsoft.net
+* Owenton, Kentucky
+* Copyright (C) 2019. All Rights Reserved.
+* 
+* ------------------------------------------------------------------------------------------------
+* Original Designer(s):
+*                      Joe M.
+* Original Author(s):
+*      03/27/2019      Joe M.
+*      
+* Revision:
+* 
+* ----------------------------------------------------------------------------------------------- */
+using System;
 using System.Data.SqlClient;
 
 namespace BurnSoft.Database.MSSQL
