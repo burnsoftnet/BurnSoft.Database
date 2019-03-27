@@ -64,6 +64,7 @@ namespace BurnSoft.Database.MSAccess
         /// The connection
         /// </summary>
         OdbcConnection Conn;
+        #endregion
         #region "Connection Strings"
         /// <summary>
         /// Connection String Format Used to Connect to MS Access Databases using the Microsoft Access Driver
@@ -72,8 +73,11 @@ namespace BurnSoft.Database.MSAccess
         /// <param name="databaseName"></param>
         /// <param name="password"></param>
         /// <param name="errOur"></param>
-        /// <returns></returns>
-        #endregion
+        /// <returns>string</returns>
+        /// <example>
+        /// SEE UNIT TEST @ UnitTest_MSAccess <br/>
+        /// <br/>
+        /// </example>
         public static string ConnectionString(string DatabasePath, string databaseName,out string errOut, string password = "")
         {
             string sAns = "";
@@ -102,6 +106,10 @@ namespace BurnSoft.Database.MSAccess
         /// <param name="password">The password.</param>
         /// <param name="errOur">The error our.</param>
         /// <returns>System.String.</returns>
+        /// <example>
+        /// SEE UNIT TEST @ UnitTest_MSAccess <br/>
+        /// <br/>
+        /// </example>
         public static string ConnectionStringOLE(string DatabasePath, string databaseName, out string errOut, string password = "")
         {
             string sAns = "";
@@ -132,6 +140,10 @@ namespace BurnSoft.Database.MSAccess
         /// <param name="ConnectionString">The connection string.</param>
         /// <param name="errOut">The error out.</param>
         /// <returns><c>true</c> if XXXX, <c>false</c> otherwise.</returns>
+        /// <example>
+        /// SEE UNIT TEST @ UnitTest_MSAccess <br/>
+        /// <br/>
+        /// </example>
         public bool ConnectDB(string ConnectionString, out string errOut)
         {
             bool bAns = false;
@@ -153,6 +165,10 @@ namespace BurnSoft.Database.MSAccess
         /// </summary>
         /// <param name="errMsg">The error MSG.</param>
         /// <returns><c>true</c> if XXXX, <c>false</c> otherwise.</returns>
+        /// <example>
+        /// SEE UNIT TEST @ UnitTest_MSAccess <br/>
+        /// <br/>
+        /// </example>
         public bool Close(out string errMsg)
         {
             bool bAns = false;
@@ -182,6 +198,10 @@ namespace BurnSoft.Database.MSAccess
         /// <param name="errOut">The error out.</param>
         /// <returns><c>true</c> if XXXX, <c>false</c> otherwise.</returns>
         /// <exception cref="System.Exception"></exception>
+        /// <example>
+        /// SEE UNIT TEST @ UnitTest_MSAccess <br/>
+        /// <br/>
+        /// </example>
         public bool ConnExec(string ConnectionString, string SQL, out string errOut)
         {
             bool bAns = false;
@@ -215,6 +235,10 @@ namespace BurnSoft.Database.MSAccess
         /// <param name="errOut">The error out.</param>
         /// <returns>DataTable.</returns>
         /// <exception cref="Exception"></exception>
+        /// <example>
+        /// SEE UNIT TEST @ UnitTest_MSAccess <br/>
+        /// <br/>
+        /// </example>
         public DataTable GetData(string ConnectionString, string SQL, out string errOut)
         {
             DataTable Table = new DataTable();
