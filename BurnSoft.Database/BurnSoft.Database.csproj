@@ -88,6 +88,9 @@
   <ItemGroup />
   <ItemGroup>
     <None Include="App.config" />
+    <None Include="BurnSoft.Database.chm">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Include="BurnSoft.Database.nuspec" />
     <None Include="packages.config" />
   </ItemGroup>
