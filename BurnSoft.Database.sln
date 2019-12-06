@@ -7,8 +7,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BurnSoft.Database", "BurnSo
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UnitTestProject_Database", "UnitTestProject_Database\UnitTestProject_Database.csproj", "{133FCBAD-D906-4D83-908E-6AD2081E394A}"
 EndProject
-Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "BurnSoftDatabase_Installer", "BurnSoftDatabase_Installer\BurnSoftDatabase_Installer.vdproj", "{94874610-8A45-4F48-8D30-3C06B34D833B}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -23,8 +21,6 @@ Global
 		{133FCBAD-D906-4D83-908E-6AD2081E394A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{133FCBAD-D906-4D83-908E-6AD2081E394A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{133FCBAD-D906-4D83-908E-6AD2081E394A}.Release|Any CPU.Build.0 = Release|Any CPU
-		{94874610-8A45-4F48-8D30-3C06B34D833B}.Debug|Any CPU.ActiveCfg = Debug
-		{94874610-8A45-4F48-8D30-3C06B34D833B}.Release|Any CPU.ActiveCfg = Release
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
