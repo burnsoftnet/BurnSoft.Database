@@ -93,7 +93,9 @@
     <None Include="BurnSoft.Database.chm">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Include="BurnSoft.Database.nuspec" />
+    <None Include="BurnSoft.Database.nuspec">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
