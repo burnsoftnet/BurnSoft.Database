@@ -85,7 +85,9 @@
     <Compile Include="SQLite\BaseDatabase.cs" />
     <Compile Include="SQLite\SQLiteDataManagement.cs" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Content Include="icon.png" />
+  </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
     <None Include="BurnSoft.Database.chm">

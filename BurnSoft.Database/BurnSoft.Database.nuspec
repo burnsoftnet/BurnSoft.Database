@@ -5,33 +5,20 @@
     <version>$version$</version>
     <title>$title$</title>
     <authors>$author$</authors>
-    <owners>$author$</owners>
-    <licenseUrl>https://raw.githubusercontent.com/burnsoftnet/BurnSoft.Database/master/LICENSE</licenseUrl>
+    <owners>burnsoftnet</owners>
     <projectUrl>https://github.com/burnsoftnet/BurnSoft.Database</projectUrl>
+    <repository type="git" url="https://github.com/burnsoftnet/BurnSoft.Database" />
     <iconUrl>https://avatars0.githubusercontent.com/u/24593581?s=460</iconUrl>
+    <icon>images\icon.png</icon>
+    <license type="expression">MIT</license>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>$description$</description>
     <releaseNotes>Initial Release of BurnSoft.Database Library</releaseNotes>
-    <copyright>Copyright 2019</copyright>
+    <copyright>Copyright 2019-2020</copyright>
     <tags>BurnSoft Database, SQLite, MSAccess Access, MSSQL, SQL, MySQL</tags>
   </metadata>
   <files>
-    <file src="BurnSoft.Database.chm" target="content/BurnSoft.Database.chm" />
-    <file src="bin/release/x64/SQLite.Interop.dll" target="lib/net45/x64/SQLite.Interop.dll" />
-    <file src="bin/release/x86/SQLite.Interop.dll" target="lib/net45/x86/SQLite.Interop.dll" />
-    <file src="bin/release/EntityFramework.dll" target="lib/net45/EntityFramework.dll" />
-    <file src="bin/release/EntityFramework.SqlServer.dll" target="lib/net45/EntityFramework.SqlServer.dll" />
-    <file src="bin/release/EntityFramework.SqlServer.xml" target="lib/net45/EntityFramework.SqlServer.xml" />
-    <file src="bin/release/EntityFramework.xml" target="lib/net45/EntityFramework.xml" />
-    <file src="bin/release/Google.Protobuf.dll" target="lib/net45/Google.Protobuf.dll" />
-    <file src="bin/release/Google.Protobuf.xml" target="lib/net45/Google.Protobuf.xml" />
-    <file src="bin/release/MySql.Data.dll" target="lib/net45/MySql.Data.dll" />
-    <file src="bin/release/MySql.Data.Entity.EF6.dll" target="lib/net45/MySql.Data.Entity.EF6.dll" />
-    <file src="bin/release/MySql.Data.Entity.EF6.xml" target="lib/net45/MySql.Data.Entity.EF6.xml" />
-    <file src="bin/release/MySql.Data.xml" target="lib/net45/MySql.Data.xml" />
-    <file src="bin/release/System.Data.SQLite.dll" target="lib/net45/System.Data.SQLite.dll" />
-    <file src="bin/release/System.Data.SQLite.EF6.dll" target="lib/net45/System.Data.SQLite.EF6.dll" />
-    <file src="bin/release/System.Data.SQLite.Linq.dll" target="lib/net45/System.Data.SQLite.Linq.dll" />
-    <file src="bin/release/System.Data.SQLite.xml" target="lib/net45/System.Data.SQLite.xml" />
+    <file src="$id$.chm" target="content/$id$.chm" />
+    <file src="icon.png" target="images\" />
   </files>
 </package>
