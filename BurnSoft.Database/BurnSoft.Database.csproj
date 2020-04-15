@@ -35,6 +35,10 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="adodb, Version=7.0.3300.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+      <HintPath>..\packages\ADODB.7.10.3077\lib\adodb.dll</HintPath>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </Reference>
     <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.dll</HintPath>
     </Reference>
@@ -79,6 +83,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="MSAccess\MSAccessDatabase.cs" />
+    <Compile Include="MSAccess\OLEDB.cs" />
     <Compile Include="MSSQL\MSSQLDatabase.cs" />
     <Compile Include="MySQL\MySQLDatabase.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
