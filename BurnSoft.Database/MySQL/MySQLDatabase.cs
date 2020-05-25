@@ -180,5 +180,30 @@ namespace BurnSoft.Database.MySQL
             }
             return bAns;
         }
+
+        public static DataTable GetData(string connectionString, string sql, out string errOut)
+        {
+            DataTable dt = new DataTable();
+            errOut = @"";
+            try
+            {
+                using (MySqlConnection conn = new MySqlConnection(connectionString))
+                {
+                    using (MySqlCommand cmd = new MySqlCommand(sql, conn))
+                    {
+                        cmd.CommandType = CommandType.Text;
+                        using (MySqlDataAdapter sda = new MySqlDataAdapter(cmd))
+                        {
+                            sda.Fill(dt);
+                        }
+                    }
+                }
+            }
+            catch (Exception e)
+            {
+                errOut = ErrorMessage(ClassLocation,"GetData", e);
+            }
+            return dt;
+        }
     }
 }
