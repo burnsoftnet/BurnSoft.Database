@@ -18,7 +18,7 @@
     <tags>BurnSoft Database, SQLite, MSAccess Access, MSSQL, SQL, MySQL</tags>
   </metadata>
   <files>
-    <file src="$id$.chm" target="content/$id$.chm" />
+    <file src="bin/$configuration$/$id$.chm" target="content/$id$.chm" />
     <file src="icon.png" target="images\" />
   </files>
 </package>
