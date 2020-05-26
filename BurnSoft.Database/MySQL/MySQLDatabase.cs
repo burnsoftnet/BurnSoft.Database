@@ -60,7 +60,7 @@ namespace BurnSoft.Database.MySQL
         /// <summary>
         /// Connections the string to connect to a MySQL Server
         /// </summary>
-        /// <param name="hostname">The hostname.</param>
+        /// <param name="hostname">The host name.</param>
         /// <param name="uid">The uid.</param>
         /// <param name="pwd">The password.</param>
         /// <param name="databaseName">Name of the database.</param>
@@ -180,7 +180,13 @@ namespace BurnSoft.Database.MySQL
             }
             return bAns;
         }
-
+        /// <summary>
+        /// pass the connection string and SQL-T statement and get a return in a DataTable Format
+        /// </summary>
+        /// <param name="connectionString">The connection string.</param>
+        /// <param name="sql">The SQL.</param>
+        /// <param name="errOut">The error out.</param>
+        /// <returns>DataTable.</returns>
         public static DataTable GetData(string connectionString, string sql, out string errOut)
         {
             DataTable dt = new DataTable();

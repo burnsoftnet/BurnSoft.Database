@@ -292,7 +292,7 @@ namespace BurnSoft.Database.SQLite
             return bAns;
         }
         /// <summary>
-        /// Gets the single value from a T-SQL querey, granted it is working in just strings, but the public functions
+        /// Gets the single value from a T-SQL query, granted it is working in just strings, but the public functions
         /// will contain the conversions for integer and double values as needed.  This was just a generic interface for a quick
         /// and easy pull from the database.
         /// </summary>

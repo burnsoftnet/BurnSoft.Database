@@ -214,10 +214,10 @@ namespace BurnSoft.Database.MSAccess
             return bAns;
         }
         /// <summary>
-        /// Connect to the database and execture the SQL statement that you passed.
-        /// In this function, we set the connection objecto null instead of using the Close Function
+        /// Connect to the database and execute the SQL statement that you passed.
+        /// In this function, we set the connection object null instead of using the Close Function
         /// because you might be using that object for something else, and this will take out the connection
-        /// from right uder neath you, so we just set that to null instead of a hard close.
+        /// from right under neath you, so we just set that to null instead of a hard close.
         /// </summary>
         /// <param name="ConnectionString">The connection string.</param>
         /// <param name="SQL">The SQL.</param>
