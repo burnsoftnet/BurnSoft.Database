@@ -17,13 +17,16 @@
 * ----------------------------------------------------------------------------------------------- */
 using System;
 using System.Data.SqlClient;
+// ReSharper disable UnusedMember.Global
+// ReSharper disable UnusedMember.Local
+// ReSharper disable ConvertIfStatementToConditionalTernaryExpression
 
 namespace BurnSoft.Database.MSSQL
 {
     /// <summary>
     /// Class MSSQLDatabase handles connections and data for Microsoft SQL Server based database.
     /// </summary>
-    public class MSSQLDatabase
+    public class MssqlDatabase
     {
         #region "Exception Error Handling"        
         /// <summary>
@@ -33,43 +36,26 @@ namespace BurnSoft.Database.MSSQL
         /// <summary>
         /// Errors the message.
         /// </summary>
-        /// <param name="location">The location.</param>
-        /// <param name="FunctionName">Name of the function.</param>
+        /// <param name="functionName">Name of the function.</param>
         /// <param name="e">The e.</param>
         /// <returns>System.String.</returns>
-        private static string ErrorMessage(string location, string FunctionName, Exception e) => $"{ClassLocation}.{FunctionName} - {e.Message.ToString()}";
+        private static string ErrorMessage(string functionName, Exception e) => $"{ClassLocation}.{functionName} - {e.Message}";
+
         /// <summary>
         /// Errors the message.
         /// </summary>
-        /// <param name="location">The location.</param>
-        /// <param name="FunctionName">Name of the function.</param>
+        /// <param name="functionName">Name of the function.</param>
         /// <param name="e">The e.</param>
         /// <returns>System.String.</returns>
-        private static string ErrorMessage(string location, string FunctionName, AccessViolationException e) => $"{ClassLocation}.{FunctionName} - {e.Message.ToString()}";
+        private static string ErrorMessage(string functionName, InvalidCastException e) => $"{ClassLocation}.{functionName} - {e.Message}";
+
         /// <summary>
         /// Errors the message.
         /// </summary>
-        /// <param name="location">The location.</param>
-        /// <param name="FunctionName">Name of the function.</param>
+        /// <param name="functionName">Name of the function.</param>
         /// <param name="e">The e.</param>
         /// <returns>System.String.</returns>
-        private static string ErrorMessage(string location, string FunctionName, InvalidCastException e) => $"{ClassLocation}.{FunctionName} - {e.Message.ToString()}";
-        /// <summary>
-        /// Errors the message.
-        /// </summary>
-        /// <param name="location">The location.</param>
-        /// <param name="FunctionName">Name of the function.</param>
-        /// <param name="e">The e.</param>
-        /// <returns>System.String.</returns>
-        private static string ErrorMessage(string location, string FunctionName, ArgumentException e) => $"{ClassLocation}.{FunctionName} - {e.Message.ToString()}";
-        /// <summary>
-        /// Errors the message.
-        /// </summary>
-        /// <param name="location">The location.</param>
-        /// <param name="FunctionName">Name of the function.</param>
-        /// <param name="e">The e.</param>
-        /// <returns>System.String.</returns>
-        private static string ErrorMessage(string location, string FunctionName, ArgumentNullException e) => $"{ClassLocation}.{FunctionName} - {e.Message.ToString()}";
+        private static string ErrorMessage(string functionName, ArgumentNullException e) => $"{ClassLocation}.{functionName} - {e.Message}";
         #endregion
 
         /// <summary>
@@ -97,9 +83,9 @@ namespace BurnSoft.Database.MSSQL
         /// </example>
         public static string ConnectionString(string hostname, string instance, string database, string uid, string pwd)
         {
-            string sAns = @"";
+            string sAns;
             string ending = $"Initial Catalog={database}; Integrated Security=false; Pooling=false;UID={uid};PWD={pwd}";
-            if (instance.Length > 0)
+            if (instance?.Length > 0)
             {
                 sAns = $"Data Source={hostname}\\{instance};{ending}";
             } else
@@ -121,12 +107,12 @@ namespace BurnSoft.Database.MSSQL
             errOut = @"";
             try
             {
-                MSSQLDatabase obj = new MSSQLDatabase();
+                MssqlDatabase obj = new MssqlDatabase();
                 bAns = obj.ConnectToDb(connString, out errOut);
             }
             catch (Exception e)
             {
-                errOut = ErrorMessage(ClassLocation, "ConnectToDatabase", e);
+                errOut = ErrorMessage( "ConnectToDatabase", e);
             }
             return bAns;
         }
@@ -157,7 +143,7 @@ namespace BurnSoft.Database.MSSQL
             }
             catch (Exception e)
             {
-                errOut = ErrorMessage(ClassLocation, "ConnectToDb", e);
+                errOut = ErrorMessage("ConnectToDb", e);
             }
             return bAns;
         }
@@ -206,7 +192,7 @@ namespace BurnSoft.Database.MSSQL
             errOut = @"";
             try
             {
-                MSSQLDatabase obj = new MSSQLDatabase();
+                MssqlDatabase obj = new MssqlDatabase();
                 
                 if (obj.ConnectToDb(connString, out errOut))
                 {
@@ -217,15 +203,16 @@ namespace BurnSoft.Database.MSSQL
                     };
                     cmd.ExecuteNonQuery();
                     cmd.Dispose();
-                    cmd = null;
                 } else
                 {
                     throw new Exception(errOut);
                 }
+
+                bAns = true;
             }
             catch (Exception e)
             {
-                errOut = ErrorMessage(ClassLocation, "RunExec", e);
+                errOut = ErrorMessage( "RunExec", e);
             }
             return bAns;
         }

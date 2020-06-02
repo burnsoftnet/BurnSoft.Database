@@ -16,7 +16,7 @@ namespace UnitTestProject_Database
         [TestMethod]
         public void TestMethod_ConnectionString()
         {
-            string connString = MSSQLDatabase.ConnectionString(Settings.MSSQLDatabase.server, "", Settings.MSSQLDatabase.database, Settings.MSSQLDatabase.UID, Settings.MSSQLDatabase.pwd);
+            string connString = MssqlDatabase.ConnectionString(Settings.MSSQLDatabase.server, "", Settings.MSSQLDatabase.database, Settings.MSSQLDatabase.UID, Settings.MSSQLDatabase.pwd);
             General.HasValue(connString);
         }
         /// <summary>
@@ -25,7 +25,7 @@ namespace UnitTestProject_Database
         [TestMethod]
         public void TestMethod_ConnectionStringInstance()
         {
-            string connString = MSSQLDatabase.ConnectionString(Settings.MSSQLDatabase.server, "testinstance", Settings.MSSQLDatabase.database, Settings.MSSQLDatabase.UID, Settings.MSSQLDatabase.pwd);
+            string connString = MssqlDatabase.ConnectionString(Settings.MSSQLDatabase.server, "testinstance", Settings.MSSQLDatabase.database, Settings.MSSQLDatabase.UID, Settings.MSSQLDatabase.pwd);
             General.HasValue(connString);
         }
         /// <summary>
@@ -34,8 +34,8 @@ namespace UnitTestProject_Database
         [TestMethod]
         public void TestMethod_ConnectToDb()
         {
-            MSSQLDatabase obj = new MSSQLDatabase();
-            string connString = MSSQLDatabase.ConnectionString(Settings.MSSQLDatabase.server, "", Settings.MSSQLDatabase.database, Settings.MSSQLDatabase.UID, Settings.MSSQLDatabase.pwd);
+            MssqlDatabase obj = new MssqlDatabase();
+            string connString = MssqlDatabase.ConnectionString(Settings.MSSQLDatabase.server, "", Settings.MSSQLDatabase.database, Settings.MSSQLDatabase.UID, Settings.MSSQLDatabase.pwd);
             bool value = obj.ConnectToDb(connString, out errOut);
             obj.Close();
             General.HasTrueValue(value, errOut);
@@ -46,9 +46,9 @@ namespace UnitTestProject_Database
         [TestMethod]
         public void TestMethod_RunExec()
         {
-            string connString = MSSQLDatabase.ConnectionString(Settings.MSSQLDatabase.server, "", Settings.MSSQLDatabase.database, Settings.MSSQLDatabase.UID, Settings.MSSQLDatabase.pwd);
+            string connString = MssqlDatabase.ConnectionString(Settings.MSSQLDatabase.server, "", Settings.MSSQLDatabase.database, Settings.MSSQLDatabase.UID, Settings.MSSQLDatabase.pwd);
             string SQL = "UPDATE test set value=1;";
-            bool value = MSSQLDatabase.RunExec(connString, SQL,out errOut);
+            bool value = MssqlDatabase.RunExec(connString, SQL,out errOut);
             General.HasTrueValue(value, errOut);
         }
     }
