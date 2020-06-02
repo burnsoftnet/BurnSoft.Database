@@ -13,7 +13,7 @@ namespace UnitTestProject_Database
         [TestMethod]
         public void TestMethod_ConnectionString()
         {
-            string value = MySQLDatabase.ConnectionString(Settings.MySQLDatabase.HOSTNAME, Settings.MySQLDatabase.UID, Settings.MySQLDatabase.PWD, Settings.MySQLDatabase.Database, out errOut);
+            string value = MySqlDatabase.ConnectionString(Settings.MySQLDatabase.HOSTNAME, Settings.MySQLDatabase.UID, Settings.MySQLDatabase.PWD, Settings.MySQLDatabase.Database, out errOut);
             General.HasValue(value, errOut);
         }
         /// <summary>
@@ -22,9 +22,9 @@ namespace UnitTestProject_Database
         [TestMethod]
         public void TestMethod_ConnectDB()
         {
-            MySQLDatabase obj = new MySQLDatabase();
-            string connString = MySQLDatabase.ConnectionString(Settings.MySQLDatabase.HOSTNAME, Settings.MySQLDatabase.UID, Settings.MySQLDatabase.PWD, Settings.MySQLDatabase.Database, out errOut);
-            bool value = obj.ConnectDB(connString, out errOut);
+            MySqlDatabase obj = new MySqlDatabase();
+            string connString = MySqlDatabase.ConnectionString(Settings.MySQLDatabase.HOSTNAME, Settings.MySQLDatabase.UID, Settings.MySQLDatabase.PWD, Settings.MySQLDatabase.Database, out errOut);
+            bool value = obj.ConnectDb(connString, out errOut);
             obj.Close();
             General.HasTrueValue(value, errOut);
         }
@@ -35,8 +35,8 @@ namespace UnitTestProject_Database
         public void TestMethod_RunQuery()
         {
             string sql = "CREATE TABLE `DB_Version` (`ID` int(11) NOT NULL AUTO_INCREMENT,`verNo` varchar(45) DEFAULT NULL,`dtUpdated` timestamp NULL DEFAULT CURRENT_TIMESTAMP, PRIMARY KEY(`ID`),  UNIQUE KEY `ID_UNIQUE` (`ID`)) ENGINE = MyISAM AUTO_INCREMENT = 5 DEFAULT CHARSET = latin1;";
-            string connString = MySQLDatabase.ConnectionString(Settings.MySQLDatabase.HOSTNAME, Settings.MySQLDatabase.UID, Settings.MySQLDatabase.PWD, Settings.MySQLDatabase.Database, out errOut);
-            bool value = MySQLDatabase.RunQuery(connString, sql, out errOut);
+            string connString = MySqlDatabase.ConnectionString(Settings.MySQLDatabase.HOSTNAME, Settings.MySQLDatabase.UID, Settings.MySQLDatabase.PWD, Settings.MySQLDatabase.Database, out errOut);
+            bool value = MySqlDatabase.RunQuery(connString, sql, out errOut);
             General.HasTrueValue(value, errOut);
         }
 

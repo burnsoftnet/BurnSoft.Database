@@ -18,13 +18,15 @@
 using System;
 using MySql.Data.MySqlClient;
 using System.Data;
+// ReSharper disable UnusedMember.Local
+// ReSharper disable UnusedMember.Global
 
 namespace BurnSoft.Database.MySQL
 {
     /// <summary>
     /// Class MySQLDatabase handles connections to the Mysql database as well as some simple queries to the database as needed
     /// </summary>
-    public class MySQLDatabase
+    public class MySqlDatabase
     {
         #region "Exception Error Handling"        
         /// <summary>
@@ -34,28 +36,30 @@ namespace BurnSoft.Database.MySQL
         /// <summary>
         /// Errors the message.
         /// </summary>
-        /// <param name="location">The location.</param>
-        /// <param name="FunctionName">Name of the function.</param>
+        /// <param name="functionName">Name of the function.</param>
         /// <param name="e">The e.</param>
         /// <returns>System.String.</returns>
-        private static string ErrorMessage(string location, string FunctionName, Exception e) => $"{ClassLocation}.{FunctionName} - {e.Message.ToString()}";
+        private static string ErrorMessage(string functionName, Exception e) => $"{ClassLocation}.{functionName} - {e.Message}";
+
         /// <summary>
         /// Errors the message.
         /// </summary>
-        /// <param name="location">The location.</param>
-        /// <param name="FunctionName">Name of the function.</param>
+        /// <param name="functionName">Name of the function.</param>
         /// <param name="e">The e.</param>
         /// <returns>System.String.</returns>
-        private static string ErrorMessage(string location, string FunctionName, InvalidCastException e) => $"{ClassLocation}.{FunctionName} - {e.Message.ToString()}";
+        private static string ErrorMessage(string functionName, InvalidCastException e) => $"{ClassLocation}.{functionName} - {e.Message}";
+
         /// <summary>
         /// Errors the message.
         /// </summary>
-        /// <param name="location">The location.</param>
-        /// <param name="FunctionName">Name of the function.</param>
+        /// <param name="functionName">Name of the function.</param>
         /// <param name="e">The e.</param>
         /// <returns>System.String.</returns>
-        private static string ErrorMessage(string location, string FunctionName, ArgumentNullException e) => $"{ClassLocation}.{FunctionName} - {e.Message.ToString()}";
+        private static string ErrorMessage(string functionName, ArgumentNullException e) => $"{ClassLocation}.{functionName} - {e.Message}";
         #endregion        
+        /// <summary>
+        /// MySQl Connection Object
+        /// </summary>
         public MySqlConnection Conn;
         /// <summary>
         /// Connections the string to connect to a MySQL Server
@@ -84,7 +88,7 @@ namespace BurnSoft.Database.MySQL
             }
             catch (Exception e)
             {
-                errOut = ErrorMessage(ClassLocation, "Connectionstring", e);
+                errOut = ErrorMessage("ConnectionString", (ArgumentNullException) e);
             }
             return sAns;
         }
@@ -102,7 +106,7 @@ namespace BurnSoft.Database.MySQL
         /// bool value = obj.ConnectDB(connString, out errOut);<br/>
         /// obj.Close();<br/>
         /// </example>
-        public bool ConnectDB(string connectionString, out string errOut)
+        public bool ConnectDb(string connectionString, out string errOut)
         {
             bool bAns = false;
             errOut = @"";
@@ -114,7 +118,7 @@ namespace BurnSoft.Database.MySQL
             }
             catch (Exception e)
             {
-                errOut = ErrorMessage(ClassLocation, "ConnectDB", e);
+                errOut = ErrorMessage("ConnectDB", (ArgumentNullException) e);
             }
             return bAns;
         }
@@ -157,8 +161,8 @@ namespace BurnSoft.Database.MySQL
             errOut = @"";
             try
             {
-                MySQLDatabase obj = new MySQLDatabase();
-                if (obj.ConnectDB(connectionString, out errOut))
+                MySqlDatabase obj = new MySqlDatabase();
+                if (obj.ConnectDb(connectionString, out errOut))
                 {
                     MySqlCommand cmd = new MySqlCommand()
                     {
@@ -176,7 +180,7 @@ namespace BurnSoft.Database.MySQL
             }
             catch (Exception e)
             {
-                errOut = ErrorMessage(ClassLocation, "RunQuery", e);
+                errOut = ErrorMessage("RunQuery", (ArgumentNullException) e);
             }
             return bAns;
         }
@@ -207,7 +211,7 @@ namespace BurnSoft.Database.MySQL
             }
             catch (Exception e)
             {
-                errOut = ErrorMessage(ClassLocation,"GetData", e);
+                errOut = ErrorMessage("GetData", (ArgumentNullException) e);
             }
             return dt;
         }
