@@ -52,6 +52,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="General.cs" />
+    <Compile Include="GlobalSuppressions.cs" />
     <Compile Include="Settings.cs" />
     <Compile Include="UnitTest_MSSQL_MSSQLDatabase.cs" />
     <Compile Include="UnitTest_MySQL_MySQLDatabase.cs" />
