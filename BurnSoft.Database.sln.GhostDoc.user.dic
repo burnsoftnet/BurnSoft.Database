@@ -5,6 +5,7 @@ dbname
 dbversion
 hostname
 Mysql
+oledb
 Owenton
 testdb
 testinstance
