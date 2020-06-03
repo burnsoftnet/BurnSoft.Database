@@ -19,6 +19,7 @@ using System;
 using System.Data.SQLite;
 using System.Data;
 using System.Globalization;
+// ReSharper disable UnusedMember.Local
 
 namespace BurnSoft.Database.SQLite
 {
