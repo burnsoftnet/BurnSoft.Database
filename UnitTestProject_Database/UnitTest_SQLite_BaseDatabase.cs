@@ -26,7 +26,7 @@ namespace UnitTestProject_Database
         [TestMethod]
         public void TestMethod_CreateDb()
         {
-            bool value = BaseDatabase.CreateDB(Settings.SQLiteDatabase.DatabaseNameAndPath, out errOut);
+            bool value = BaseDatabase.CreateDb(Settings.SQLiteDatabase.DatabaseNameAndPath, out errOut);
             General.HasTrueValue(value, errOut);
         }
         /// <summary>
@@ -44,7 +44,7 @@ namespace UnitTestProject_Database
         [TestMethod]
         public void TestMethod_DBVersionExists()
         {
-            bool value = BaseDatabase.DBVersionExists(Settings.SQLiteDatabase.DatabaseNameAndPath, Settings.SQLiteDatabase.DBVersion, out errOut);
+            bool value = BaseDatabase.DbVersionExists(Settings.SQLiteDatabase.DatabaseNameAndPath, Settings.SQLiteDatabase.DBVersion, out errOut);
             General.HasTrueValue(value, errOut);
         }
         /// <summary>

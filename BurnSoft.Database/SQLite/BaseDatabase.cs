@@ -18,12 +18,13 @@
 using System;
 using System.Data.SQLite;
 using System.IO;
+// ReSharper disable UnusedMember.Local
 
 namespace BurnSoft.Database.SQLite
 {
     /// <summary>
-    /// Class BaseDatabase is used for creating the base database if it doesn't exist and the ability to put in the versioning of the
-    /// database in ia table or update the versioning
+    /// Class BaseDatabase is used for creating the base database if it doesn't exist and the ability to put in the version of the
+    /// database in ia table or update the versions.
     /// </summary>
     public class BaseDatabase
     {
@@ -36,27 +37,26 @@ namespace BurnSoft.Database.SQLite
         /// <summary>
         /// Errors the message.
         /// </summary>
-        /// <param name="location">The location.</param>
-        /// <param name="FunctionName">Name of the function.</param>
+        /// <param name="functionName">Name of the function.</param>
         /// <param name="e">The e.</param>
         /// <returns>System.String.</returns>
-        private static string ErrorMessage(string location, string FunctionName, Exception e) => $"{ClassLocation}.{FunctionName} - {e.Message.ToString()}";
+        private static string ErrorMessage(string functionName, Exception e) => $"{ClassLocation}.{functionName} - {e.Message}";
+
         /// <summary>
         /// Errors the message.
         /// </summary>
-        /// <param name="location">The location.</param>
-        /// <param name="FunctionName">Name of the function.</param>
+        /// <param name="functionName">Name of the function.</param>
         /// <param name="e">The e.</param>
         /// <returns>System.String.</returns>
-        private static string ErrorMessage(string location, string FunctionName, InvalidCastException e) => $"{ClassLocation}.{FunctionName} - {e.Message.ToString()}";
+        private static string ErrorMessage(string functionName, InvalidCastException e) => $"{ClassLocation}.{functionName} - {e.Message}";
+
         /// <summary>
         /// Errors the message.
         /// </summary>
-        /// <param name="location">The location.</param>
-        /// <param name="FunctionName">Name of the function.</param>
+        /// <param name="functionName">Name of the function.</param>
         /// <param name="e">The e.</param>
         /// <returns>System.String.</returns>
-        private static string ErrorMessage(string location, string FunctionName, ArgumentNullException e) => $"{ClassLocation}.{FunctionName} - {e.Message.ToString()}";
+        private static string ErrorMessage(string functionName, ArgumentNullException e) => $"{ClassLocation}.{functionName} - {e.Message}";
         #endregion
 
         /// <summary>
@@ -87,7 +87,7 @@ namespace BurnSoft.Database.SQLite
         /// <br/>
         /// bool value = BaseDatabase.CreateDB("C:\\test\\unittest.db", out errOut);
         /// </example>
-        public static bool CreateDB(string dbName, out string errOut)
+        public static bool CreateDb(string dbName, out string errOut)
         {
             bool bAns = false;
             errOut = @"";
@@ -98,7 +98,7 @@ namespace BurnSoft.Database.SQLite
             }
             catch (Exception e)
             {
-                errOut = ErrorMessage(ClassLocation, "CreateDB", e);
+                errOut = ErrorMessage("CreateDB", e);
             }
             return bAns;
         }
@@ -114,7 +114,7 @@ namespace BurnSoft.Database.SQLite
         /// <br/>
         /// bool value = BaseDatabase.DBVersionExists("C:\\test\\unittest.db", 1.1, out errOut);
         /// </example>
-        public static bool DBVersionExists(string dbName, double myVer, out string errOut)
+        public static bool DbVersionExists(string dbName, double myVer, out string errOut)
         {
             bool bAns = false;
             errOut = @"";
@@ -126,7 +126,7 @@ namespace BurnSoft.Database.SQLite
             }
             catch (Exception e)
             {
-                errOut = ErrorMessage(ClassLocation, "DBVersionExists", e);
+                errOut = ErrorMessage( "DBVersionExists", e);
             }
             return bAns;
         }
@@ -134,7 +134,7 @@ namespace BurnSoft.Database.SQLite
         /// Updates the database version.
         /// </summary>
         /// <param name="dbname">The dbname.</param>
-        /// <param name="dbversion">The dbversion.</param>
+        /// <param name="dbversion">The database version.</param>
         /// <param name="errOut">The error out.</param>
         /// <returns><c>true</c> if XXXX, <c>false</c> otherwise.</returns>
         /// <exception cref="Exception"></exception>
@@ -155,7 +155,7 @@ namespace BurnSoft.Database.SQLite
             }
             catch (Exception e)
             {
-                errOut = ErrorMessage(ClassLocation, "UpdateDbVersion", e);
+                errOut = ErrorMessage("UpdateDbVersion", e);
             }
             return bAns;
         }
@@ -181,7 +181,7 @@ namespace BurnSoft.Database.SQLite
                 string sql = "create table IF NOT EXISTS DB_Version (id integer primary key autoincrement, version DOUBLE DEFAULT 0, dt DATETIME DEFAULT CURRENT_TIMESTAMP);";
                 if (SQLiteDataManagement.RunQuery(dbname, sql, out errOut))
                 {
-                    if (!DBVersionExists(dbname, version, out errOut))
+                    if (!DbVersionExists(dbname, version, out errOut))
                     {
                         if (UpdateDbVersion(dbname, version, out errOut))
                         {
@@ -201,7 +201,7 @@ namespace BurnSoft.Database.SQLite
             }
             catch (Exception e)
             {
-                errOut = ErrorMessage(ClassLocation, "CreateDatabaseVersion", e);
+                errOut = ErrorMessage("CreateDatabaseVersion", e);
             }
             return bAns;
         }
@@ -239,7 +239,7 @@ namespace BurnSoft.Database.SQLite
             }
             catch (Exception e)
             {
-                errOut = ErrorMessage(ClassLocation, "GetDatabaseVersion", e);
+                errOut = ErrorMessage("GetDatabaseVersion", e);
             }
             return dAns;
         }
@@ -267,7 +267,7 @@ namespace BurnSoft.Database.SQLite
                 bool dbExists = File.Exists(dbname);
                 if (!dbExists)
                 {
-                    if (CreateDB(dbname, out errOut))
+                    if (CreateDb(dbname, out errOut))
                     {
                         if (CreateDatabaseVersion(dbname, out errOut, dbversion))
                         {
@@ -288,12 +288,12 @@ namespace BurnSoft.Database.SQLite
                     }
                 } else
                 {
-                    bAns = dbExists;
+                    bAns = true;
                 }
             }
             catch (Exception e)
             {
-                errOut = ErrorMessage(ClassLocation, "CreateStarterDatabase", e);
+                errOut = ErrorMessage("CreateStarterDatabase", e);
             }
             return bAns;
         }
