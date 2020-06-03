@@ -14,7 +14,7 @@ namespace UnitTestProject_Database
         [TestInitialize]
         public void TestInitialize()
         {
-            ConnString = BurnSoft.Database.MSAccess.MSAccessDatabase.ConnectionString(Settings.AccessDatabase.DatabasePath, Settings.AccessDatabase.DatabaseName, out errOut, Settings.AccessDatabase.DatabasePassword);
+            ConnString = BurnSoft.Database.MSAccess.MsAccessDatabase.ConnectionString(Settings.AccessDatabase.DatabasePath, Settings.AccessDatabase.DatabaseName, out errOut, Settings.AccessDatabase.DatabasePassword);
         }
         /// <summary>
         /// Defines the test method TestMethod_ConnectionStringWithPassword.
@@ -22,7 +22,7 @@ namespace UnitTestProject_Database
         [TestMethod]
         public void TestMethod_ConnectionStringWithPassword()
         {
-            string value = BurnSoft.Database.MSAccess.MSAccessDatabase.ConnectionString(Settings.AccessDatabase.DatabasePath, Settings.AccessDatabase.DatabaseName, out errOut, Settings.AccessDatabase.DatabasePassword);
+            string value = BurnSoft.Database.MSAccess.MsAccessDatabase.ConnectionString(Settings.AccessDatabase.DatabasePath, Settings.AccessDatabase.DatabaseName, out errOut, Settings.AccessDatabase.DatabasePassword);
             General.HasValue(value, errOut);
         }
         /// <summary>
@@ -31,7 +31,7 @@ namespace UnitTestProject_Database
         [TestMethod]
         public void TestMethod_ConnectionStringWithOutPassword()
         {
-            string value = MSAccessDatabase.ConnectionString(Settings.AccessDatabase.DatabasePath, Settings.AccessDatabase.DatabaseName, out errOut);
+            string value = MsAccessDatabase.ConnectionString(Settings.AccessDatabase.DatabasePath, Settings.AccessDatabase.DatabaseName, out errOut);
             General.HasValue(value, errOut);
         }
         /// <summary>
@@ -40,7 +40,7 @@ namespace UnitTestProject_Database
         [TestMethod]
         public void TestMethod_ConnectionOLEStringWithPassword()
         {
-            string value = MSAccessDatabase.ConnectionStringOLE(Settings.AccessDatabase.DatabasePath, Settings.AccessDatabase.DatabaseName, out errOut, Settings.AccessDatabase.DatabasePassword);
+            string value = MsAccessDatabase.ConnectionStringOle(Settings.AccessDatabase.DatabasePath, Settings.AccessDatabase.DatabaseName, out errOut, Settings.AccessDatabase.DatabasePassword);
             General.HasValue(value, errOut);
         }
         /// <summary>
@@ -49,7 +49,7 @@ namespace UnitTestProject_Database
         [TestMethod]
         public void TestMethod_ConnectionOLEStringWithOutPassword()
         {
-            string value = MSAccessDatabase.ConnectionStringOLE(Settings.AccessDatabase.DatabasePath, Settings.AccessDatabase.DatabaseName, out errOut);
+            string value = MsAccessDatabase.ConnectionStringOle(Settings.AccessDatabase.DatabasePath, Settings.AccessDatabase.DatabaseName, out errOut);
             General.HasValue(value, errOut);
         }
 
@@ -59,8 +59,8 @@ namespace UnitTestProject_Database
         [TestMethod]
         public void TestMethod_ConnectDB()
         {
-            MSAccessDatabase obj = new MSAccessDatabase();
-            bool value = obj.ConnectDB(ConnString, out errOut);
+            MsAccessDatabase obj = new MsAccessDatabase();
+            bool value = obj.ConnectDb(ConnString, out errOut);
             obj.Close(out errOut);
             General.HasTrueValue(value, errOut);
 
@@ -72,7 +72,7 @@ namespace UnitTestProject_Database
         public void TestMethod_ConnExec()
         {
             string SQL = "INSERT INTO Gun_Cal(Cal) VALUES('TEST');";
-            MSAccessDatabase obj = new MSAccessDatabase();
+            MsAccessDatabase obj = new MsAccessDatabase();
             bool value = obj.ConnExec(ConnString, SQL, out errOut);
             General.HasTrueValue(value, errOut);
         }
@@ -84,7 +84,7 @@ namespace UnitTestProject_Database
         public void TestMethod_GetData()
         {
             String SQL = "Select * from Gun_Cal";
-            MSAccessDatabase obj = new MSAccessDatabase();
+            MsAccessDatabase obj = new MsAccessDatabase();
             DataTable table = obj.GetData(ConnString, SQL, out errOut);
             string TestValue = @"";
             foreach(DataRow row in table.Rows)

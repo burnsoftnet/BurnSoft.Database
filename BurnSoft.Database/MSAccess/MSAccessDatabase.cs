@@ -18,13 +18,14 @@
 using System;
 using System.Data.Odbc;
 using System.Data;
+// ReSharper disable UnusedMember.Local
 
 namespace BurnSoft.Database.MSAccess
 {
     /// <summary>
     /// Class MSAccessDatabase, Helps connect and manage MS Access Databases
     /// </summary>
-    public class MSAccessDatabase
+    public class MsAccessDatabase
     {
         #region "Exception Error Handling"        
         /// <summary>
@@ -34,58 +35,42 @@ namespace BurnSoft.Database.MSAccess
         /// <summary>
         /// Errors the message.
         /// </summary>
-        /// <param name="location">The location.</param>
-        /// <param name="FunctionName">Name of the function.</param>
+        /// <param name="functionName">Name of the function.</param>
         /// <param name="e">The e.</param>
         /// <returns>System.String.</returns>
-        private static string ErrorMessage(string location, string FunctionName, Exception e) => $"{ClassLocation}.{FunctionName} - {e.Message.ToString()}";
+        private static string ErrorMessage(string functionName, Exception e) => $"{ClassLocation}.{functionName} - {e.Message}";
+
         /// <summary>
         /// Errors the message.
         /// </summary>
-        /// <param name="location">The location.</param>
-        /// <param name="FunctionName">Name of the function.</param>
+        /// <param name="functionName">Name of the function.</param>
         /// <param name="e">The e.</param>
         /// <returns>System.String.</returns>
-        private static string ErrorMessage(string location, string FunctionName, AccessViolationException e) => $"{ClassLocation}.{FunctionName} - {e.Message.ToString()}";
+        private static string ErrorMessage(string functionName, InvalidCastException e) => $"{ClassLocation}.{functionName} - {e.Message}";
+
         /// <summary>
         /// Errors the message.
         /// </summary>
-        /// <param name="location">The location.</param>
-        /// <param name="FunctionName">Name of the function.</param>
+        /// <param name="functionName">Name of the function.</param>
         /// <param name="e">The e.</param>
         /// <returns>System.String.</returns>
-        private static string ErrorMessage(string location, string FunctionName, InvalidCastException e) => $"{ClassLocation}.{FunctionName} - {e.Message.ToString()}";
-        /// <summary>
-        /// Errors the message.
-        /// </summary>
-        /// <param name="location">The location.</param>
-        /// <param name="FunctionName">Name of the function.</param>
-        /// <param name="e">The e.</param>
-        /// <returns>System.String.</returns>
-        private static string ErrorMessage(string location, string FunctionName, ArgumentException e) => $"{ClassLocation}.{FunctionName} - {e.Message.ToString()}";
-        /// <summary>
-        /// Errors the message.
-        /// </summary>
-        /// <param name="location">The location.</param>
-        /// <param name="FunctionName">Name of the function.</param>
-        /// <param name="e">The e.</param>
-        /// <returns>System.String.</returns>
-        private static string ErrorMessage(string location, string FunctionName, ArgumentNullException e) => $"{ClassLocation}.{FunctionName} - {e.Message.ToString()}";
+        private static string ErrorMessage(string functionName, ArgumentNullException e) => $"{ClassLocation}.{functionName} - {e.Message}";
         #endregion
         #region "Class Vars"        
         /// <summary>
         /// The connection
         /// </summary>
-        OdbcConnection Conn;
+        OdbcConnection _conn;
         #endregion
         #region "Connection Strings"
+
         /// <summary>
         /// Connection String Format Used to Connect to MS Access Databases using the Microsoft Access Driver
         /// </summary>
-        /// <param name="DatabasePath"></param>
+        /// <param name="databasePath"></param>
         /// <param name="databaseName"></param>
+        /// <param name="errOut"></param>
         /// <param name="password"></param>
-        /// <param name="errOur"></param>
         /// <returns>string</returns>
         /// <example>
         /// SEE UNIT TEST @ UnitTest_MSAccess <br/>
@@ -95,33 +80,28 @@ namespace BurnSoft.Database.MSAccess
         /// <b>Results</b><br/>
         /// Driver={Microsoft Access Driver (*.mdb)};dbq=C:\test\test.mdb
         /// </example>
-        public static string ConnectionString(string DatabasePath, string databaseName,out string errOut, string password = "")
+        public static string ConnectionString(string databasePath, string databaseName,out string errOut, string password = "")
         {
             string sAns = "";
             errOut = @"";
             try
             {
-                if (password.Length > 0)
-                {
-                    sAns = $"Driver={{Microsoft Access Driver (*.mdb)}};dbq={DatabasePath}\\{databaseName};Pwd={password}";
-                } else
-                {
-                    sAns = $"Driver={{Microsoft Access Driver (*.mdb)}};dbq={DatabasePath}\\{databaseName}";
-                }
+                sAns = password?.Length > 0 ? $"Driver={{Microsoft Access Driver (*.mdb)}};dbq={databasePath}\\{databaseName};Pwd={password}" : $"Driver={{Microsoft Access Driver (*.mdb)}};dbq={databasePath}\\{databaseName}";
             }
             catch (Exception e)
             {
-                errOut = ErrorMessage(ClassLocation, "ConnectionString", e);
+                errOut = ErrorMessage("ConnectionString", e);
             }
             return sAns;
         }
+
         /// <summary>
         /// Connections to the MS Access Database using the string OLE.
         /// </summary>
-        /// <param name="DatabasePath">The database path.</param>
+        /// <param name="databasePath">The database path.</param>
         /// <param name="databaseName">Name of the database.</param>
+        /// <param name="errOut"></param>
         /// <param name="password">The password.</param>
-        /// <param name="errOur">The error our.</param>
         /// <returns>System.String.</returns>
         /// <example>
         /// SEE UNIT TEST @ UnitTest_MSAccess <br/>
@@ -131,24 +111,17 @@ namespace BurnSoft.Database.MSAccess
         /// <b>Results</b><br/>
         /// Provider=Microsoft.Jet.OLEDB.4.0;Persist Security Info=False;Data Source="C:\test\test.mdb";
         /// </example>
-        public static string ConnectionStringOLE(string DatabasePath, string databaseName, out string errOut, string password = "")
+        public static string ConnectionStringOle(string databasePath, string databaseName, out string errOut, string password = "")
         {
             string sAns = "";
             errOut = @"";
             try
             {
-                if (password.Length > 0)
-                {
-                    sAns = $"Provider=Microsoft.Jet.OLEDB.4.0;Persist Security Info=False;Data Source=\"{DatabasePath}\\{databaseName}\";Jet OLEDB:Database Password={password};";
-                }
-                else
-                {
-                    sAns = $"Provider=Microsoft.Jet.OLEDB.4.0;Persist Security Info=False;Data Source=\"{DatabasePath}\\{databaseName}\";";
-                }
+                sAns = password?.Length > 0 ? $"Provider=Microsoft.Jet.OLEDB.4.0;Persist Security Info=False;Data Source=\"{databasePath}\\{databaseName}\";Jet OLEDB:Database Password={password};" : $"Provider=Microsoft.Jet.OLEDB.4.0;Persist Security Info=False;Data Source=\"{databasePath}\\{databaseName}\";";
             }
             catch (Exception e)
             {
-                errOut = ErrorMessage(ClassLocation, "ConnectionString", e);
+                errOut = ErrorMessage( "ConnectionString", e);
             }
             return sAns;
         }
@@ -158,7 +131,7 @@ namespace BurnSoft.Database.MSAccess
         /// <summary>
         /// Connects the database using the connection string.
         /// </summary>
-        /// <param name="ConnectionString">The connection string.</param>
+        /// <param name="connectionString">The connection string.</param>
         /// <param name="errOut">The error out.</param>
         /// <returns><c>true</c> if XXXX, <c>false</c> otherwise.</returns>
         /// <example>
@@ -168,19 +141,19 @@ namespace BurnSoft.Database.MSAccess
         /// bool value = obj.ConnectDB(ConnString, out errOut); <br/>
         /// obj.Close(out errOut); <br/>
         /// </example>
-        public bool ConnectDB(string ConnectionString, out string errOut)
+        public bool ConnectDb(string connectionString, out string errOut)
         {
             bool bAns = false;
             errOut = @"";
             try
             {
-                Conn = new OdbcConnection(ConnectionString);
-                Conn.Open();
+                _conn = new OdbcConnection(connectionString);
+                _conn.Open();
                 bAns = true;
             }
             catch (Exception e)
             {
-                errOut = ErrorMessage(ClassLocation, "ConnectDB", e);
+                errOut = ErrorMessage("ConnectDB", e);
             }
             return bAns;
         }
@@ -201,15 +174,16 @@ namespace BurnSoft.Database.MSAccess
             errMsg = @"";
             try
             {
-                if(Conn.State != System.Data.ConnectionState.Closed)
+                if(_conn.State != ConnectionState.Closed)
                 {
-                    Conn.Close();
+                    _conn.Close();
                 }
-                Conn = null;
+                _conn = null;
+                bAns = true;
             }
             catch (Exception e)
             {
-                errMsg = ErrorMessage(ClassLocation, "CloseDB", e);
+                errMsg = ErrorMessage( "CloseDB", e);
             }
             return bAns;
         }
@@ -219,8 +193,8 @@ namespace BurnSoft.Database.MSAccess
         /// because you might be using that object for something else, and this will take out the connection
         /// from right under neath you, so we just set that to null instead of a hard close.
         /// </summary>
-        /// <param name="ConnectionString">The connection string.</param>
-        /// <param name="SQL">The SQL.</param>
+        /// <param name="connectionString">The connection string.</param>
+        /// <param name="sql">The SQL.</param>
         /// <param name="errOut">The error out.</param>
         /// <returns><c>true</c> if XXXX, <c>false</c> otherwise.</returns>
         /// <exception cref="System.Exception"></exception>
@@ -231,19 +205,18 @@ namespace BurnSoft.Database.MSAccess
         /// MSAccessDatabase obj = new MSAccessDatabase(); <br/>
         /// bool value = obj.ConnExec(ConnString, SQL, out errOut); <br/>
         /// </example>
-        public bool ConnExec(string ConnectionString, string SQL, out string errOut)
+        public bool ConnExec(string connectionString, string sql, out string errOut)
         {
             bool bAns = false;
             errOut = @"";
             try
             {
-                if (ConnectDB(ConnectionString, out errOut))
+                if (ConnectDb(connectionString, out errOut))
                 {
-                    OdbcCommand CMD = new OdbcCommand(SQL, Conn);
-                    CMD.ExecuteNonQuery();
-                    CMD.Connection.Close();
-                    CMD = null;
-                    Conn = null;
+                    OdbcCommand cmd = new OdbcCommand(sql, _conn);
+                    cmd.ExecuteNonQuery();
+                    cmd.Connection.Close();
+                    _conn = null;
                     bAns = true;
                 } else
                 {
@@ -252,15 +225,15 @@ namespace BurnSoft.Database.MSAccess
             }
             catch (Exception e)
             {
-                errOut = ErrorMessage(ClassLocation, "ConnExec", e);
+                errOut = ErrorMessage("ConnExec", e);
             }
             return bAns;
         }
         /// <summary>
         /// Gets the data.
         /// </summary>
-        /// <param name="ConnectionString">The connection string.</param>
-        /// <param name="SQL">The SQL.</param>
+        /// <param name="connectionString">The connection string.</param>
+        /// <param name="sql">The SQL.</param>
         /// <param name="errOut">The error out.</param>
         /// <returns>DataTable.</returns>
         /// <exception cref="Exception"></exception>
@@ -276,19 +249,18 @@ namespace BurnSoft.Database.MSAccess
         ///        TestValue += String.Format("{0}{1}",row["Cal"].ToString(),Environment.NewLine); <br/>
         ///    } <br/>
         /// </example>
-        public DataTable GetData(string ConnectionString, string SQL, out string errOut)
+        public DataTable GetData(string connectionString, string sql, out string errOut)
         {
-            DataTable Table = new DataTable();
+            DataTable table = new DataTable();
             errOut = @"";
             try
             {
-                Table.Locale = System.Globalization.CultureInfo.InvariantCulture;
-                if (ConnectDB(ConnectionString, out errOut))
+                table.Locale = System.Globalization.CultureInfo.InvariantCulture;
+                if (ConnectDb(connectionString, out errOut))
                 {
-                    OdbcCommand CMD = new OdbcCommand(SQL, Conn);
-                    OdbcDataAdapter RS = new OdbcDataAdapter();
-                    RS.SelectCommand = CMD;
-                    RS.Fill(Table);
+                    OdbcCommand cmd = new OdbcCommand(sql, _conn);
+                    OdbcDataAdapter rs = new OdbcDataAdapter {SelectCommand = cmd};
+                    rs.Fill(table);
                 } else
                 {
                     throw new Exception(errOut);
@@ -296,9 +268,9 @@ namespace BurnSoft.Database.MSAccess
             }
             catch (Exception e)
             {
-                errOut = ErrorMessage(ClassLocation, "GetData", e);
+                errOut = ErrorMessage("GetData", e);
             }
-            return Table;
+            return table;
         }
     }
 }
