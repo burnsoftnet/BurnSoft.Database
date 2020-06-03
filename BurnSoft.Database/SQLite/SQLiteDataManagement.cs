@@ -18,13 +18,14 @@
 using System;
 using System.Data.SQLite;
 using System.Data;
+using System.Globalization;
 
 namespace BurnSoft.Database.SQLite
 {
     /// <summary>
     /// Class SQLiteDataManagement handles the ability to read and write data to the SQLite Database.
     /// </summary>
-    public class SQLiteDataManagement
+    public class SqLiteDataManagement
     {
 
         #region "Exception Error Handling"        
@@ -35,27 +36,26 @@ namespace BurnSoft.Database.SQLite
         /// <summary>
         /// Errors the message.
         /// </summary>
-        /// <param name="location">The location.</param>
-        /// <param name="FunctionName">Name of the function.</param>
+        /// <param name="functionName">Name of the function.</param>
         /// <param name="e">The e.</param>
         /// <returns>System.String.</returns>
-        private static string ErrorMessage(string location, string FunctionName, Exception e) =>  $"{ClassLocation}.{FunctionName} - {e.Message.ToString()}";
+        private static string ErrorMessage(string functionName, Exception e) => $"{ClassLocation}.{functionName} - {e.Message}";
+
         /// <summary>
         /// Errors the message.
         /// </summary>
-        /// <param name="location">The location.</param>
-        /// <param name="FunctionName">Name of the function.</param>
+        /// <param name="functionName">Name of the function.</param>
         /// <param name="e">The e.</param>
         /// <returns>System.String.</returns>
-        private static string ErrorMessage(string location, string FunctionName, InvalidCastException e) => $"{ClassLocation}.{FunctionName} - {e.Message.ToString()}";
+        private static string ErrorMessage(string functionName, InvalidCastException e) => $"{ClassLocation}.{functionName} - {e.Message}";
+
         /// <summary>
         /// Errors the message.
         /// </summary>
-        /// <param name="location">The location.</param>
-        /// <param name="FunctionName">Name of the function.</param>
+        /// <param name="functionName">Name of the function.</param>
         /// <param name="e">The e.</param>
         /// <returns>System.String.</returns>
-        private static string ErrorMessage(string location, string FunctionName, ArgumentNullException e) => $"{ClassLocation}.{FunctionName} - {e.Message.ToString()}";
+        private static string ErrorMessage(string functionName, ArgumentNullException e) => $"{ClassLocation}.{functionName} - {e.Message}";
         #endregion        
         /// <summary>
         /// The connection object
@@ -74,7 +74,7 @@ namespace BurnSoft.Database.SQLite
         /// value = obj.ConnectDB("C:\\test\\unittest.db", out errOut);
         /// obj.Close();
         /// </example>
-        public bool ConnectDB(string dbName, out string errOut)
+        public bool ConnectDb(string dbName, out string errOut)
         {
             bool bAns = false;
             errOut = @"";
@@ -86,7 +86,7 @@ namespace BurnSoft.Database.SQLite
             }
             catch (Exception e)
             {
-                errOut = ErrorMessage(ClassLocation, "ConnectDB", e);
+                errOut = ErrorMessage( "ConnectDB", e);
             }
             return bAns;
         }
@@ -102,7 +102,7 @@ namespace BurnSoft.Database.SQLite
         /// </example>
         public void CloseDb()
         {
-            if (ConnObject.State != System.Data.ConnectionState.Closed)
+            if (ConnObject.State != ConnectionState.Closed)
             {
                 ConnObject.Close();
             }
@@ -118,6 +118,7 @@ namespace BurnSoft.Database.SQLite
         /// value = obj.ConnectDB("C:\\test\\unittest.db", out errOut);
         /// obj.Dispose();
         /// </example>
+        // ReSharper disable once UnusedMember.Global
         public void Dispose()
         {
             ConnObject?.Dispose();
@@ -127,7 +128,7 @@ namespace BurnSoft.Database.SQLite
         /// Runs the query.
         /// </summary>
         /// <param name="dbName">Name of the database.</param>
-        /// <param name="SQL">The SQL.</param>
+        /// <param name="sql">The SQL.</param>
         /// <param name="errOut">The error out.</param>
         /// <returns><c>true</c> if XXXX, <c>false</c> otherwise.</returns>
         /// <exception cref="Exception"></exception>
@@ -137,18 +138,18 @@ namespace BurnSoft.Database.SQLite
         /// string sql = "INSERT INTO DB_Version (version) VALUES (2.0);";
         /// bool value = SQLiteDataManagement.RunQuery("C:\\test\\unittest.db", sql, out errOut);
         /// </example>
-        public static bool RunQuery(string dbName, string SQL, out string errOut)
+        public static bool RunQuery(string dbName, string sql, out string errOut)
         {
             bool bAns = false;
             errOut = @"";
             try
             {
-                SQLiteDataManagement obj = new SQLiteDataManagement();
-                if (obj.ConnectDB(dbName, out errOut))
+                SqLiteDataManagement obj = new SqLiteDataManagement();
+                if (obj.ConnectDb(dbName, out errOut))
                 {
                     SQLiteCommand cmd = new SQLiteCommand
                     {
-                        CommandText = SQL,
+                        CommandText = sql,
                         Connection = obj.ConnObject
                     };
                     cmd.ExecuteNonQuery();
@@ -162,7 +163,7 @@ namespace BurnSoft.Database.SQLite
             }
             catch (Exception e)
             {
-                errOut = ErrorMessage(ClassLocation, "RunQuery", e);
+                errOut = ErrorMessage("RunQuery", e);
             }
             return bAns;
         }
@@ -170,7 +171,7 @@ namespace BurnSoft.Database.SQLite
         /// Determines whether the specified database name has data.
         /// </summary>
         /// <param name="dbName">Name of the database.</param>
-        /// <param name="SQl">The s ql.</param>
+        /// <param name="sQl">The s ql.</param>
         /// <param name="errOut">The error out.</param>
         /// <returns><c>true</c> if the specified database name has data; otherwise, <c>false</c>.</returns>
         /// <exception cref="Exception"></exception>
@@ -180,16 +181,16 @@ namespace BurnSoft.Database.SQLite
         /// string sql = "select * from DB_Version;";
         /// bool value = SQLiteDataManagement.HasData("C:\\test\\unittest.db", sql, out errOut);
         /// </example>
-        public static bool HasData(string dbName, string SQl , out string errOut)
+        public static bool HasData(string dbName, string sQl , out string errOut)
         {
             bool bAns = false;
             errOut = @"";
             try
             {
-                SQLiteDataManagement obj = new SQLiteDataManagement();
-                if (obj.ConnectDB(dbName, out errOut))
+                SqLiteDataManagement obj = new SqLiteDataManagement();
+                if (obj.ConnectDb(dbName, out errOut))
                 {
-                    SQLiteCommand cmd = new SQLiteCommand(SQl, obj.ConnObject);
+                    SQLiteCommand cmd = new SQLiteCommand(sQl, obj.ConnObject);
                     using (SQLiteDataReader rs = cmd.ExecuteReader())
                     {
                         bAns = rs.HasRows;
@@ -204,7 +205,7 @@ namespace BurnSoft.Database.SQLite
             }
             catch (Exception e)
             {
-                errOut = ErrorMessage(ClassLocation, "HasData", e);
+                errOut = ErrorMessage("HasData", e);
             }
             return bAns;
         }
@@ -234,14 +235,14 @@ namespace BurnSoft.Database.SQLite
         ///        }<br/>
         ///}<br/>
         /// </example>
-        public static DataTable GetDataBySQL(string dbname, string sql, out string errOut)
+        public static DataTable GetDataBySql(string dbname, string sql, out string errOut)
         {
             DataTable dtAns = new DataTable();
             errOut = @"";
             try
             {
-                SQLiteDataManagement obj = new SQLiteDataManagement();
-                if (obj.ConnectDB(dbname, out errOut))
+                SqLiteDataManagement obj = new SqLiteDataManagement();
+                if (obj.ConnectDb(dbname, out errOut))
                 {
                     SQLiteCommand cmd = new SQLiteCommand(sql, obj.ConnObject);
                     using (SQLiteDataAdapter da  = new SQLiteDataAdapter(cmd))
@@ -260,7 +261,7 @@ namespace BurnSoft.Database.SQLite
             }
             catch (Exception e)
             {
-                errOut = ErrorMessage(ClassLocation, "GetDataBySQL", e);
+                errOut = ErrorMessage("GetDataBySQL", e);
             }
             return dtAns;
         }
@@ -276,7 +277,7 @@ namespace BurnSoft.Database.SQLite
         /// <br/>
         /// bool value = SQLiteDataManagement.CleanDB("C:\\test\\unittest.db", out errOut);
         /// </example>
-        public static bool CleanDB(string dbname, out string errOut)
+        public static bool CleanDb(string dbname, out string errOut)
         {
             bool bAns = false;
             errOut = @"";
@@ -287,7 +288,7 @@ namespace BurnSoft.Database.SQLite
             }
             catch (Exception e)
             {
-                errOut = ErrorMessage(ClassLocation, "CleanDb", e);
+                errOut = ErrorMessage("CleanDb", e);
             }
             return bAns;
         }
@@ -315,8 +316,8 @@ namespace BurnSoft.Database.SQLite
             errOut = @"";
             try
             {
-                SQLiteDataManagement obj = new SQLiteDataManagement();
-                if (obj.ConnectDB(dbname, out errOut))
+                SqLiteDataManagement obj = new SqLiteDataManagement();
+                if (obj.ConnectDb(dbname, out errOut))
                 {
                     SQLiteCommand cmd = new SQLiteCommand(sql, obj.ConnObject);
                     using (SQLiteDataReader rs = cmd.ExecuteReader())
@@ -339,7 +340,7 @@ namespace BurnSoft.Database.SQLite
             }
             catch (Exception e)
             {
-                errOut = ErrorMessage(ClassLocation, "GetSingleValue", e);
+                errOut = ErrorMessage("GetSingleValue", e);
             }
             return sAns;
         }
@@ -370,7 +371,7 @@ namespace BurnSoft.Database.SQLite
             }
             catch (Exception e)
             {
-                errOut = ErrorMessage(ClassLocation, "GetSingleValueFromDatabase", e);
+                errOut = ErrorMessage("GetSingleValueFromDatabase", e);
             }
             return sAns;
         }
@@ -401,7 +402,7 @@ namespace BurnSoft.Database.SQLite
             }
             catch (Exception e)
             {
-                errOut = ErrorMessage(ClassLocation, "GetSingleValueFromDatabase", e);
+                errOut = ErrorMessage( "GetSingleValueFromDatabase", e);
             }
             return iAns;
         }
@@ -427,12 +428,12 @@ namespace BurnSoft.Database.SQLite
             errOut = @"";
             try
             {
-                dAns = Convert.ToDouble(GetSingleValue(dbname, sql, sColName, Convert.ToString(defaultValue), out errOut));
+                dAns = Convert.ToDouble(GetSingleValue(dbname, sql, sColName, Convert.ToString(defaultValue, CultureInfo.InvariantCulture), out errOut));
                 if (errOut.Length > 0) throw new Exception(errOut);
             }
             catch (Exception e)
             {
-                errOut = ErrorMessage(ClassLocation, "GetSingleValueFromDatabase", e);
+                errOut = ErrorMessage("GetSingleValueFromDatabase", e);
             }
             return dAns;
         }

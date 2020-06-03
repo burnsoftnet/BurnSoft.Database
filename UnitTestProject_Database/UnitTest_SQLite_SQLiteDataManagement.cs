@@ -30,8 +30,8 @@ namespace UnitTestProject_Database
         [TestMethod]
         public void TestMethod_ConnectDB()
         {
-            SQLiteDataManagement obj = new SQLiteDataManagement();
-            bool value = obj.ConnectDB(Settings.SQLiteDatabase.StarterDatabaseNameAndPath, out errOut);
+            SqLiteDataManagement obj = new SqLiteDataManagement();
+            bool value = obj.ConnectDb(Settings.SQLiteDatabase.StarterDatabaseNameAndPath, out errOut);
             General.HasTrueValue(value, errOut);
         }
         /// <summary>
@@ -41,7 +41,7 @@ namespace UnitTestProject_Database
         public void TestMethod_RunQuery()
         {
             string sql = "INSERT INTO DB_Version (version) VALUES (2.0);";
-            bool value = SQLiteDataManagement.RunQuery(Settings.SQLiteDatabase.StarterDatabaseNameAndPath, sql, out errOut);
+            bool value = SqLiteDataManagement.RunQuery(Settings.SQLiteDatabase.StarterDatabaseNameAndPath, sql, out errOut);
             General.HasTrueValue(value, errOut);
         }
         /// <summary>
@@ -51,7 +51,7 @@ namespace UnitTestProject_Database
         public void TestMethod_HasData()
         {
             string sql = "select * from DB_Version;";
-            bool value = SQLiteDataManagement.HasData(Settings.SQLiteDatabase.StarterDatabaseNameAndPath, sql, out errOut);
+            bool value = SqLiteDataManagement.HasData(Settings.SQLiteDatabase.StarterDatabaseNameAndPath, sql, out errOut);
             General.HasTrueValue(value, errOut);
         }
         /// <summary>
@@ -61,7 +61,7 @@ namespace UnitTestProject_Database
         public void TestMethod_GetDataBySQL()
         {
             string sql = "select * from DB_Version;";
-            DataTable dt = SQLiteDataManagement.GetDataBySQL(Settings.SQLiteDatabase.StarterDatabaseNameAndPath, sql, out errOut);
+            DataTable dt = SqLiteDataManagement.GetDataBySql(Settings.SQLiteDatabase.StarterDatabaseNameAndPath, sql, out errOut);
             bool HasData = false;
             if (errOut.Length == 0)
             {
@@ -82,7 +82,7 @@ namespace UnitTestProject_Database
         [TestMethod]
         public void TestMethod_CleanDB()
         {
-            bool value = SQLiteDataManagement.CleanDB(Settings.SQLiteDatabase.StarterDatabaseNameAndPath, out errOut);
+            bool value = SqLiteDataManagement.CleanDb(Settings.SQLiteDatabase.StarterDatabaseNameAndPath, out errOut);
             General.HasTrueValue(value, errOut);
         }
         /// <summary>
@@ -92,7 +92,7 @@ namespace UnitTestProject_Database
         public void TestMethod_GetSingleValueFromDatabase_String()
         {
             string sql = "select * from DB_Version order by dt desc limit 1;";
-            string value = SQLiteDataManagement.GetSingleValueFromDatabase(Settings.SQLiteDatabase.StarterDatabaseNameAndPath, sql, "dt", "", out errOut);
+            string value = SqLiteDataManagement.GetSingleValueFromDatabase(Settings.SQLiteDatabase.StarterDatabaseNameAndPath, sql, "dt", "", out errOut);
             General.HasValue(value, errOut);
         }
         /// <summary>
@@ -102,7 +102,7 @@ namespace UnitTestProject_Database
         public void TestMethod_GetSingleValueFromDatabase_integer()
         {
             string sql = "select * from DB_Version order by dt desc limit 1;";
-            int value = SQLiteDataManagement.GetSingleValueFromDatabase(Settings.SQLiteDatabase.StarterDatabaseNameAndPath, sql, "id", 0, out errOut);
+            int value = SqLiteDataManagement.GetSingleValueFromDatabase(Settings.SQLiteDatabase.StarterDatabaseNameAndPath, sql, "id", 0, out errOut);
             bool HasValue = (value > 0);
             Debug.Print("Value Returned is: {0}", value);
             General.HasTrueValue(HasValue, errOut);
@@ -114,7 +114,7 @@ namespace UnitTestProject_Database
         public void TestMethod_GetSingleValueFromDatabase_Double()
         {
             string sql = "select * from DB_Version order by dt desc limit 1;";
-            double value = SQLiteDataManagement.GetSingleValueFromDatabase(Settings.SQLiteDatabase.StarterDatabaseNameAndPath, sql, "version", 0.0, out errOut);
+            double value = SqLiteDataManagement.GetSingleValueFromDatabase(Settings.SQLiteDatabase.StarterDatabaseNameAndPath, sql, "version", 0.0, out errOut);
             bool HasValue = (value > 0);
             Debug.Print("Value Returned is: {0}", value);
             General.HasTrueValue(HasValue, errOut);

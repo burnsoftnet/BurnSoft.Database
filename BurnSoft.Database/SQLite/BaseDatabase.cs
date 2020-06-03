@@ -121,7 +121,7 @@ namespace BurnSoft.Database.SQLite
             try
             {
                 string sql = $"SELECT * from DB_Version where version={myVer}";
-                bAns = SQLiteDataManagement.HasData(dbName, sql, out errOut);
+                bAns = SqLiteDataManagement.HasData(dbName, sql, out errOut);
                 if (errOut.Length > 0) throw new Exception(errOut);
             }
             catch (Exception e)
@@ -150,7 +150,7 @@ namespace BurnSoft.Database.SQLite
             try
             {
                 string sql = $"INSERT INTO DB_Version (version) VALUES ({dbversion});";
-                bAns = SQLiteDataManagement.RunQuery(dbname, sql, out errOut);
+                bAns = SqLiteDataManagement.RunQuery(dbname, sql, out errOut);
                 if (!bAns) throw new Exception(errOut);
             }
             catch (Exception e)
@@ -179,7 +179,7 @@ namespace BurnSoft.Database.SQLite
             try
             {
                 string sql = "create table IF NOT EXISTS DB_Version (id integer primary key autoincrement, version DOUBLE DEFAULT 0, dt DATETIME DEFAULT CURRENT_TIMESTAMP);";
-                if (SQLiteDataManagement.RunQuery(dbname, sql, out errOut))
+                if (SqLiteDataManagement.RunQuery(dbname, sql, out errOut))
                 {
                     if (!DbVersionExists(dbname, version, out errOut))
                     {
@@ -223,8 +223,8 @@ namespace BurnSoft.Database.SQLite
             try
             {
                 string sql = "select version from DB_Version order by id desc limit 1;";
-                SQLiteDataManagement obj = new SQLiteDataManagement();
-                obj.ConnectDB(dbname, out errOut);
+                SqLiteDataManagement obj = new SqLiteDataManagement();
+                obj.ConnectDb(dbname, out errOut);
                 SQLiteCommand cmd = new SQLiteCommand(sql, obj.ConnObject);
                 using (SQLiteDataReader rs = cmd.ExecuteReader())
                 {
