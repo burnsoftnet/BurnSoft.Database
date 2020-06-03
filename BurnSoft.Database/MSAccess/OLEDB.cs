@@ -8,8 +8,11 @@ using ADODB;
 
 namespace BurnSoft.Database.MSAccess
 {
-    public class OLEDB
+    /// <summary>
+    /// Class OLEDB.
+    /// </summary>
+    public class Oledb
     {
-
+        //TODO Add code code to access oledb database for access databases
     }
 }
