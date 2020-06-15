@@ -1,10 +1,5 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-using System;
-using System.Collections.Generic;
 using System.Diagnostics;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace UnitTestProject_Database
 {
@@ -25,7 +20,7 @@ namespace UnitTestProject_Database
                 Debug.Print("ERROR!");
                 Debug.Print(errOut);
             }
-            Assert.AreEqual(bAns, true);
+            Assert.IsTrue(bAns);
         }
         /// <summary>
         /// Determines whether [has false value] [the specified b ans].
@@ -39,7 +34,7 @@ namespace UnitTestProject_Database
                 Debug.Print("ERROR!");
                 Debug.Print(errOut);
             }
-            Assert.AreEqual(bAns, false);
+            Assert.IsFalse(bAns);
         }
         /// <summary>
         /// Determines whether the specified value has value.
@@ -61,7 +56,7 @@ namespace UnitTestProject_Database
                 Debug.Print("ERROR!");
                 Debug.Print(errOut);
             }
-            Assert.AreEqual(isLoaded, true);
+            Assert.IsTrue(isLoaded);
         }
     }
 }
