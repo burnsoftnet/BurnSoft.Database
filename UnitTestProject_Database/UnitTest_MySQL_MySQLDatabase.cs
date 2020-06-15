@@ -39,7 +39,10 @@ namespace UnitTestProject_Database
             bool value = MySqlDatabase.RunQuery(connString, sql, out errOut);
             General.HasTrueValue(value, errOut);
         }
-
+        [TestMethod]
+        public void ValueExists()
+        {
+        }
         /*
         [TestMethod]
         public void TestMethod_()

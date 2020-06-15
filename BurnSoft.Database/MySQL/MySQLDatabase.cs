@@ -215,5 +215,30 @@ namespace BurnSoft.Database.MySQL
             }
             return dt;
         }
+        /// <summary>
+        /// Pass a SQL Statement to see if rows exist in the table  with those requirements.
+        /// If it doesn't exist, it will return false, if one or more row exists, it will return true
+        /// </summary>
+        /// <param name="connectionString">MySQL Connections string</param>
+        /// <param name="sql">T-SQL query with the requirements</param>
+        /// <param name="errOut">If an exception occured, this will contain the error message.</param>
+        /// <returns></returns>
+        public static bool ValueExists(string connectionString, string sql, out string errOut)
+        {
+            bool bAns = false;
+
+            try
+            {
+                DataTable dt = GetData(connectionString, sql, out errOut);
+                if (errOut?.Length > 0) throw  new Exception(errOut);
+                bAns = (dt.Rows?.Count > 0);
+            }
+            catch (Exception e)
+            {
+                errOut = ErrorMessage("", e);
+            }
+
+            return bAns;
+        }
     }
 }
