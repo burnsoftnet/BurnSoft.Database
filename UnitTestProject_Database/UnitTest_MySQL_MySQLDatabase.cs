@@ -39,9 +39,16 @@ namespace UnitTestProject_Database
             bool value = MySqlDatabase.RunQuery(connString, sql, out errOut);
             General.HasTrueValue(value, errOut);
         }
+        /// <summary>
+        /// Defines the test method ValueExistsTests.
+        /// </summary>
         [TestMethod]
-        public void ValueExists()
+        public void ValueExistsTests()
         {
+            string sql = "select * from `DB_Version`";
+            string connString = MySqlDatabase.ConnectionString(Settings.MySQLDatabase.HOSTNAME, Settings.MySQLDatabase.UID, Settings.MySQLDatabase.PWD, Settings.MySQLDatabase.Database, out errOut);
+            bool value = MySqlDatabase.ValueExists(connString, sql, out errOut);
+            General.HasTrueValue(value, errOut);
         }
         /*
         [TestMethod]
