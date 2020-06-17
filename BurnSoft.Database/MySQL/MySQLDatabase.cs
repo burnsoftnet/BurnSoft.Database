@@ -216,6 +216,39 @@ namespace BurnSoft.Database.MySQL
             return dt;
         }
         /// <summary>
+        /// Gets the data and returns it in a data set format.
+        /// </summary>
+        /// <param name="connection">The connection.</param>
+        /// <param name="sql">The SQL.</param>
+        /// <param name="tableName">Name of the table.</param>
+        /// <param name="errOut">The error out.</param>
+        /// <returns>DataSet.</returns>
+        public static DataSet GetData(string connection, string sql, string tableName, out string errOut)
+        {
+            DataSet ds = new DataSet();
+            errOut = @"";
+            try
+            {
+                using (MySqlConnection conn = new MySqlConnection(connection))
+                {
+                    using (MySqlCommand cmd = new MySqlCommand(sql, conn))
+                    {
+                        cmd.CommandType = CommandType.Text;
+                        using (MySqlDataAdapter sda = new MySqlDataAdapter(cmd))
+                        {
+                            sda.Fill(ds, tableName);
+                        }
+                    }
+                }
+            }
+            catch (Exception e)
+            {
+                errOut = ErrorMessage("GetData", e);
+            }
+
+            return ds;
+        }
+        /// <summary>
         /// Pass a SQL Statement to see if rows exist in the table  with those requirements.
         /// If it doesn't exist, it will return false, if one or more row exists, it will return true
         /// </summary>
