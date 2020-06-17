@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Data;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using BurnSoft.Database.MySQL;
 namespace UnitTestProject_Database
@@ -6,6 +7,11 @@ namespace UnitTestProject_Database
     [TestClass]
     public class UnitTest_MySQL_MySQLDatabase
     {
+        /// <summary>
+        /// Gets or sets the test context.
+        /// </summary>
+        /// <value>The test context.</value>
+        public TestContext TestContext { get; set; }
         /// <summary>
         /// The error out
         /// </summary>
@@ -49,6 +55,27 @@ namespace UnitTestProject_Database
             string connString = MySqlDatabase.ConnectionString(Settings.MySQLDatabase.HOSTNAME, Settings.MySQLDatabase.UID, Settings.MySQLDatabase.PWD, Settings.MySQLDatabase.Database, out errOut);
             bool value = MySqlDatabase.ValueExists(connString, sql, out errOut);
             General.HasTrueValue(value, errOut);
+        }
+
+        [TestMethod, TestCategory("MySQL - Get Data")]
+        public void GetDataSetTest()
+        {
+            string sql = "select * from `DB_Version`";
+            string connString = MySqlDatabase.ConnectionString(Settings.MySQLDatabase.HOSTNAME, Settings.MySQLDatabase.UID, Settings.MySQLDatabase.PWD, Settings.MySQLDatabase.Database, out errOut);
+            DataSet value = MySqlDatabase.GetData(connString, sql, "dbversion", out errOut);
+            bool didPass = false;
+
+            foreach (DataTable table in value.Tables)
+            {
+                foreach (DataRow row in table.Rows)
+                {
+                    TestContext.WriteLine($"Version #: {row["dbVer"]}");
+                    TestContext.WriteLine($"Date Created: {row["dtUpdated"]}");
+
+                }
+            }
+
+            General.HasTrueValue(didPass, errOut);
         }
         /*
         [TestMethod]
