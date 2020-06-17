@@ -56,7 +56,9 @@ namespace UnitTestProject_Database
             bool value = MySqlDatabase.ValueExists(connString, sql, out errOut);
             General.HasTrueValue(value, errOut);
         }
-
+        /// <summary>
+        /// Defines the test method GetDataSetTest.
+        /// </summary>
         [TestMethod, TestCategory("MySQL - Get Data")]
         public void GetDataSetTest()
         {
@@ -69,9 +71,9 @@ namespace UnitTestProject_Database
             {
                 foreach (DataRow row in table.Rows)
                 {
-                    TestContext.WriteLine($"Version #: {row["dbVer"]}");
+                    TestContext.WriteLine($"Version #: {row["VerNo"]}");
                     TestContext.WriteLine($"Date Created: {row["dtUpdated"]}");
-
+                    didPass = true;
                 }
             }
 

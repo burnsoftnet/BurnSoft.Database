@@ -268,7 +268,7 @@ namespace BurnSoft.Database.MySQL
             }
             catch (Exception e)
             {
-                errOut = ErrorMessage("", e);
+                errOut = ErrorMessage("ValueExists", e);
             }
 
             return bAns;
