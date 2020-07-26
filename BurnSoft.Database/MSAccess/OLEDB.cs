@@ -20,7 +20,7 @@ namespace BurnSoft.Database.MSAccess
             errOut = @"";
             try
             {
-                ADODB.Connection conn = DoConnection(path, password);
+                ADODB.Connection conn = DoConnection(path, password,true);
                 conn.Open();
                 conn.Execute($"ALTER DATABASE PASSWORD {password} NULL", out _);
                 conn.Close();
@@ -32,7 +32,7 @@ namespace BurnSoft.Database.MSAccess
             return bAns;
         }
 
-        private static ADODB.Connection DoConnection(string path, string password = @"")
+        private static ADODB.Connection DoConnection(string path, string password = @"", bool runAsAdmin = false)
         {
             ADODB.Connection conn = new ADODB.Connection();
             conn.Provider = "Microsoft.Jet.OLEDB.4.0";
@@ -51,9 +51,26 @@ namespace BurnSoft.Database.MSAccess
             errOut = @"";
             try
             {
-                ADODB.Connection conn = DoConnection(path, password);
+                ADODB.Connection conn = DoConnection(path, password,true);
                 conn.Open();
                 conn.Execute($"ALTER DATABASE PASSWORD NULL {password}", out _);
+                conn.Close();
+            }
+            catch (Exception e)
+            {
+                errOut = e.Message;
+            }
+            return bAns;
+        }
+        public static bool RunSQL(string path,string sql, out string errOut, bool runAsAdmin = false, string password=@"")
+        {
+            bool bAns = false;
+            errOut = @"";
+            try
+            {
+                ADODB.Connection conn = DoConnection(path, password, runAsAdmin);
+                conn.Open();
+                conn.Execute(sql, out _);
                 conn.Close();
             }
             catch (Exception e)
