@@ -20,6 +20,7 @@ using MySql.Data.MySqlClient;
 using System.Data;
 // ReSharper disable UnusedMember.Local
 // ReSharper disable UnusedMember.Global
+// ReSharper disable ConstantConditionalAccessQualifier
 
 namespace BurnSoft.Database.MySQL
 {
@@ -254,7 +255,7 @@ namespace BurnSoft.Database.MySQL
         /// </summary>
         /// <param name="connectionString">MySQL Connections string</param>
         /// <param name="sql">T-SQL query with the requirements</param>
-        /// <param name="errOut">If an exception occured, this will contain the error message.</param>
+        /// <param name="errOut">If an exception occurred, this will contain the error message.</param>
         /// <returns></returns>
         public static bool ValueExists(string connectionString, string sql, out string errOut)
         {
@@ -278,7 +279,7 @@ namespace BurnSoft.Database.MySQL
         /// </summary>
         /// <param name="connection"></param>
         /// <param name="sql"></param>
-        /// <param name="IdentitiySeedColumnName"></param>
+        /// <param name="identitySeedColumnName"></param>
         /// <param name="errOut"></param>
         /// <returns>number</returns>
         /// <example>
@@ -286,7 +287,7 @@ namespace BurnSoft.Database.MySQL
         /// int value = GetIDFromTableBasedOnTSQL(SomeConnectionString, sql, "id", out var errOut);
         /// 
         /// </example>
-        public static int GetIDFromTableBasedOnTSQL(string connection, string sql, string IdentitiySeedColumnName, out string errOut)
+        public static int GetIDFromTableBasedOnTSQL(string connection, string sql, string identitySeedColumnName, out string errOut)
         {
             int iAns = 0;
             errOut = @"";
@@ -297,7 +298,7 @@ namespace BurnSoft.Database.MySQL
                 if (errOut?.Length > 0) throw new Exception(errOut);
                 foreach (DataRow dr in dt.Rows)
                 {
-                    iAns = Convert.ToInt32(dr[IdentitiySeedColumnName]);
+                    iAns = Convert.ToInt32(dr[identitySeedColumnName]);
                 }
             }
             catch (Exception e)

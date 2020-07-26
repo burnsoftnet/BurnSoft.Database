@@ -172,7 +172,15 @@ namespace BurnSoft.Database.MSAccess
         public static bool AddColumn(string path, string name, string table, string defaultValue, string type, out string errOut, string password=@"")
         {
             string myDefault = $"[\"{defaultValue}\"]";
-            string sql = $"ALTER TABLE {table} ADD COLUMN {name} {type} {(defaultValue?.Length > 0) : myDefault};";
+            string sql = $"ALTER TABLE {table} ADD COLUMN {name} {type}";
+            if (defaultValue?.Length > 0)
+            {
+                sql += $" [\"{defaultValue}\"];";
+            }
+            else
+            {
+                sql += ";";
+            }
             return RunSql(path, sql, out errOut, false, password);
         }
         /// <summary>

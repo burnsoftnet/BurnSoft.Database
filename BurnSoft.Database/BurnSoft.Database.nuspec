@@ -13,7 +13,7 @@
     <license type="expression">MIT</license>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>$description$</description>
-    <releaseNotes>Initial Release of BurnSoft.Database Library</releaseNotes>
+    <releaseNotes>Added Additional functions for OLEDB</releaseNotes>
     <copyright>Copyright 2019-2020</copyright>
     <tags>BurnSoft Database, SQLite, MSAccess Access, MSSQL, SQL, MySQL</tags>
   </metadata>
