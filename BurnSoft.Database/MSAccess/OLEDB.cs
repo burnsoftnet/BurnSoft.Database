@@ -165,6 +165,13 @@ namespace BurnSoft.Database.MSAccess
             string sql = $"ALTER TABLE {table} ADD COLUMN {name} {type} {(defaultValue?.Length > 0) : myDefault};";
             return RunSql(path, sql, out errOut, false, password);
         }
+
+        public static bool CreateView(string path, string name, string sql, out string errOut, string password = @"")
+        {
+            string mySql = $"CREATE VIEW {name} AS {sql}";
+            return RunSql(path, mySql, out errOut, false, password);
+        }
+
         #endregion
 
     }
