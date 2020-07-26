@@ -1,9 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Data.OleDb;
 using ADODB;
 
 namespace BurnSoft.Database.MSAccess
@@ -23,31 +18,31 @@ namespace BurnSoft.Database.MSAccess
         /// <summary>
         /// Errors the message for regular Exceptions
         /// </summary>
-        /// <param name="FunctionName">Name of the function.</param>
+        /// <param name="functionName">Name of the function.</param>
         /// <param name="e">The e.</param>
         /// <returns>System.String.</returns>
-        private static string ErrorMessage(string FunctionName, Exception e) => $"{ClassLocation}.{FunctionName} - {e.Message.ToString()}";
+        private static string ErrorMessage(string functionName, Exception e) => $"{ClassLocation}.{functionName} - {e.Message.ToString()}";
         /// <summary>
         /// Errors the message for access violations
         /// </summary>
-        /// <param name="FunctionName">Name of the function.</param>
+        /// <param name="functionName">Name of the function.</param>
         /// <param name="e">The e.</param>
         /// <returns>System.String.</returns>
-        private static string ErrorMessage(string FunctionName, AccessViolationException e) => $"{ClassLocation}.{FunctionName} - {e.Message.ToString()}";
+        private static string ErrorMessage(string functionName, AccessViolationException e) => $"{ClassLocation}.{functionName} - {e.Message.ToString()}";
         /// <summary>
         /// Errors the message for invalid cast exception
         /// </summary>
-        /// <param name="FunctionName">Name of the function.</param>
+        /// <param name="functionName">Name of the function.</param>
         /// <param name="e">The e.</param>
         /// <returns>System.String.</returns>
-        private static string ErrorMessage(string FunctionName, InvalidCastException e) => $"{ClassLocation}.{FunctionName} - {e.Message.ToString()}";
+        private static string ErrorMessage(string functionName, InvalidCastException e) => $"{ClassLocation}.{functionName} - {e.Message.ToString()}";
         /// <summary>
         /// Errors the message argument exception
         /// </summary>
-        /// <param name="FunctionName">Name of the function.</param>
+        /// <param name="functionName">Name of the function.</param>
         /// <param name="e">The e.</param>
         /// <returns>System.String.</returns>
-        private static string ErrorMessage(string FunctionName, ArgumentException e) => $"{ClassLocation}.{FunctionName} - {e.Message.ToString()}";
+        private static string ErrorMessage(string functionName, ArgumentException e) => $"{ClassLocation}.{functionName} - {e.Message.ToString()}";
         /// <summary>
         /// Errors the message for argument null exception.
         /// </summary>
@@ -56,18 +51,25 @@ namespace BurnSoft.Database.MSAccess
         /// <returns>System.String.</returns>
         private static string ErrorMessage(string FunctionName, ArgumentNullException e) => $"{ClassLocation}.{FunctionName} - {e.Message.ToString()}";
         #endregion
-        //End Snippet
-
+        //End Snippet        
+        /// <summary>
+        /// Adds the password to database.
+        /// </summary>
+        /// <param name="path">The path.</param>
+        /// <param name="password">The password.</param>
+        /// <param name="errOut">The error out.</param>
+        /// <returns><c>true</c> if XXXX, <c>false</c> otherwise.</returns>
         public static bool AddPasswordToDatabase(string path, string password, out string errOut)
         {
             bool bAns = false;
             errOut = @"";
             try
             {
-                ADODB.Connection conn = DoConnection(path, password,true);
+                Connection conn = DoConnection(path, password,true);
                 conn.Open();
                 conn.Execute($"ALTER DATABASE PASSWORD {password} NULL", out _);
                 conn.Close();
+                bAns = true;
             }
             catch (Exception e)
             {
@@ -76,12 +78,12 @@ namespace BurnSoft.Database.MSAccess
             return bAns;
         }
 
-        private static ADODB.Connection DoConnection(string path, string password = @"", bool runAsAdmin = false)
+        private static Connection DoConnection(string path, string password = @"", bool runAsAdmin = false)
         {
-            ADODB.Connection conn = new ADODB.Connection();
+            Connection conn = new ADODB.Connection();
             conn.Provider = "Microsoft.Jet.OLEDB.4.0";
             conn.ConnectionString = $"Data Source={path}";
-            conn.Mode = ADODB.ConnectModeEnum.adModeShareExclusive;
+            conn.Mode = ConnectModeEnum.adModeShareExclusive;
             if (password?.Length > 0)
             {
                 conn.Properties["Jet OLEDB:Database Password"].Value = password;
@@ -95,10 +97,11 @@ namespace BurnSoft.Database.MSAccess
             errOut = @"";
             try
             {
-                ADODB.Connection conn = DoConnection(path, password,true);
+                Connection conn = DoConnection(path, password,true);
                 conn.Open();
                 conn.Execute($"ALTER DATABASE PASSWORD NULL {password}", out _);
                 conn.Close();
+                bAns = true;
             }
             catch (Exception e)
             {
@@ -112,10 +115,11 @@ namespace BurnSoft.Database.MSAccess
             errOut = @"";
             try
             {
-                ADODB.Connection conn = DoConnection(path, password, runAsAdmin);
+                Connection conn = DoConnection(path, password, runAsAdmin);
                 conn.Open();
                 conn.Execute(sql, out _);
                 conn.Close();
+                bAns = true;
             }
             catch (Exception e)
             {
