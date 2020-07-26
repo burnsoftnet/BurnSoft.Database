@@ -47,7 +47,33 @@ namespace BurnSoft.Database.MSAccess
         /// <returns>System.String.</returns>
         private static string ErrorMessage(string functionName, ArgumentNullException e) => $"{ClassLocation}.{functionName} - {e.Message}";
         #endregion
-        //End Snippet        
+        //End Snippet      
+        #region "Database Security"
+        /// <summary>
+        /// Removes the password from the access database.
+        /// </summary>
+        /// <param name="path">The path.</param>
+        /// <param name="password">The password.</param>
+        /// <param name="errOut">The error out.</param>
+        /// <returns><c>true</c> if XXXX, <c>false</c> otherwise.</returns>
+        public static bool RemovePasswordFromDatabase(string path, string password, out string errOut)
+        {
+            bool bAns = false;
+            errOut = @"";
+            try
+            {
+                Connection conn = DoConnection(path, password, true);
+                conn.Open();
+                conn.Execute($"ALTER DATABASE PASSWORD NULL {password}", out _);
+                conn.Close();
+                bAns = true;
+            }
+            catch (Exception e)
+            {
+                errOut = ErrorMessage("RemovePasswordFromDatabase", e);
+            }
+            return bAns;
+        }
         /// <summary>
         /// Add a Password to the MSAccess database to prevent people from just opening up the database in access
         /// and looking through the database
@@ -62,7 +88,7 @@ namespace BurnSoft.Database.MSAccess
             errOut = @"";
             try
             {
-                Connection conn = DoConnection(path, password,true);
+                Connection conn = DoConnection(path, password, true);
                 conn.Open();
                 conn.Execute($"ALTER DATABASE PASSWORD {password} NULL", out _);
                 conn.Close();
@@ -70,10 +96,12 @@ namespace BurnSoft.Database.MSAccess
             }
             catch (Exception e)
             {
-                errOut = ErrorMessage("AddPasswordToDatabase",e);
+                errOut = ErrorMessage("AddPasswordToDatabase", e);
             }
             return bAns;
         }
+        #endregion
+        #region "Private Functions"
         /// <summary>
         /// Does the connection to the Access database
         /// </summary>
@@ -85,44 +113,22 @@ namespace BurnSoft.Database.MSAccess
         {
             Connection conn = new Connection
             {
-                Provider = "Microsoft.Jet.OLEDB.4.0", ConnectionString = $"Data Source={path}"
+                Provider = "Microsoft.Jet.OLEDB.4.0",
+                ConnectionString = $"Data Source={path}"
             };
             if (runAsAdmin)
             {
                 conn.Mode = ConnectModeEnum.adModeShareExclusive;
             }
-            
+
             if (password?.Length > 0)
             {
                 conn.Properties["Jet OLEDB:Database Password"].Value = password;
             }
             return conn;
         }
-        /// <summary>
-        /// Removes the password from the access database.
-        /// </summary>
-        /// <param name="path">The path.</param>
-        /// <param name="password">The password.</param>
-        /// <param name="errOut">The error out.</param>
-        /// <returns><c>true</c> if XXXX, <c>false</c> otherwise.</returns>
-        public static bool RemovePasswordFromDatabase(string path, string password, out string errOut)
-        {
-            bool bAns = false;
-            errOut = @"";
-            try
-            {
-                Connection conn = DoConnection(path, password,true);
-                conn.Open();
-                conn.Execute($"ALTER DATABASE PASSWORD NULL {password}", out _);
-                conn.Close();
-                bAns = true;
-            }
-            catch (Exception e)
-            {
-                errOut = ErrorMessage("RemovePasswordFromDatabase", e);
-            }
-            return bAns;
-        }
+        #endregion
+        #region "Run Quereies"
         /// <summary>
         /// Runs the T-SQL statement against the Access Database.
         /// </summary>
@@ -132,7 +138,7 @@ namespace BurnSoft.Database.MSAccess
         /// <param name="runAsAdmin">if set to <c>true</c> [run as admin].</param>
         /// <param name="password">The password.</param>
         /// <returns><c>true</c> if XXXX, <c>false</c> otherwise.</returns>
-        public static bool RunSql(string path,string sql, out string errOut, bool runAsAdmin = false, string password=@"")
+        public static bool RunSql(string path, string sql, out string errOut, bool runAsAdmin = false, string password = @"")
         {
             bool bAns = false;
             errOut = @"";
@@ -150,5 +156,8 @@ namespace BurnSoft.Database.MSAccess
             }
             return bAns;
         }
+        #endregion
+
+
     }
 }
