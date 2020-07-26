@@ -106,7 +106,7 @@ namespace BurnSoft.Database.MSAccess
         /// Does the connection to the Access database
         /// </summary>
         /// <param name="path">The path.</param>
-        /// <param name="password">The password.</param>
+        /// <param name="password">The password to access the database is this database is password protected</param>
         /// <param name="runAsAdmin">if set to <c>true</c> [run as admin].</param>
         /// <returns>Connection.</returns>
         private static Connection DoConnection(string path, string password = @"", bool runAsAdmin = false)
@@ -136,7 +136,7 @@ namespace BurnSoft.Database.MSAccess
         /// <param name="sql">The SQL.</param>
         /// <param name="errOut">The error out.</param>
         /// <param name="runAsAdmin">if set to <c>true</c> [run as admin].</param>
-        /// <param name="password">The password.</param>
+        /// <param name="password">The password to access the database is this database is password protected.</param>
         /// <returns><c>true</c> if XXXX, <c>false</c> otherwise.</returns>
         public static bool RunSql(string path, string sql, out string errOut, bool runAsAdmin = false, string password = @"")
         {
@@ -157,15 +157,33 @@ namespace BurnSoft.Database.MSAccess
             return bAns;
         }
         #endregion
-        #region "Adding to Database"
-
+        #region "Adding to Database"        
+        /// <summary>
+        /// Adds the column to the access database
+        /// </summary>
+        /// <param name="path">The path.</param>
+        /// <param name="name">The name.</param>
+        /// <param name="table">The table.</param>
+        /// <param name="defaultValue">The default value.</param>
+        /// <param name="type">The type.</param>
+        /// <param name="errOut">The error out.</param>
+        /// <param name="password">The password to access the database is this database is password protected.</param>
+        /// <returns><c>true</c> if XXXX, <c>false</c> otherwise.</returns>
         public static bool AddColumn(string path, string name, string table, string defaultValue, string type, out string errOut, string password=@"")
         {
             string myDefault = $"[\"{defaultValue}\"]";
             string sql = $"ALTER TABLE {table} ADD COLUMN {name} {type} {(defaultValue?.Length > 0) : myDefault};";
             return RunSql(path, sql, out errOut, false, password);
         }
-
+        /// <summary>
+        /// Creates the a view in the Access Database.
+        /// </summary>
+        /// <param name="path">The path.</param>
+        /// <param name="name">The name.</param>
+        /// <param name="sql">The SQL.</param>
+        /// <param name="errOut">The error out.</param>
+        /// <param name="password">The password to access the database is this database is password protected.</param>
+        /// <returns><c>true</c> if XXXX, <c>false</c> otherwise.</returns>
         public static bool CreateView(string path, string name, string sql, out string errOut, string password = @"")
         {
             string mySql = $"CREATE VIEW {name} AS {sql}";
