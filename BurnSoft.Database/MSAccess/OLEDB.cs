@@ -71,7 +71,7 @@ namespace BurnSoft.Database.MSAccess
             }
             catch (Exception e)
             {
-                errOut = e.Message;
+                errOut = ErrorMessage("AddPasswordToDatabase",e);
             }
             return bAns;
         }
@@ -89,7 +89,7 @@ namespace BurnSoft.Database.MSAccess
             return conn;
         }
 
-        public static bool RemovePasswordToDatabase(string path, string password, out string errOut)
+        public static bool RemovePasswordFromDatabase(string path, string password, out string errOut)
         {
             bool bAns = false;
             errOut = @"";
@@ -102,7 +102,7 @@ namespace BurnSoft.Database.MSAccess
             }
             catch (Exception e)
             {
-                errOut = e.Message;
+                errOut = ErrorMessage("RemovePasswordFromDatabase", e);
             }
             return bAns;
         }
@@ -119,7 +119,7 @@ namespace BurnSoft.Database.MSAccess
             }
             catch (Exception e)
             {
-                errOut = e.Message;
+                errOut = ErrorMessage("RunSQL", e);
             }
             return bAns;
         }
