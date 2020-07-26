@@ -1,5 +1,7 @@
 ﻿using System;
 using ADODB;
+// ReSharper disable UnusedMember.Global
+// ReSharper disable UnusedMember.Local
 
 namespace BurnSoft.Database.MSAccess
 {
@@ -21,39 +23,34 @@ namespace BurnSoft.Database.MSAccess
         /// <param name="functionName">Name of the function.</param>
         /// <param name="e">The e.</param>
         /// <returns>System.String.</returns>
-        private static string ErrorMessage(string functionName, Exception e) => $"{ClassLocation}.{functionName} - {e.Message.ToString()}";
+        private static string ErrorMessage(string functionName, Exception e) => $"{ClassLocation}.{functionName} - {e.Message}";
         /// <summary>
         /// Errors the message for access violations
         /// </summary>
         /// <param name="functionName">Name of the function.</param>
         /// <param name="e">The e.</param>
         /// <returns>System.String.</returns>
-        private static string ErrorMessage(string functionName, AccessViolationException e) => $"{ClassLocation}.{functionName} - {e.Message.ToString()}";
-        /// <summary>
-        /// Errors the message for invalid cast exception
-        /// </summary>
-        /// <param name="functionName">Name of the function.</param>
-        /// <param name="e">The e.</param>
-        /// <returns>System.String.</returns>
-        private static string ErrorMessage(string functionName, InvalidCastException e) => $"{ClassLocation}.{functionName} - {e.Message.ToString()}";
+        private static string ErrorMessage(string functionName, AccessViolationException e) => $"{ClassLocation}.{functionName} - {e.Message}";
+
         /// <summary>
         /// Errors the message argument exception
         /// </summary>
         /// <param name="functionName">Name of the function.</param>
         /// <param name="e">The e.</param>
         /// <returns>System.String.</returns>
-        private static string ErrorMessage(string functionName, ArgumentException e) => $"{ClassLocation}.{functionName} - {e.Message.ToString()}";
+        private static string ErrorMessage(string functionName, ArgumentException e) => $"{ClassLocation}.{functionName} - {e.Message}";
         /// <summary>
         /// Errors the message for argument null exception.
         /// </summary>
-        /// <param name="FunctionName">Name of the function.</param>
+        /// <param name="functionName">Name of the function.</param>
         /// <param name="e">The e.</param>
         /// <returns>System.String.</returns>
-        private static string ErrorMessage(string FunctionName, ArgumentNullException e) => $"{ClassLocation}.{FunctionName} - {e.Message.ToString()}";
+        private static string ErrorMessage(string functionName, ArgumentNullException e) => $"{ClassLocation}.{functionName} - {e.Message}";
         #endregion
         //End Snippet        
         /// <summary>
-        /// Adds the password to database.
+        /// Add a Password to the MSAccess database to prevent people from just opening up the database in access
+        /// and looking through the database
         /// </summary>
         /// <param name="path">The path.</param>
         /// <param name="password">The password.</param>
@@ -77,20 +74,37 @@ namespace BurnSoft.Database.MSAccess
             }
             return bAns;
         }
-
+        /// <summary>
+        /// Does the connection to the Access database
+        /// </summary>
+        /// <param name="path">The path.</param>
+        /// <param name="password">The password.</param>
+        /// <param name="runAsAdmin">if set to <c>true</c> [run as admin].</param>
+        /// <returns>Connection.</returns>
         private static Connection DoConnection(string path, string password = @"", bool runAsAdmin = false)
         {
-            Connection conn = new ADODB.Connection();
-            conn.Provider = "Microsoft.Jet.OLEDB.4.0";
-            conn.ConnectionString = $"Data Source={path}";
-            conn.Mode = ConnectModeEnum.adModeShareExclusive;
+            Connection conn = new Connection
+            {
+                Provider = "Microsoft.Jet.OLEDB.4.0", ConnectionString = $"Data Source={path}"
+            };
+            if (runAsAdmin)
+            {
+                conn.Mode = ConnectModeEnum.adModeShareExclusive;
+            }
+            
             if (password?.Length > 0)
             {
                 conn.Properties["Jet OLEDB:Database Password"].Value = password;
             }
             return conn;
         }
-
+        /// <summary>
+        /// Removes the password from the access database.
+        /// </summary>
+        /// <param name="path">The path.</param>
+        /// <param name="password">The password.</param>
+        /// <param name="errOut">The error out.</param>
+        /// <returns><c>true</c> if XXXX, <c>false</c> otherwise.</returns>
         public static bool RemovePasswordFromDatabase(string path, string password, out string errOut)
         {
             bool bAns = false;
@@ -109,7 +123,16 @@ namespace BurnSoft.Database.MSAccess
             }
             return bAns;
         }
-        public static bool RunSQL(string path,string sql, out string errOut, bool runAsAdmin = false, string password=@"")
+        /// <summary>
+        /// Runs the T-SQL statement against the Access Database.
+        /// </summary>
+        /// <param name="path">The path.</param>
+        /// <param name="sql">The SQL.</param>
+        /// <param name="errOut">The error out.</param>
+        /// <param name="runAsAdmin">if set to <c>true</c> [run as admin].</param>
+        /// <param name="password">The password.</param>
+        /// <returns><c>true</c> if XXXX, <c>false</c> otherwise.</returns>
+        public static bool RunSql(string path,string sql, out string errOut, bool runAsAdmin = false, string password=@"")
         {
             bool bAns = false;
             errOut = @"";
