@@ -37,6 +37,19 @@ namespace BurnSoft.Database.MSAccess
             return bAns;
         }
 
+        private static ADODB.Connection DoConnection(string path, string password = @"")
+        {
+            ADODB.Connection conn = new ADODB.Connection();
+            conn.Provider = "Microsoft.Jet.OLEDB.4.0";
+            conn.ConnectionString = $"Data Source={path}";
+            conn.Mode = ADODB.ConnectModeEnum.adModeShareExclusive;
+            if (password?.Length > 0)
+            {
+                conn.Properties["Jet OLEDB:Database Password"].Value = password;
+            }
+            return conn;
+        }
+
         public static bool RemovePasswordToDatabase(string path, string password, out string errOut)
         {
             bool bAns = false;
@@ -49,7 +62,7 @@ namespace BurnSoft.Database.MSAccess
                 //conn.Properties["Jet OLEDB:Database Password"].Value = password;
                 conn.Mode = ADODB.ConnectModeEnum.adModeShareExclusive;
                 conn.Open();
-                string sql = $"ALTER DATABASE PASSWORD {password} NULL";
+                string sql = $"ALTER DATABASE PASSWORD NULL {password}";
                 conn.Execute(sql, out _);
                 conn.Close();
             }
