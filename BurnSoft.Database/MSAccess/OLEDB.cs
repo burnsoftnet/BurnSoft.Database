@@ -20,14 +20,9 @@ namespace BurnSoft.Database.MSAccess
             errOut = @"";
             try
             {
-                ADODB.Connection conn = new ADODB.Connection();
-                conn.Provider = "Microsoft.Jet.OLEDB.4.0";
-                conn.ConnectionString = $"Data Source={path}";
-                //conn.Properties["Jet OLEDB:Database Password"].Value = password;
-                conn.Mode = ADODB.ConnectModeEnum.adModeShareExclusive;
+                ADODB.Connection conn = DoConnection(path, password);
                 conn.Open();
-                string sql = $"ALTER DATABASE PASSWORD {password} NULL";
-                conn.Execute(sql, out _);
+                conn.Execute($"ALTER DATABASE PASSWORD {password} NULL", out _);
                 conn.Close();
             }
             catch (Exception e)
@@ -56,14 +51,9 @@ namespace BurnSoft.Database.MSAccess
             errOut = @"";
             try
             {
-                ADODB.Connection conn = new ADODB.Connection();
-                conn.Provider = "Microsoft.Jet.OLEDB.4.0";
-                conn.ConnectionString = $"Data Source={path}";
-                //conn.Properties["Jet OLEDB:Database Password"].Value = password;
-                conn.Mode = ADODB.ConnectModeEnum.adModeShareExclusive;
+                ADODB.Connection conn = DoConnection(path, password);
                 conn.Open();
-                string sql = $"ALTER DATABASE PASSWORD NULL {password}";
-                conn.Execute(sql, out _);
+                conn.Execute($"ALTER DATABASE PASSWORD NULL {password}", out _);
                 conn.Close();
             }
             catch (Exception e)
