@@ -16,8 +16,14 @@
 * 
 * ----------------------------------------------------------------------------------------------- */
 using System;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using MySql.Data.MySqlClient;
 using System.Data;
+using System.Data.Common;
+using System.Diagnostics.Eventing.Reader;
+using BurnSoft.Database.MySQL.Type;
+
 // ReSharper disable UnusedMember.Local
 // ReSharper disable UnusedMember.Global
 // ReSharper disable ConstantConditionalAccessQualifier
@@ -90,6 +96,71 @@ namespace BurnSoft.Database.MySQL
             catch (Exception e)
             {
                 errOut = ErrorMessage("ConnectionString", (ArgumentNullException) e);
+            }
+            return sAns;
+        }
+        public static string ConnectionString(string WebConfigConnectionStringName, out string errOut)
+        {
+            string sAns = @"";
+            errOut = @"";
+            try
+            {
+                string[] lst = WebConfigConnectionStringName.Split(';');
+                List<ConString> cs = new List<ConString>();
+                string server =@"";
+                string database = @"";
+                string persistSecurityInfo = @"";
+                string userId = @"";
+                string password = @"";
+
+                foreach (string l in lst)
+                {
+                    string[] newLst = l.Split('=');
+
+                    if (newLst[0].Trim().Equals("server"))
+                    {
+                        server = newLst[1].Trim();
+                    } 
+                    else if (newLst[0].Trim().Equals("Password"))
+                    {
+                        password = newLst[1].Trim();
+                    }
+                    else if (newLst[0].Trim().Equals("persistsecurityinfo"))
+                    {
+                        persistSecurityInfo = newLst[1].Trim();
+                    }
+                    else if (newLst[0].Trim().Equals("database"))
+                    {
+                        database = newLst[1].Trim();
+                    }
+                    else if (newLst[0].Trim().Equals("User ID"))
+                    {
+                        userId = newLst[1].Trim();
+                    }
+                }
+
+                cs.Add(new ConString()
+                {
+                    Server = server,
+                    Database = database,
+                    UserID = userId,
+                    Password = password,
+                    PersistSecurityInfo = persistSecurityInfo
+                });
+
+                foreach (ConString s in cs)
+                {
+                    sAns = ConnectionString(s.Server, s.UserID, s.Password, s.Database, out errOut);
+                }
+                //DbConnectionStringBuilder dbConnectionStringBuilder = new DbConnectionStringBuilder();
+                //dbConnectionStringBuilder.ConnectionString = WebConfigConnectionStringName;
+                //string username = (string)dbConnectionStringBuilder["User ID"];
+                //string password = (string)dbConnectionStringBuilder["Password"];
+                //sAns = $"Server={hostname};user id={uid};password={pwd};persist security info=true;database={databaseName}";
+            }
+            catch (Exception e)
+            {
+                errOut = ErrorMessage("ConnectionString", (ArgumentNullException)e);
             }
             return sAns;
         }
