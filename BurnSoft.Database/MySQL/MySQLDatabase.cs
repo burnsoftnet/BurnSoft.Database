@@ -120,23 +120,23 @@ namespace BurnSoft.Database.MySQL
                 {
                     string[] newLst = l.Split('=');
 
-                    if (newLst[0].Trim().Equals("server"))
+                    if (newLst[0].Trim().ToLower().Equals("server"))
                     {
                         server = newLst[1].Trim();
                     }
-                    else if (newLst[0].Trim().Equals("Password"))
+                    else if (newLst[0].Trim().ToLower().Equals("password"))
                     {
                         password = newLst[1].Trim();
                     }
-                    else if (newLst[0].Trim().Equals("persistsecurityinfo"))
+                    else if (newLst[0].Trim().ToLower().Equals("persistsecurityinfo"))
                     {
                         persistSecurityInfo = newLst[1].Trim();
                     }
-                    else if (newLst[0].Trim().Equals("database"))
+                    else if (newLst[0].Trim().ToLower().Equals("database"))
                     {
                         database = newLst[1].Trim();
                     }
-                    else if (newLst[0].Trim().Equals("User ID"))
+                    else if (newLst[0].Trim().ToLower().Equals("user id"))
                     {
                         userId = newLst[1].Trim();
                     }
