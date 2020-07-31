@@ -17,11 +17,8 @@
 * ----------------------------------------------------------------------------------------------- */
 using System;
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
 using MySql.Data.MySqlClient;
 using System.Data;
-using System.Data.Common;
-using System.Diagnostics.Eventing.Reader;
 using BurnSoft.Database.MySQL.Type;
 
 // ReSharper disable UnusedMember.Local
@@ -99,15 +96,21 @@ namespace BurnSoft.Database.MySQL
             }
             return sAns;
         }
-        public static string ConnectionString(string WebConfigConnectionStringName, out string errOut)
+        /// <summary>
+        /// Parses the connection string from the web.config connection string section.
+        /// </summary>
+        /// <param name="webConfigConnectionStringName">Name of the web configuration connection string.</param>
+        /// <param name="errOut">The error out.</param>
+        /// <returns>List&lt;ConString&gt;.</returns>
+        private static List<ConString> ParseConnectionString(string webConfigConnectionStringName, out string errOut)
         {
-            string sAns = @"";
+            List<ConString> sAns = new List<ConString>();
             errOut = @"";
             try
             {
-                string[] lst = WebConfigConnectionStringName.Split(';');
+                string[] lst = webConfigConnectionStringName.Split(';');
                 List<ConString> cs = new List<ConString>();
-                string server =@"";
+                string server = @"";
                 string database = @"";
                 string persistSecurityInfo = @"";
                 string userId = @"";
@@ -120,7 +123,7 @@ namespace BurnSoft.Database.MySQL
                     if (newLst[0].Trim().Equals("server"))
                     {
                         server = newLst[1].Trim();
-                    } 
+                    }
                     else if (newLst[0].Trim().Equals("Password"))
                     {
                         password = newLst[1].Trim();
@@ -148,15 +151,40 @@ namespace BurnSoft.Database.MySQL
                     PersistSecurityInfo = persistSecurityInfo
                 });
 
+                sAns = cs;
+            }
+            catch (Exception e)
+            {
+                errOut = ErrorMessage("ParseConnectionString", (ArgumentNullException)e);
+            }
+            return sAns;
+        }
+        /// <summary>
+        /// Pass the connection string from the web.config file and have it return back a connection string that the mysql libraries like.
+        /// </summary>
+        /// <param name="webConfigConnectionStringName">Name of the web configuration connection string.</param>
+        /// <param name="errOut">The error out.</param>
+        /// <returns>System.String.</returns>
+        /// <example>
+        /// string conString = MySQLDatabase.ConnectionString(ConfigurationManager.ConnectionString["MySQLConnection"].ToString, out var err); <br/>
+        ///  <br/>
+        /// <b>Results</b> <br/>
+        ///  <br/>
+        ///  Server=serverName;user id=userName;password=password;persist security info=true;database=Northwind
+        /// </example>
+        public static string ConnectionString(string webConfigConnectionStringName, out string errOut)
+        {
+            string sAns = @"";
+            errOut = @"";
+            try
+            {
+               
+                List<ConString> cs = ParseConnectionString(webConfigConnectionStringName, out errOut);
+                
                 foreach (ConString s in cs)
                 {
                     sAns = ConnectionString(s.Server, s.UserID, s.Password, s.Database, out errOut);
                 }
-                //DbConnectionStringBuilder dbConnectionStringBuilder = new DbConnectionStringBuilder();
-                //dbConnectionStringBuilder.ConnectionString = WebConfigConnectionStringName;
-                //string username = (string)dbConnectionStringBuilder["User ID"];
-                //string password = (string)dbConnectionStringBuilder["Password"];
-                //sAns = $"Server={hostname};user id={uid};password={pwd};persist security info=true;database={databaseName}";
             }
             catch (Exception e)
             {
