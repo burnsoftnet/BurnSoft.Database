@@ -15,7 +15,7 @@ namespace UnitTestProject_Database
         /// <param name="errOut">The error out.</param>
         public static void HasTrueValue(bool bAns, string errOut = "")
         {
-            if (errOut.Length > 0 )
+            if (errOut?.Length > 0 )
             {
                 Debug.Print("ERROR!");
                 Debug.Print(errOut);
@@ -29,7 +29,7 @@ namespace UnitTestProject_Database
         /// <param name="errOut">The error out.</param>
         public static void HasFalseValue(bool bAns, string errOut = "")
         {
-            if (errOut.Length > 0)
+            if (errOut?.Length > 0)
             {
                 Debug.Print("ERROR!");
                 Debug.Print(errOut);
@@ -51,7 +51,7 @@ namespace UnitTestProject_Database
             {
                 Debug.Print("NO VALUE RETURNED!!");
             }
-            if (errOut.Length > 0)
+            if (errOut?.Length > 0)
             {
                 Debug.Print("ERROR!");
                 Debug.Print(errOut);
