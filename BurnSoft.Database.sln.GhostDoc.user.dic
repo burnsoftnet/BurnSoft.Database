@@ -5,8 +5,10 @@ dbname
 dbversion
 hostname
 Mysql
+Northwind
 oledb
 Owenton
+persistsecurityinfo
 sometable
 testdb
 testinstance
