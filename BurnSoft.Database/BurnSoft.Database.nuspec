@@ -13,7 +13,7 @@
     <license type="expression">MIT</license>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>$description$</description>
-    <releaseNotes>Added Additional functions for OLEDB</releaseNotes>
+    <releaseNotes>Updated nuget packages</releaseNotes>
     <copyright>Copyright 2019-2020</copyright>
     <tags>BurnSoft Database, SQLite, MSAccess Access, MSSQL, SQL, MySQL</tags>
   </metadata>
