@@ -272,5 +272,41 @@ namespace BurnSoft.Database.MSAccess
             }
             return table;
         }
+
+        /// <summary>
+        /// Get the Identity seed from the table base on your T SQl statement.
+        /// </summary>
+        /// <param name="connection"></param>
+        /// <param name="sql"></param>
+        /// <param name="identitySeedColumnName"></param>
+        /// <param name="errOut"></param>
+        /// <returns>number</returns>
+        /// <example>
+        /// string sql = "select id from sometable where something='something'"; <br/>
+        /// int value = GetIDFromTableBasedOnTSQL(SomeConnectionString, sql, "id", out var errOut);
+        /// 
+        /// </example>
+        public static int GetIDFromTableBasedOnTSQL(string connection, string sql, string identitySeedColumnName, out string errOut)
+        {
+            int iAns = 0;
+            errOut = @"";
+            try
+            {
+                MsAccessDatabase obj = new MsAccessDatabase();
+                //TODO: Add this to Unit Test
+                DataTable dt = obj.GetData(connection, sql, out errOut);
+                if (errOut?.Length > 0) throw new Exception(errOut);
+                foreach (DataRow dr in dt.Rows)
+                {
+                    iAns = Convert.ToInt32(dr[identitySeedColumnName]);
+                }
+            }
+            catch (Exception e)
+            {
+                errOut = ErrorMessage("GetIDFromTableBasedOnTSQL", e);
+            }
+            return iAns;
+        }
+
     }
 }
