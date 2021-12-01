@@ -51,8 +51,13 @@ nuget delete %HELPFILENAME% %ver% burnsoft -Source %USENUGETSERVER% -NonInteract
 echo "Uploading %nupak%.%NUGETEXT%"
 nuget push %nupak%.%NUGETEXT% burnsoft -Source %USENUGETSERVER%
 
-if "%ConfigurationName%" == %RELEASE% (
-	echo "nuget guthub push"
-	nuget push %nupak%.%NUGETEXT% -source "github"
-)
-cd ..
+
+if NOT "%~5"=="-public" goto END
+
+echo "nuget guthub push"
+nuget push %nupak%.%NUGETEXT% -source "github"
+
+echo "nuget.org push"
+nuget push Y%nupak%.%NUGETEXT% -Source https://api.nuget.org/v3/index.json
+
+:END
