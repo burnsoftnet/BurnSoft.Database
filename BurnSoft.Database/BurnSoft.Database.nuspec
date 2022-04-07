@@ -16,9 +16,20 @@
     <releaseNotes>Updated nuget packages</releaseNotes>
     <copyright>Copyright 2019-2022</copyright>
     <tags>BurnSoft Database, SQLite, MSAccess Access, MSSQL, SQL, MySQL</tags>
+    <frameworkReferences>
+      <group targetFramework=".NETFramework4.8">
+        <frameworkReference name=".NETFramework4.8" />
+      </group>
+      <group targetFramework=".NET5">
+        <frameworkReference name=".NET5" />
+      </group>
+    </frameworkReferences>
   </metadata>
   <files>
     <file src="bin/$configuration$/$id$.chm" target="content/$id$.chm" />
+    <file src="bin/$configuration$/net5/net5.0/$id$.dll" target="lib/net5/" />
+    <file src="bin/$configuration$/net5/net5.0/$id$.xml" target="lib/net5/" />
+    <file src="bin/$configuration$/net5/net5.0/$id$.deps.json" target="lib/net5/" />
     <file src="icon.png" target="images\" />
   </files>
 </package>
