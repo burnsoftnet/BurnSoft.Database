@@ -2,9 +2,9 @@
 <package >
   <metadata>
     <id>$id$</id>
-    <version>$version$</version>
+    <version>1.0.0.11-alpha</version>
     <title>$title$</title>
-    <authors>$author$</authors>
+    <authors>burnsoftnet</authors>
     <owners>burnsoftnet</owners>
     <projectUrl>https://github.com/burnsoftnet/BurnSoft.Database</projectUrl>
     <repository type="git" url="https://github.com/burnsoftnet/BurnSoft.Database" />
@@ -12,9 +12,9 @@
     <icon>images\icon.png</icon>
     <license type="expression">MIT</license>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
-    <description>$description$</description>
+    <description>General Functions to Connect to different types of databases along with the ability to run SQL commands and return data.</description>
     <releaseNotes>Updated nuget packages</releaseNotes>
-    <copyright>Copyright 2019-2020</copyright>
+    <copyright>Copyright 2019-2022</copyright>
     <tags>BurnSoft Database, SQLite, MSAccess Access, MSSQL, SQL, MySQL</tags>
   </metadata>
   <files>
