@@ -2,6 +2,28 @@
 
   <PropertyGroup>
     <TargetFramework>net5.0</TargetFramework>
+    <AssemblyName>BurnSoft.Database</AssemblyName>
+    <Description>General Functions to Connect to different types of databases along with the ability to run SQL commands and return data.</Description>
+    <Authors>www.burnsoft.net</Authors>
+    <Company>www.burnsoft.net</Company>
+    <Copyright>Copyright © www.burnsoft.net 2019 - 2022</Copyright>
+    <PackageProjectUrl>https://github.com/burnsoftnet/BurnSoft.Database</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/burnsoftnet/BurnSoft.Database</RepositoryUrl>
+    <RepositoryType>git</RepositoryType>
+    <AssemblyVersion>1.0.0.11</AssemblyVersion>
+    <FileVersion>1.0.0.11</FileVersion>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <DebugType>embedded</DebugType>
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>C:\Source\Repos\BurnSoft.Database\BurnSoft.Database\bin\Debug\net5\</OutputPath>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+    <DebugType>embedded</DebugType>
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>C:\Source\Repos\BurnSoft.Database\BurnSoft.Database\bin\Release\net5\</OutputPath>
   </PropertyGroup>
 
   <ItemGroup>
