@@ -2,9 +2,9 @@
 <package >
   <metadata>
     <id>$id$</id>
-    <version>$version$</version>
+    <version>1.0.0.11-alpha</version>
     <title>$title$</title>
-    <authors>$author$</authors>
+    <authors>burnsoftnet</authors>
     <owners>burnsoftnet</owners>
     <projectUrl>https://github.com/burnsoftnet/BurnSoft.Database</projectUrl>
     <repository type="git" url="https://github.com/burnsoftnet/BurnSoft.Database" />
@@ -12,13 +12,24 @@
     <icon>images\icon.png</icon>
     <license type="expression">MIT</license>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
-    <description>$description$</description>
+    <description>General Functions to Connect to different types of databases along with the ability to run SQL commands and return data.</description>
     <releaseNotes>Updated nuget packages</releaseNotes>
-    <copyright>Copyright 2019-2020</copyright>
+    <copyright>Copyright 2019-2022</copyright>
     <tags>BurnSoft Database, SQLite, MSAccess Access, MSSQL, SQL, MySQL</tags>
+    <frameworkReferences>
+      <group targetFramework=".NETFramework4.8">
+        <frameworkReference name=".NETFramework4.8" />
+      </group>
+      <group targetFramework=".NET5">
+        <frameworkReference name=".NET5" />
+      </group>
+    </frameworkReferences>
   </metadata>
   <files>
     <file src="bin/$configuration$/$id$.chm" target="content/$id$.chm" />
+    <file src="bin/$configuration$/net5/net5.0/$id$.dll" target="lib/net5/" />
+    <file src="bin/$configuration$/net5/net5.0/$id$.xml" target="lib/net5/" />
+    <file src="bin/$configuration$/net5/net5.0/$id$.deps.json" target="lib/net5/" />
     <file src="icon.png" target="images\" />
   </files>
 </package>

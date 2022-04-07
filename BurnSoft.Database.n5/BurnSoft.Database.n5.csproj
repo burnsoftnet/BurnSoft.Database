@@ -1,0 +1,71 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net5.0</TargetFramework>
+    <AssemblyName>BurnSoft.Database</AssemblyName>
+    <Description>General Functions to Connect to different types of databases along with the ability to run SQL commands and return data.</Description>
+    <Authors>www.burnsoft.net</Authors>
+    <Company>www.burnsoft.net</Company>
+    <Copyright>Copyright © www.burnsoft.net 2019 - 2022</Copyright>
+    <PackageProjectUrl>https://github.com/burnsoftnet/BurnSoft.Database</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/burnsoftnet/BurnSoft.Database</RepositoryUrl>
+    <RepositoryType>git</RepositoryType>
+    <AssemblyVersion>1.0.0.11</AssemblyVersion>
+    <FileVersion>1.0.0.11</FileVersion>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <DebugType>embedded</DebugType>
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>C:\Source\Repos\BurnSoft.Database\BurnSoft.Database\bin\Debug\net5\</OutputPath>
+    <DocumentationFile>C:\Source\Repos\BurnSoft.Database\BurnSoft.Database\bin\Debug\net5\net5.0\BurnSoft.Database.xml</DocumentationFile>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+    <DebugType>embedded</DebugType>
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>C:\Source\Repos\BurnSoft.Database\BurnSoft.Database\bin\Release\net5\</OutputPath>
+    <DocumentationFile>C:\Source\Repos\BurnSoft.Database\BurnSoft.Database\bin\Release\net5\net5.0\BurnSoft.Database.xml</DocumentationFile>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Include="..\BurnSoft.Database\MSAccess\MSAccessDatabase.cs" Link="MSAccess\MSAccessDatabase.cs" />
+    <Compile Include="..\BurnSoft.Database\MSAccess\OLEDB.cs" Link="MSAccess\OLEDB.cs" />
+    <Compile Include="..\BurnSoft.Database\MSSQL\MSSQLDatabase.cs" Link="MSSQL\MSSQLDatabase.cs" />
+    <Compile Include="..\BurnSoft.Database\MySQL\MySQLDatabase.cs" Link="MySQL\MySQLDatabase.cs" />
+    <Compile Include="..\BurnSoft.Database\MySQL\Type\ConString.cs" Link="MySQL\Type\ConString.cs" />
+    <Compile Include="..\BurnSoft.Database\SQLite\BaseDatabase.cs" Link="SQLite\BaseDatabase.cs" />
+    <Compile Include="..\BurnSoft.Database\SQLite\SQLiteDataManagement.cs" Link="SQLite\SQLiteDataManagement.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="ADODB" Version="7.10.3077" />
+    <PackageReference Include="BouncyCastle" Version="1.8.9" />
+    <PackageReference Include="EntityFramework" Version="6.4.4" />
+    <PackageReference Include="Google.Protobuf" Version="3.20.0" />
+    <PackageReference Include="K4os.Compression.LZ4" Version="1.2.16" />
+    <PackageReference Include="K4os.Compression.LZ4.Streams" Version="1.2.16" />
+    <PackageReference Include="K4os.Hash.xxHash" Version="1.0.7" />
+    <PackageReference Include="MySql.Data" Version="8.0.28" />
+    <PackageReference Include="Stub.System.Data.SQLite.Core.NetFramework" Version="1.0.115.5" />
+    <PackageReference Include="System.Buffers" Version="4.5.1" />
+    <PackageReference Include="System.Data.Odbc" Version="6.0.0" />
+    <PackageReference Include="System.Data.SQLite" Version="1.0.115.5" />
+    <PackageReference Include="System.Data.SQLite.Core" Version="1.0.115.5" />
+    <PackageReference Include="System.Data.SQLite.EF6" Version="1.0.115.5" />
+    <PackageReference Include="System.Data.SQLite.Linq" Version="1.0.115.5" />
+    <PackageReference Include="System.Data.SQLite.x64" Version="1.0.115.5" />
+    <PackageReference Include="System.Data.SQLite.x86" Version="1.0.115.5" />
+    <PackageReference Include="System.Memory" Version="4.5.4" />
+    <PackageReference Include="System.Numerics.Vectors" Version="4.5.0" />
+    <PackageReference Include="System.Runtime.CompilerServices.Unsafe" Version="6.0.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="MSAccess\" />
+    <Folder Include="MSSQL\" />
+    <Folder Include="MySQL\Type\" />
+    <Folder Include="SQLite\" />
+  </ItemGroup>
+
+</Project>
