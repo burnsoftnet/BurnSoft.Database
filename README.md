@@ -1,5 +1,9 @@
 # BurnSoft.Database
 
+![](https://img.shields.io/nuget/vpre/BurnSoft.Database) | ![](https://img.shields.io/nuget/v/BurnSoft.Database)
+
+![](https://img.shields.io/badge/license-MIT-blue.svg?maxAge=3600) 
+
 The **Database** class is a generic classed used to connect to the database and run SQL queries against that database.
 
 Currently this is still under construction but plan to connect to the following database for the first version
