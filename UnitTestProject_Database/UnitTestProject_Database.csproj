@@ -172,12 +172,12 @@
   <ItemGroup>
     <Compile Include="General.cs" />
     <Compile Include="GlobalSuppressions.cs" />
-    <Compile Include="Settings.cs" />
+    <Compile Include="Settings\Settings.cs" />
     <Compile Include="UnitTest_MSSQL_MSSQLDatabase.cs" />
     <Compile Include="UnitTest_MySQL_MySQLDatabase.cs" />
     <Compile Include="UnitTest_SQLite_SQLiteDataManagement.cs" />
     <Compile Include="UnitTest_SQLite_BaseDatabase.cs" />
-    <Compile Include="UnitTest_MSAccess.cs" />
+    <Compile Include="MSAccessTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

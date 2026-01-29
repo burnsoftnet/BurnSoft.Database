@@ -6,57 +6,63 @@ using System.Data;
 namespace UnitTestProject_Database
 {
     [TestClass]
-    public class UnitTest_MSAccess
+    public class MSAccessTests
     {
         private string errOut;
         private string ConnString;
+        private string _dbPath;
+        private string _dbName;
+        private string _dbPassword;
 
         [TestInitialize]
         public void TestInitialize()
         {
-            ConnString = BurnSoft.Database.MSAccess.MsAccessDatabase.ConnectionString(Settings.AccessDatabase.DatabasePath, Settings.AccessDatabase.DatabaseName, out errOut, Settings.AccessDatabase.DatabasePassword);
+            _dbPath = Settings.AccessDatabase.DatabasePath;
+            _dbName = Settings.AccessDatabase.DatabaseName;
+            _dbPassword = Settings.AccessDatabase.DatabasePassword;
+            ConnString = MsAccessDatabase.ConnectionString(_dbPath, _dbName, out errOut, _dbPassword);
         }
         /// <summary>
         /// Defines the test method TestMethod_ConnectionStringWithPassword.
         /// </summary>
-        [TestMethod]
+        [TestMethod, TestCategory("MSAccess")]
         public void TestMethod_ConnectionStringWithPassword()
         {
-            string value = BurnSoft.Database.MSAccess.MsAccessDatabase.ConnectionString(Settings.AccessDatabase.DatabasePath, Settings.AccessDatabase.DatabaseName, out errOut, Settings.AccessDatabase.DatabasePassword);
+            string value = BurnSoft.Database.MSAccess.MsAccessDatabase.ConnectionString(_dbPath, _dbName, out errOut, _dbPassword);
             General.HasValue(value, errOut);
         }
         /// <summary>
         /// Defines the test method TestMethod_ConnectionStringWithOutPassword.
         /// </summary>
-        [TestMethod]
+        [TestMethod, TestCategory("MSAccess")]
         public void TestMethod_ConnectionStringWithOutPassword()
         {
-            string value = MsAccessDatabase.ConnectionString(Settings.AccessDatabase.DatabasePath, Settings.AccessDatabase.DatabaseName, out errOut);
+            string value = MsAccessDatabase.ConnectionString(_dbPath, _dbName, out errOut);
             General.HasValue(value, errOut);
         }
         /// <summary>
         /// Defines the test method TestMethod_ConnectionOLEStringWithPassword.
         /// </summary>
-        [TestMethod]
+        [TestMethod, TestCategory("MSAccess")]
         public void TestMethod_ConnectionOLEStringWithPassword()
         {
-            string value = MsAccessDatabase.ConnectionStringOle(Settings.AccessDatabase.DatabasePath, Settings.AccessDatabase.DatabaseName, out errOut, Settings.AccessDatabase.DatabasePassword);
+            string value = MsAccessDatabase.ConnectionStringOle(_dbPath, _dbName, out errOut, _dbPassword);
             General.HasValue(value, errOut);
         }
         /// <summary>
         /// Defines the test method TestMethod_ConnectionOLEStringWithOutPassword.
         /// </summary>
-        [TestMethod]
+        [TestMethod, TestCategory("MSAccess")]
         public void TestMethod_ConnectionOLEStringWithOutPassword()
         {
-            string value = MsAccessDatabase.ConnectionStringOle(Settings.AccessDatabase.DatabasePath, Settings.AccessDatabase.DatabaseName, out errOut);
+            string value = MsAccessDatabase.ConnectionStringOle(_dbPath, _dbName, out errOut);
             General.HasValue(value, errOut);
         }
 
         /// <summary>
         /// Defines the test method TestMethod_ConnectDB.
         /// </summary>
-        [TestMethod]
+        [TestMethod, TestCategory("MSAccess")]
         public void TestMethod_ConnectDB()
         {
             MsAccessDatabase obj = new MsAccessDatabase();
@@ -68,7 +74,7 @@ namespace UnitTestProject_Database
         /// <summary>
         /// Defines the test method TestMethod_ConnExec.
         /// </summary>
-        [TestMethod]
+        [TestMethod, TestCategory("MSAccess")]
         public void TestMethod_ConnExec()
         {
             string SQL = "INSERT INTO Gun_Cal(Cal) VALUES('TEST');";
@@ -80,7 +86,7 @@ namespace UnitTestProject_Database
         /// <summary>
         /// Defines the test method TestMethod_GetData.
         /// </summary>
-        [TestMethod]
+        [TestMethod, TestCategory("MSAccess")]
         public void TestMethod_GetData()
         {
             String SQL = "Select * from Gun_Cal";

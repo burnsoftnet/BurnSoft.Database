@@ -14,7 +14,7 @@ namespace UnitTestProject_Database
         /// <summary>
         /// Defines the test method TestMethod_ConnectionString.
         /// </summary>
-        [TestMethod]
+        [TestMethod, TestCategory("SQLite - Base")]
         public void TestMethod_ConnectionString()
         {
             string value = BaseDatabase.ConnectionString(Settings.SQLiteDatabase.DatabaseNameAndPath);
@@ -23,7 +23,7 @@ namespace UnitTestProject_Database
         /// <summary>
         /// Defines the test method TestMethod_CreateDb.
         /// </summary>
-        [TestMethod]
+        [TestMethod, TestCategory("SQLite - Base")]
         public void TestMethod_CreateDb()
         {
             bool value = BaseDatabase.CreateDb(Settings.SQLiteDatabase.DatabaseNameAndPath, out errOut);
@@ -32,7 +32,7 @@ namespace UnitTestProject_Database
         /// <summary>
         /// Defines the test method TestMethod_CreateDatabaseVersion.
         /// </summary>
-        [TestMethod]
+        [TestMethod, TestCategory("SQLite - Base")]
         public void TestMethod_CreateDatabaseVersion()
         {
             bool value = BaseDatabase.CreateDatabaseVersion(Settings.SQLiteDatabase.DatabaseNameAndPath, out errOut, Settings.SQLiteDatabase.DBVersion);
@@ -41,7 +41,7 @@ namespace UnitTestProject_Database
         /// <summary>
         /// Defines the test method TestMethod_DBVersionExists.
         /// </summary>
-        [TestMethod]
+        [TestMethod, TestCategory("SQLite - Base")]
         public void TestMethod_DBVersionExists()
         {
             bool value = BaseDatabase.DbVersionExists(Settings.SQLiteDatabase.DatabaseNameAndPath, Settings.SQLiteDatabase.DBVersion, out errOut);
@@ -50,7 +50,7 @@ namespace UnitTestProject_Database
         /// <summary>
         /// Defines the test method TestMethod_GetDatabaseVersion.
         /// </summary>
-        [TestMethod]
+        [TestMethod, TestCategory("SQLite - Base")]
         public void TestMethod_GetDatabaseVersion()
         {
             bool DidSetVersion = BaseDatabase.UpdateDbVersion(Settings.SQLiteDatabase.DatabaseNameAndPath, Settings.SQLiteDatabase.DBVersion, out errOut);
@@ -62,7 +62,7 @@ namespace UnitTestProject_Database
         /// <summary>
         /// Defines the test method TestMethod_UpdateDbVersion.
         /// </summary>
-        [TestMethod]
+        [TestMethod, TestCategory("SQLite - Base")]
         public void TestMethod_UpdateDbVersion()
         {
             bool value = BaseDatabase.UpdateDbVersion(Settings.SQLiteDatabase.DatabaseNameAndPath, Settings.SQLiteDatabase.DBVersionUpdate, out errOut);
@@ -73,7 +73,7 @@ namespace UnitTestProject_Database
         /// <summary>
         /// Defines the test method TestMethod_CreateStarterDatabase.
         /// </summary>
-        [TestMethod]
+        [TestMethod, TestCategory("SQLite - Base")]
         public void TestMethod_CreateStarterDatabase()
         {
             bool value = BaseDatabase.CreateStarterDatabase(Settings.SQLiteDatabase.StarterDatabaseNameAndPath, out errOut);

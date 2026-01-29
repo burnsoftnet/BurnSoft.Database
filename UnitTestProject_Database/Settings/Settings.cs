@@ -27,7 +27,7 @@ namespace UnitTestProject_Database
             /// <summary>
             /// The database password
             /// </summary>
-            public const string DatabasePassword = "";
+            public const string DatabasePassword = "14uN0t2n0";
 
         }
         /// <summary>

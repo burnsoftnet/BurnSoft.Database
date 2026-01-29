@@ -27,7 +27,7 @@ namespace UnitTestProject_Database
         /// <summary>
         /// Defines the test method TestMethod_ConnectDB.
         /// </summary>
-        [TestMethod]
+        [TestMethod, TestCategory("SQLite - Data Mgt.")]
         public void TestMethod_ConnectDB()
         {
             SqLiteDataManagement obj = new SqLiteDataManagement();
@@ -37,7 +37,7 @@ namespace UnitTestProject_Database
         /// <summary>
         /// Defines the test method TestMethod_RunQuery.
         /// </summary>
-        [TestMethod]
+        [TestMethod, TestCategory("SQLite - Data Mgt.")]
         public void TestMethod_RunQuery()
         {
             string sql = "INSERT INTO DB_Version (version) VALUES (2.0);";
@@ -47,7 +47,7 @@ namespace UnitTestProject_Database
         /// <summary>
         /// Defines the test method TestMethod_HasData.
         /// </summary>
-        [TestMethod]
+        [TestMethod, TestCategory("SQLite - Data Mgt.")]
         public void TestMethod_HasData()
         {
             string sql = "select * from DB_Version;";
@@ -57,7 +57,7 @@ namespace UnitTestProject_Database
         /// <summary>
         /// Defines the test method TestMethod_GetDataBySQL.
         /// </summary>
-        [TestMethod]
+        [TestMethod, TestCategory("SQLite - Data Mgt.")]
         public void TestMethod_GetDataBySQL()
         {
             string sql = "select * from DB_Version;";
@@ -79,7 +79,7 @@ namespace UnitTestProject_Database
         /// <summary>
         /// Defines the test method TestMethod_CleanDB.
         /// </summary>
-        [TestMethod]
+        [TestMethod, TestCategory("SQLite - Data Mgt.")]
         public void TestMethod_CleanDB()
         {
             bool value = SqLiteDataManagement.CleanDb(Settings.SQLiteDatabase.StarterDatabaseNameAndPath, out errOut);
@@ -88,7 +88,7 @@ namespace UnitTestProject_Database
         /// <summary>
         /// Defines the test method TestMethod_GetSingleValueFromDatabase_String.
         /// </summary>
-        [TestMethod]
+        [TestMethod, TestCategory("SQLite - Data Mgt.")]
         public void TestMethod_GetSingleValueFromDatabase_String()
         {
             string sql = "select * from DB_Version order by dt desc limit 1;";
@@ -98,7 +98,7 @@ namespace UnitTestProject_Database
         /// <summary>
         /// Defines the test method TestMethod_GetSingleValueFromDatabase_integer.
         /// </summary>
-        [TestMethod]
+        [TestMethod, TestCategory("SQLite - Data Mgt.")]
         public void TestMethod_GetSingleValueFromDatabase_integer()
         {
             string sql = "select * from DB_Version order by dt desc limit 1;";
@@ -110,7 +110,7 @@ namespace UnitTestProject_Database
         /// <summary>
         /// Defines the test method TestMethod_GetSingleValueFromDatabase_Double.
         /// </summary>
-        [TestMethod]
+        [TestMethod, TestCategory("SQLite - Data Mgt.")]
         public void TestMethod_GetSingleValueFromDatabase_Double()
         {
             string sql = "select * from DB_Version order by dt desc limit 1;";

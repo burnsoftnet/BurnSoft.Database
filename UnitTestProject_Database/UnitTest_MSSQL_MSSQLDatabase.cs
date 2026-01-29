@@ -13,7 +13,7 @@ namespace UnitTestProject_Database
         /// <summary>
         /// Defines the test method TestMethod_ConnectionString.
         /// </summary>
-        [TestMethod]
+        [TestMethod, TestCategory("MSSQL")]
         public void TestMethod_ConnectionString()
         {
             string connString = MssqlDatabase.ConnectionString(Settings.MSSQLDatabase.server, "", Settings.MSSQLDatabase.database, Settings.MSSQLDatabase.UID, Settings.MSSQLDatabase.pwd);
@@ -22,7 +22,7 @@ namespace UnitTestProject_Database
         /// <summary>
         /// Defines the test method TestMethod_ConnectionStringInstance.
         /// </summary>
-        [TestMethod]
+        [TestMethod, TestCategory("MSSQL")]
         public void TestMethod_ConnectionStringInstance()
         {
             string connString = MssqlDatabase.ConnectionString(Settings.MSSQLDatabase.server, "testinstance", Settings.MSSQLDatabase.database, Settings.MSSQLDatabase.UID, Settings.MSSQLDatabase.pwd);
@@ -31,7 +31,7 @@ namespace UnitTestProject_Database
         /// <summary>
         /// Defines the test method TestMethod_ConnectToDb.
         /// </summary>
-        [TestMethod]
+        [TestMethod, TestCategory("MSSQL")]
         public void TestMethod_ConnectToDb()
         {
             MssqlDatabase obj = new MssqlDatabase();
@@ -43,7 +43,7 @@ namespace UnitTestProject_Database
         /// <summary>
         /// Defines the test method TestMethod_RunExec.
         /// </summary>
-        [TestMethod]
+        [TestMethod, TestCategory("MSSQL")]
         public void TestMethod_RunExec()
         {
             string connString = MssqlDatabase.ConnectionString(Settings.MSSQLDatabase.server, "", Settings.MSSQLDatabase.database, Settings.MSSQLDatabase.UID, Settings.MSSQLDatabase.pwd);
