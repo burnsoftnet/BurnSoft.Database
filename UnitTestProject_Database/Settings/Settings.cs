@@ -69,7 +69,7 @@ namespace UnitTestProject_Database
             /// <summary>
             /// The password
             /// </summary>
-            public const string PWD = "test.user";
+            public const string PWD = "@test.user1";
             /// <summary>
             /// The database
             /// </summary>
