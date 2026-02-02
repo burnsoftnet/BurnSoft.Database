@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -23,7 +24,7 @@ namespace UnitTestProject_Database
             /// <summary>
             /// The database path
             /// </summary>
-            public const string DatabasePath = "C:\\test";
+            public static string DatabasePath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "data");
             /// <summary>
             /// The database password
             /// </summary>
